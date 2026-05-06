@@ -4,7 +4,13 @@
       "type": "stdio",
       "command": "uvx",
       "args": ["--from", "git+https://github.com/zwldarren/akshare-one-mcp.git", "akshare-one-mcp"],
-      "_comment": "A 股核心数据源：行情、财报、北向资金、龙虎榜、行业指数。基于开源 akshare 库。"
+      "_comment": "AKShare 股票级 MCP（9 个工具）：财报、行情、财务指标、内部交易、新闻"
+    },
+    "ashare-extras": {
+      "type": "stdio",
+      "command": "/Users/zhaozhangyun/projects/ashare-extras-mcp/.venv/bin/ashare-extras-mcp",
+      "args": [],
+      "_comment": "A 股市场级 MCP（25 个工具）：龙虎榜 / 北向资金 / 限售解禁 / 大宗交易 / 宏观（PMI/CPI/PPI/M2/社融/LPR/进出口）/ 申万行业。直接调用 venv 里 editable 安装的 console script，绕过 uvx 缓存——代码改动立刻生效。"
     },
     "tushare": {
       "type": "stdio",
@@ -13,8 +19,8 @@
       "env": {
         "TUSHARE_TOKEN": "${TUSHARE_TOKEN}"
       },
-      "_comment": "Tushare Pro：财务数据更全，需要 200 元/年订阅。设置 TUSHARE_TOKEN 环境变量后启用，未设置时会启动失败但不影响 akshare。"
+      "_comment": "Tushare Pro：财务数据更全，需要 200 元/年订阅。设置 TUSHARE_TOKEN 环境变量后启用，未设置时会启动失败但不影响 akshare/ashare-extras。"
     }
   },
-  "_README": "A 股本地化版本 — 由 ashare-localization 分支替换原 11 个海外 MCP（Daloopa/Morningstar/SP/FactSet/Moody's/MTNewswire/Aiera/LSEG/PitchBook/Chronograph/Egnyte）。后续可补充：雪球（需自写 MCP，cookie 鉴权）、巨潮公告、东方财富资金流向。"
+  "_README": "A 股 MCP 三件套：akshare（股票级 9 工具）+ ashare-extras（市场级 25 工具）+ tushare（财务级，可选）。覆盖 6 个 A 股专属 skill 的全部数据需求：dragon-tiger / north-bound / unlock-calendar / block-trade / china-macro / sw-industry。"
 }

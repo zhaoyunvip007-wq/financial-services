@@ -50,7 +50,7 @@ After completing 4 previous tasks, this final task assembles everything into pub
 - ✅ **Write 1,500-2,000 words on Scenario Analysis** - Specific Bull/Base/Bear parameters
 - ✅ **Achieve 10,000-15,000 total words** - This is a MINIMUM, not a suggestion
 - ✅ **Produce 30-50 pages minimum** - Text-dense with charts every 200-300 words
-- ✅ **Professional institutional quality** - Indistinguishable from JPMorgan/Goldman Sachs
+- ✅ **机构级专业品质** —— 与中信证券 / 中金公司 / 招商证券 / 国泰君安等头部券商深度研报无差别
 
 **NEVER:**
 - ❌ "This section would include..." - WRITE THE ACTUAL SECTION
@@ -123,20 +123,20 @@ It must be:
 - **Tables**: 12-20 comprehensive financial tables
 - **Density**: 60-80% page coverage
 
-### Critical Sections with Word Counts
+### Critical Sections with Word Counts（A 股版章节标题）
 
-| Section | Minimum | Target | Critical? |
-|---------|---------|--------|-----------|
-| Investment Summary (Page 1) | 500 | 700 | |
-| Investment Thesis | 800 | 1,200 | |
-| Risk Factors | 600 | 900 | |
-| Company Description | 800 | 1,200 | |
-| Management Bios | 1,000 | 1,400 | |
-| Products & Services | 700 | 1,000 | |
-| **Projection Assumptions** | **2,000** | **3,000** | ⭐ YES |
-| **Scenario Analysis** | **1,500** | **2,000** | ⭐ YES |
-| Financial Analysis | 1,200 | 1,800 | |
-| Valuation Methodology | 800 | 1,200 | |
+| 章节 | 最低 | 目标 | 关键? |
+|------|------|------|------|
+| 投资要点（首页 Page 1） | 500 | 700 | |
+| 核心投资逻辑 | 800 | 1,200 | |
+| 风险提示 | 600 | 900 | |
+| 公司基本面 | 800 | 1,200 | |
+| 管理层与治理结构 | 1,000 | 1,400 | |
+| 产品与业务 | 700 | 1,000 | |
+| **盈利预测与假设** | **2,000** | **3,000** | ⭐ YES |
+| **情景分析（乐观 / 中性 / 悲观）** | **1,500** | **2,000** | ⭐ YES |
+| 财务分析 | 1,200 | 1,800 | |
+| 估值方法与目标价 | 800 | 1,200 | |
 
 **Total: 10,000-15,000 words**
 
@@ -144,102 +144,129 @@ It must be:
 
 ## Report Structure
 
-### Page 1: Investment Summary (CRITICAL PAGE)
+### Page 1: 投资要点（首页，关键页）
 
 **This is the most important page. Must have:**
 
-1. **"INITIATING COVERAGE" header** (NOT "Company Update")
-2. **Thesis-focused title** (e.g., "AI Platform Leader Positioned for 40% CAGR")
-3. **Rating box** with:
-   - Rating (BUY/OUTPERFORM/HOLD/UNDERPERFORM/SELL)
-   - Current price
-   - Target price
-   - 52-week range
-   - Market cap
-   - Enterprise value
-4. **Research analyst information** with credentials
-5. **Stock price performance chart** (Figure 1)
-6. **3-4 detailed investment bullets** with ■ character
-   - Each bullet has **bold topic header** + 3-5 sentences
-   - Lead with key numbers
-7. **Financial summary table** (2-3 years historical + 2-3 years projected)
-   - Years noted as "A" for actual, "E" for estimate
+1. **"首次覆盖"或"启动覆盖"标题**（标识为研究启动报告）
+2. **聚焦投资逻辑的副标题**（如"申万食品饮料龙头，高端白酒量价齐升驱动 25% CAGR"）
+3. **评级方框** 包含：
+   - 评级（买入 / 增持 / 中性 / 减持 / 卖出，A 股五档评级）
+   - 当前股价（人民币元）
+   - 12 个月目标价
+   - 52 周区间
+   - 总市值（亿元）
+   - 流通市值（亿元）
+   - EV（企业价值）
+   - 上市板块（沪主板 / 深主板 / 创业板 / 科创板 / 北交所）
+   - 申万一级 / 二级行业
+4. **分析师信息**（姓名、执业证书编号 SAC、所属机构）
+5. **股价表现图**（图 1，标的 vs 沪深 300 vs 申万行业指数）
+6. **3-4 条投资要点**（用 ■ 符号引导）
+   - 每条以**加粗主题** + 3-5 句话展开
+   - 先讲数字
+7. **财务摘要表**（2-3 年历史 + 2-3 年预测）
+   - 年份标注 "A"（实际）和 "E"（预测）
+   - 核心指标：营业总收入、归母净利润、EPS、PE、PB、ROE
 
-**Bullet Format Example:**
+**A 股投资要点格式示例：**
 ```
-■ **Vertical SaaS leadership and regulatory moat should enable $50bn+ TAM by 2030.**
-Deep domain expertise in healthcare IT, strong customer retention (95%+ net revenue retention),
-and cross-sell capabilities have driven Acme Health's market expansion. With the healthcare IT
-market expected to reach $50bn+ by 2030, Acme Health is well-positioned to capture share given
-its regulatory moat and high switching costs. Management has indicated that 70% of current
-revenue comes from enterprise hospital systems, suggesting strong product-market fit.
+■ **白酒高端化与渠道升级驱动 25% 营收 CAGR，对标行业龙头估值仍有 30% 修复空间。**
+公司作为申万食品饮料二级行业（白酒）龙头，2024A-2029E 营收 CAGR 预计 25%，
+归母净利润 CAGR 28%，毛利率有望从 90% 提升至 92%。高端产品占比从 60% 提升
+至 75% 是核心驱动；批价坚挺 + 渠道库存合理（< 1 个月）支撑量价齐升。当前
+PE (2025E) 28x，低于历史中位数 35x 与申万白酒板块均值 32x，估值修复空间显著。
 ```
 
-### Pages 2-5: Investment Thesis & Risks
+### Pages 2-5: 核心投资逻辑与风险提示
 
-**Investment Thesis (800-1,200 words)**
-- 3-5 key thesis pillars
+**核心投资逻辑（Investment Thesis，800-1,200 words）**
+- 3-5 个核心逻辑支柱
 - Each pillar: 200-300 words
-- Lead with key statistic
-- Quantify financial impact
-- Include timeline
+- 以关键数据 / 比例引出
+- 量化财务影响
+- 标注时间窗口
 
-**Risk Assessment (600-900 words)**
-- 8-12 identified risks
-- Organized by category:
-  - Company-specific risks (4-6)
-  - Industry/market risks (3-4)
-  - Financial risks (2-3)
-  - Macroeconomic risks (2-3)
-- Each risk: 50-100 word description
+**风险提示（Risk Assessment，600-900 words）**
+- 8-12 项风险识别
+- 按类别组织：
+  - 公司特定风险（4-6 项）
+  - 行业 / 市场风险（3-4 项）
+  - 财务风险（2-3 项）
+  - 宏观与政策风险（2-3 项）
+- 每项风险：50-100 字描述
+- **A 股专属风险必查清单：**
+  - 商誉减值风险（商誉 / 净资产 >30%）
+  - 大股东质押风险（质押率 >50%）
+  - 限售股解禁压力（未来 12 个月解禁占总股本比）
+  - 关联交易占比偏高
+  - 退市新规风险（连续亏损 / 财务造假 / 市值阈值）
+  - 政策风险（行业新政 / 税收优惠到期 / 补贴退坡 / 监管收紧）
+  - 公司治理风险（实控人变更 / 高管减持 / 审计意见非标）
+  - 业绩承诺到期风险（重组对赌期满）
 
-### Pages 6-17: Company 101
+### Pages 6-17: 公司基本面（Company 101）
 
-**Company Description (800-1,200 words)**
-- What the company does (plain English)
-- Business model and monetization
-- Geographic presence
-- Scale metrics
+**公司概况（Company Description，800-1,200 words）**
+- 主营业务（用大白话）
+- 商业模式与盈利模式
+- 上市板块（沪主板 / 深主板 / 创业板 / 科创板 / 北交所）
+- 申万一级 / 二级 / 三级行业
+- 区域 / 渠道布局
+- 规模指标（营收、市值、员工、市占率）
 
-**Company History (800-1,200 words)**
-- Founding story
-- Timeline of major milestones
-- Strategic pivots
-- Recent developments
+**发展沿革（Company History，800-1,200 words）**
+- 成立故事
+- 重大事件时间线（IPO / 重大重组 / 定增 / 分红 / 股权激励）
+- 战略转型 / 业务调整
+- 近期重大事项（再融资 / 重大合同 / 股东减持 / 业绩说明会要点）
 
-**Management Team (1,000-1,400 words)**
-- 300-400 word bio for each of 3-4 key executives
-- Include: role, background, accomplishments, education
-- Governance structure
+**管理层与治理结构（Management Team，1,000-1,400 words）**
+- 3-4 位核心高管，每人 300-400 字简介
+- 包含：当前职务、过往履历、核心业绩、教育背景、在任时间、持股 / 股权激励
+- **A 股专属治理结构：**
+  - 实控人与一致行动人持股比例
+  - 国资 / 民企背景与上层股东
+  - 大股东质押率（重点风险指标）
+  - 独立董事比例（强制 ≥1/3）
+  - 监事会构成（A 股特有）
+  - 业绩承诺与对赌期（如有重组背景）
+  - 股权激励方案与解锁条件
 
-**Products & Services (700-1,000 words)**
-- Detailed product portfolio
-- Features and differentiation
-- Target customers
-- Pricing models
+**产品与业务（Products & Services，700-1,000 words）**
+- 主营业务分部（按年报"分行业 / 分产品"披露口径）
+- 产品矩阵与差异化
+- 客户类型（B 端 / C 端 / G 端）
+- 定价模式
+- 主要业务地区分布
 
-**Customers & Go-to-Market (500-700 words)**
-- Customer segments
-- Distribution channels
-- Sales strategy
-- Key partnerships
+**客户与渠道（Customers & Go-to-Market，500-700 words）**
+- 客户结构（前五大客户占比，年报披露）
+- 渠道分布（直营 / 经销 / 线上 / 线下）
+- 销售模式
+- 关键合作伙伴 / 战略客户
+- **A 股专属：** 关联交易占比、应收账款集中度
 
-**Industry Overview (800-1,200 words)**
-- Industry definition and scope
-- Market size and growth
-- Key trends
-- Regulatory environment
+**所处行业 / 行业景气度（Industry Overview，800-1,200 words）**
+- 行业定义（申万一级 / 二级 / 三级行业分类）
+- 市场规模与增速
+- 行业景气度（产能利用率、价格趋势、库存水平）
+- 关键趋势（国产替代、消费升级、双碳、AI+ 等）
+- 政策与监管环境（行业新政、补贴 / 税收优惠、双减 / 反垄断 / 数据合规）
+- 产业链上下游
 
-**Competitive Landscape (700-1,000 words)**
-- 5-10 key competitors
-- Market positioning
-- Competitive advantages
-- Market share analysis
+**竞争格局（Competitive Landscape，700-1,000 words）**
+- 申万行业内 5-10 家关键竞争对手
+- 市场地位（CR3 / CR5 集中度）
+- 竞争优势（成本 / 技术 / 渠道 / 品牌）
+- 市占率分析
 
-**TAM Analysis (500-700 words)**
-- Total addressable market sizing
-- Market growth projections
-- Company's serviceable market
+**市场空间（TAM Analysis，500-700 words）**
+- 总体可触达市场（TAM，引用国家统计局 / 行业协会 / 券商研报）
+- 市场增长预测
+- 公司可服务市场（SAM）
+- 当前渗透率 / 国产化率
+- 国产替代空间（如适用）
 
 ### Pages 18-30: Financial Analysis
 
@@ -309,74 +336,75 @@ We project [Region] revenue to grow XX% CAGR from 2024-2029E, reaching $XXM, dri
 
 **MUST have specific parameters for each scenario. Structure:**
 
-**Bull Case (500-700 words)**
+**乐观情景（Bull Case，500-700 words）**
 ```
-Bull Case: [Title describing key optimistic scenario]
+乐观情景：[标题描述关键乐观场景]
 
-Probability: XX%
+概率：XX%
 
-Key Assumptions:
-- Revenue CAGR (2024-2029E): XX% (vs. XX% base case)
-- 2029E Revenue: $X,XXXm (vs. $X,XXXm base)
-- 2029E EBITDA Margin: XX% (vs. XX% base)
-- Key product growth: XX% CAGR (vs. XX% base)
-- Geographic expansion: [specific milestones and timeline]
-- Market share: XX% by 2029E (vs. XX% base)
+核心假设：
+- 营收 CAGR (2024-2029E): XX%（vs. 中性 XX%）
+- 2029E 营业总收入：¥XXX 亿（vs. 中性 ¥XXX 亿）
+- 2029E 归母净利率：XX%（vs. 中性 XX%）
+- 核心产品 / 业务增速：XX% CAGR（vs. 中性 XX%）
+- 渠道 / 区域扩张：[具体里程碑与时间]
+- 市占率：2029E 达 XX%（vs. 中性 XX%）
 
-Catalysts Required for Bull Case:
-1. [Specific catalyst] - Expected timing: [date/quarter]
-2. [Specific catalyst] - Expected timing: [date/quarter]
-3. [Specific catalyst] - Expected timing: [date/quarter]
+乐观情景所需催化剂：
+1. [具体催化剂] - 预期时点：[年 / 季度]
+2. [具体催化剂] - 预期时点：[年 / 季度]
+3. [具体催化剂] - 预期时点：[年 / 季度]
 
-Detailed Rationale:
-[200-300 words explaining what needs to happen for bull case to materialize.
-Be specific about product launches, market conditions, competitive dynamics, etc.]
+详细推演：
+[200-300 字解释乐观情景成立条件。
+对新品上市、行业景气、政策红利、竞争格局变化等具体说明。]
 
-Valuation Implications:
-- DCF Value: $XX per share (XX% upside from current)
-- Trading Comps: XX.Xx EV/EBITDA implies $XX per share
-- Bull Case Target: $XX per share
-```
-
-**Base Case (300-500 words)**
-```
-Base Case: [Title describing most likely scenario]
-
-Probability: XX%
-
-Key Assumptions:
-[Similar structure to Bull Case with base assumptions]
-
-Rationale:
-[Explain why this is most likely scenario]
-
-Valuation:
-- DCF Value: $XX per share
-- Trading Comps: $XX per share
-- Base Case Target: $XX per share (weighted average)
+估值含义：
+- DCF 估值：¥XX / 股（较当前上行 XX%）
+- PE 法（申万行业 75 分位）：XX.Xx PE 隐含 ¥XX / 股
+- 乐观情景目标价：¥XX / 股
 ```
 
-**Bear Case (500-700 words)**
+**中性情景（Base Case，300-500 words）**
 ```
-Bear Case: [Title describing downside scenario]
+中性情景：[标题描述最可能场景]
 
-Probability: XX%
+概率：XX%
 
-Key Assumptions:
-[Similar structure with downside parameters]
+核心假设：
+[与乐观情景结构相同，使用中性假设]
 
-Downside Triggers:
-1. [Specific risk event] - Likelihood: [%]
-2. [Specific risk event] - Likelihood: [%]
-3. [Specific risk event] - Likelihood: [%]
+推演逻辑：
+[解释为什么这是最可能场景]
 
-Rationale:
-[200-300 words on what would cause bear case]
+估值：
+- DCF 估值：¥XX / 股
+- PE 法（申万行业中位数）：¥XX / 股
+- 中性情景目标价：¥XX / 股（加权平均）
+```
 
-Valuation Implications:
-- DCF Value: $XX per share (XX% downside from current)
-- Trading Comps: $XX per share
-- Bear Case Target: $XX per share
+**悲观情景（Bear Case，500-700 words）**
+```
+悲观情景：[标题描述下行场景]
+
+概率：XX%
+
+核心假设：
+[与乐观情景结构相同，使用下行假设]
+
+下行触发：
+1. [具体风险事件] - 概率：[%]
+2. [具体风险事件] - 概率：[%]
+3. [具体风险事件] - 概率：[%]
+4. **A 股专属：** 商誉减值 / 大股东质押爆仓 / 限售解禁压力 / 业绩承诺未达 / 政策收紧 / 实控人变更
+
+推演逻辑：
+[200-300 字解释悲观情景触发条件]
+
+估值含义：
+- DCF 估值：¥XX / 股（较当前下行 XX%）
+- PE 法（申万行业 25 分位）：¥XX / 股
+- 悲观情景目标价：¥XX / 股
 ```
 
 **Scenario Comparison (200-300 words)**
@@ -391,55 +419,72 @@ Valuation Implications:
 - Timeline and milestones
 - Supporting data from model
 
-### Pages 31-40: Valuation Analysis
+### Pages 31-40: 估值与目标价（Valuation Analysis）
 
-**Valuation Methodology (800-1,200 words)**
+**估值方法论（Valuation Methodology，800-1,200 words）**
 
-**DCF Analysis (300-400 words)**
-- Methodology explanation
-- Key assumptions:
-  - WACC: X.X% (calculation breakdown)
-  - Terminal growth: X.X% (rationale)
-  - Terminal margin: XX% (justification)
-- Sensitivity analysis discussion
-- DCF value: $XX per share
+**PE / PB 可比公司法（A 股主估值，300-400 words）**
+- 申万行业内 5-10 家可比公司选择理由
+- 统计摘要（max/75 分位 / 中位数 / 25 分位 / min）
+- 倍数选择（PE 用于成熟盈利、PB 用于银行 / 周期 / 重资产、PEG 用于高成长 30%+、PS 用于亏损 / 低利润率）
+- A 股估值倍数经验区间（白酒 25-40x PE、银行 0.5-1.2x PB、新能源 15-30x PE、医药创新 30-80x PE 等）
+- 给予溢价 / 折价的依据（龙头溢价 / 国央企背景 / 高质押折价 / 解禁压力等）
+- PE 法估值：¥XX / 股
 
-**Comparable Companies (300-400 words)**
-- Peer selection rationale (why these 5-10 companies)
-- Statistical summary (max/75th/median/25th/min)
-- Multiple selection (why EV/EBITDA vs. EV/Revenue vs. P/E)
-- Premium/discount justification (why target deserves premium/discount)
-- Comparable companies value: $XX per share
+**DCF 永续增长法（300-400 words）**
+- 方法论说明
+- 核心假设：
+  - WACC：X.X%（计算拆解：10Y 中国国债 ~2.3% + Beta × ERP 5.5-7%；A 股 WACC 区间 7-11%）
+  - 永续增长率：X.X%（不超过中国长期 GDP 潜在增速 3-4%）
+  - 终值年归母净利率：XX%
+- 敏感性分析讨论
+- DCF 估值：¥XX / 股
 
-**Precedent Transactions (200-300 words, if applicable)**
-- Transaction relevance
-- Control premium analysis
-- Precedent transactions value: $XX per share
+**戈登增长模型（高分红蓝筹 / 银行 / 公用类适用，200-300 words）**
+- 适用条件说明
+- 核心假设：r、g、D₁
+- 估值结果：¥XX / 股
 
-**Valuation Reconciliation (200-300 words)**
-- Weighting rationale (e.g., DCF 50%, Comps 40%, Precedent 10%)
-- Weighted average calculation
-- Valuation range (low/base/high)
-- Final price target: $XX
+**A 股并购重组对标（200-300 words，如适用）**
+- 重组案例相关性
+- 控制权溢价分析
+- 并购对标估值：¥XX / 股
 
-**Price Target & Recommendation (300-500 words)**
-- Final recommendation (BUY/OUTPERFORM/HOLD/UNDERPERFORM/SELL)
-- Price target: $XX (XX% upside from current $XX)
-- Time horizon: 12 months
-- Key catalysts (3-5 with specific timeframes)
-- Key risks to price target (3-5 with impact quantification)
+**估值汇总（Valuation Reconciliation，200-300 words）**
+- 权重分配理由（A 股典型：PE 50%、DCF 30%、PB 10%、并购对标 10%）
+- 加权平均计算
+- 估值区间（低 / 中 / 高）
+- 最终目标价：¥XX
+
+**目标价与评级（Price Target & Recommendation，300-500 words）**
+- 最终评级（买入 / 增持 / 中性 / 减持 / 卖出，A 股五档评级）
+- 目标价：¥XX（较当前 ¥XX 上行空间 XX%）
+- 时间窗口：12 个月
+- 股价催化因素（3-5 项，含具体时点）
+  - **A 股催化典型：** 季报 / 年报披露、新品上市、产能投产、政策落地、限售解禁、北向资金加仓、机构调研频次、龙虎榜机构席位扫货
+- 目标价下行风险（3-5 项，含影响量化）
+
+**A 股评级标准（券商研报惯例）：**
+- 买入：未来 12 个月跑赢申万行业指数 15% 以上
+- 增持：跑赢 5-15%
+- 中性：跑输 5% 至跑赢 5%
+- 减持：跑输 5-15%
+- 卖出：跑输 15% 以上
 
 ### Pages 41-50: Appendices
 
-**Data Sources & References**
-- All sources listed with dates
-- Organized by category:
-  - SEC Filings (with EDGAR links)
-  - Earnings Calls (with transcript links)
-  - Company Materials
-  - Industry Reports
-  - News Articles
-- **ALL URLs must be clickable hyperlinks**
+**数据来源与参考文献（Data Sources & References）**
+- 所有来源附日期
+- 按类别组织：
+  - 定期报告（巨潮资讯网链接，年报 / 半年报 / 季报 / 临时公告）
+  - 业绩说明会通稿 / 投资者关系活动记录表
+  - 上证 e 互动 / 深交所互动易问答
+  - 公司路演 PPT 与投资者沟通材料
+  - 行业研究报告（券商深度报告、艾瑞、易观、中商产业研究院）
+  - 财经媒体（财联社、第一财经、证券时报、新浪财经、雪球）
+  - 数据接口（AKShare / Tushare / Wind / 同花顺 iFinD）
+  - 行业协会数据
+- **所有 URL 必须为可点击超链接**
 
 **Detailed Financial Model Assumptions**
 - Comprehensive assumptions detail
@@ -983,15 +1028,17 @@ Use Claude's DOCX skill to:
 
 **SECTION 5: Appendices (Pages 41-50)**
 
-1. **Data Sources & References**
-   - Add heading: 'Data Sources & References' (level 1)
+1. **数据来源与参考文献**
+   - Add heading: '数据来源与参考文献' (level 1)
    - List all sources used throughout the report
    - Organize by category:
-     - SEC Filings (10-K, 10-Q, DEF 14A, 8-K with EDGAR links)
-     - Earnings Calls (with transcript links)
-     - Company Materials (investor presentations, press releases)
-     - Industry Reports (Gartner, Forrester, etc.)
-     - News Articles
+     - 定期报告与公告（巨潮资讯网链接，年报 / 半年报 / 季报 / 临时公告 / 业绩预告）
+     - 业绩说明会通稿 / 投资者关系活动记录表
+     - 上证 e 互动 / 深交所互动易问答
+     - 公司路演 PPT 与投资者沟通材料
+     - 行业研究报告（券商深度报告、艾瑞、易观）
+     - 财经媒体（财联社、第一财经、雪球）
+     - 数据接口（AKShare / Tushare / Wind / 同花顺）
    - **CRITICAL**: All URLs must be clickable hyperlinks (not plain text)
    - Include dates for all sources
 
@@ -1186,17 +1233,17 @@ IF ANY ITEMS UNCHECKED: ✗ FIX BEFORE DELIVERY
 
 ### Lead with Numbers (CRITICAL)
 
-✓ **CORRECT**: "Revenue increased 150% YoY to $250M in Q4 2024, driven by..."
-✗ **INCORRECT**: "The company saw strong revenue growth this quarter..."
+✓ **CORRECT**: "2024Q4 营业总收入同比增长 150% 至 ¥2.5 亿，主要得益于……"
+✗ **INCORRECT**: "公司本季度营收强劲增长……"
 
-✓ **CORRECT**: "EBITDA margin expanded 500bps to 30% vs. 25% in FY2023"
-✗ **INCORRECT**: "EBITDA margin expanded versus the prior year"
+✓ **CORRECT**: "归母净利率扩张 500bps 至 30%（vs. 2023 全年 25%）"
+✗ **INCORRECT**: "归母净利率较去年扩张"
 
-✓ **CORRECT**: "Market share increased 3 percentage points to 18% vs. 15% in 2023"
-✗ **INCORRECT**: "Market share increased compared to last year"
+✓ **CORRECT**: "市占率从 2023 年 15% 提升 3 个百分点至 18%"
+✗ **INCORRECT**: "市占率较去年有所提升"
 
-✓ **CORRECT**: "Management expects 40-50% revenue growth in FY2025E"
-✗ **INCORRECT**: "Management expects strong revenue growth"
+✓ **CORRECT**: "公司预期 2025E 营业总收入同比增速 40-50%"
+✗ **INCORRECT**: "公司预期营收强劲增长"
 
 ### Professional Writing Standards
 
@@ -1208,14 +1255,16 @@ IF ANY ITEMS UNCHECKED: ✗ FIX BEFORE DELIVERY
 - **Active voice**: "We estimate revenue will reach $500M"
 - **Precise**: Avoid "might", "could", "possibly"
 
-### Number Formatting
+### Number Formatting（A 股口径）
 
-**Consistency:**
-- Billions: $X.XB (e.g., "$2.5B")
-- Millions: $XXXM (e.g., "$250M")
-- Always specify: YoY, QoQ, CAGR
-- Basis points for small margin changes: "500bps"
-- Year format: "2024A" (actual), "2025E" (estimate)
+**统一规范：**
+- 亿元：¥XX.X 亿（如 "¥2.5 亿"）
+- 百万元：¥XXX 百万（如 "¥250 百万"）
+- 小数点单位用"万元 / 亿元"，避免 "Million / Billion"
+- 始终标注：YoY（同比）、QoQ（环比）、CAGR（年复合增速）
+- 利润率小幅变化用 "bps"："500bps"
+- 年份格式："2024A"（实际）、"2025E"（预测）
+- 股票代码格式：`600519.SH`（沪市）/ `000858.SZ`（深主板）/ `300750.SZ`（创业板）/ `688981.SH`（科创板）/ `833533.BJ`（北交所）
 
 ### Use "vs." not "versus"
 ✓ **CORRECT**: "Gross margin of 65% vs. 60% in prior year"
@@ -1296,12 +1345,12 @@ A successful equity research report should:
 ## Output Files
 
 **Primary Deliverable:**
-`[Company]_Initiation_Report_[Date].docx`
+`[公司名]_[股票代码]_Initiation_Report_[Date].docx`
 
-**Example**: `Tesla_Initiation_Report_2024-10-27.docx`
+**Example**: `贵州茅台_600519.SH_Initiation_Report_2026-05-06.docx` 或 `宁德时代_300750.SZ_Initiation_Report_2026-05-06.docx`
 
 **Supporting Deliverable:**
-`[Company]_Financial_Model_[Date].xlsx` (from Task 2)
+`[公司名]_[股票代码]_Financial_Model_[Date].xlsx` (from Task 2)
 
 **Both files should be packaged together for final delivery.**
 
@@ -1315,7 +1364,7 @@ This is the culmination of all equity research work from Tasks 1-4. The output s
 - **Actionable**: Enables reader to make informed investment decision
 - **Publication-ready**: Can be delivered directly to clients
 
-**Standard**: JPMorgan, Goldman Sachs, Morgan Stanley institutional equity research.
+**Standard**: 中信证券 / 中金公司 / 招商证券 / 国泰君安等头部券商深度研究报告品质。
 
 **Quality bar**: Client-ready initiation report suitable for publication.
 

@@ -300,161 +300,198 @@ WACC        1.5%    2.0%    2.5%    3.0%    3.5%
 
 #### A. Select Comparable Companies
 
-**Selection Criteria:**
-- Same industry/sector (primary requirement)
-- Similar business model
-- Comparable size (market cap, revenue)
-- Similar growth profile
-- Similar geographies
+**Selection Criteria（A 股可比公司选择）：**
+- 同申万二级 / 三级行业（首要标准）
+- 相似业务模式
+- 可比规模（市值、营收）
+- 相似增长曲线（营收 CAGR、ROE）
+- 上市板块尽量匹配（主板 / 创业板 / 科创板，板块估值差异显著）
+- 国央企 / 民企属性匹配（国资背景估值结构不同）
 
-**Identify 5-10 peer companies:**
-1. [Peer 1] - Direct competitor
-2. [Peer 2] - Direct competitor
-3. [Peer 3] - Adjacent player
-4. [Peer 4] - Similar business model
-5. [Peer 5] - Regional competitor
-6. [Add 3-5 more]
+**Identify 5-10 A 股 / 港股可比公司：**
+1. [Peer 1] - 申万行业内直接竞争对手（同三级行业）
+2. [Peer 2] - 直接竞争对手
+3. [Peer 3] - 同二级行业的相邻细分
+4. [Peer 4] - 同业务模式
+5. [Peer 5] - 区域龙头
+6. [新增 3-5 家，覆盖龙头 / 中游 / 长尾，必要时纳入港股 H 股或行业龙头中概股做交叉验证]
 
-**Document rationale for each peer selected.**
+**为每家可比公司说明选择理由。**
 
 #### B. Gather Peer Financial Data
 
 **For each comparable, gather:**
-- Current stock price
-- Shares outstanding (diluted)
-- Market capitalization
-- Total debt and cash (for EV calculation)
-- Enterprise value
-- LTM (Last Twelve Months) financials:
-  - Revenue
-  - EBITDA
-  - EBIT
-  - Net Income
-- NTM (Next Twelve Months) consensus estimates
-- Revenue growth rate
-- EBITDA margin
+- 最新 A 股收盘价（前复权）
+- 总股本与流通股本（亿股）
+- 总市值（亿元）、流通市值
+- 有息负债与货币资金（用于 EV 计算）
+- 企业价值（EV = 市值 + 净债务 + 少数股东权益）
+- TTM（最近四个季度）财务：
+  - 营业总收入
+  - 归母净利润、扣非归母净利润
+  - 净资产、ROE、ROIC
+  - EBITDA（计算项，年报附注核对）
+- 当年 / 次年一致预期（券商研报均值）
+- 营收 YoY 增速、归母净利润 YoY 增速
+- 销售净利率、毛利率、ROE
 
 **Data sources:**
-- FactSet, CapitalIQ, Bloomberg (preferred)
-- Company 10-Ks/10-Qs for actuals
-- Consensus estimates from Yahoo Finance, Seeking Alpha (if pro tools unavailable)
+- AKShare MCP / Tushare MCP（A 股结构化数据，免费 / 低成本，首选）
+- Wind / 同花顺 iFinD / 东方财富 Choice（机构付费，含一致预期）
+- 巨潮资讯网（年报 / 季报原始数据）
+- 雪球 / 同花顺 / 东方财富（个股快速对标）
+- 行业券商研报（中信 / 中金 / 招商等的行业组深度报告，含一致预期）
 
-#### C. Calculate Valuation Multiples
+#### C. Calculate Valuation Multiples（A 股偏好倍数）
 
-**For each peer, calculate:**
+**For each peer, calculate（A 股核心倍数 PE / PB / PEG，EV/EBITDA 仅辅助）：**
 ```
-EV/Revenue (LTM) = Enterprise Value / LTM Revenue
-EV/Revenue (NTM) = Enterprise Value / NTM Revenue (est.)
-EV/EBITDA (LTM) = Enterprise Value / LTM EBITDA
-EV/EBITDA (NTM) = Enterprise Value / NTM EBITDA (est.)
-P/E (NTM) = Market Cap / NTM Net Income (est.)
+PE (TTM) = 总市值 / TTM 归母净利润
+PE (当年E) = 总市值 / 当年一致预期归母净利润
+PE (次年E) = 总市值 / 次年一致预期归母净利润
+PB (LF) = 总市值 / 最新一期归母净资产
+PEG = PE (当年E) / 当年归母净利润同比增速 × 100
+EV/EBITDA = 企业价值 / TTM EBITDA（辅助）
+EV/Revenue = 企业价值 / TTM 营业总收入（辅助，亏损或低利润率公司用）
+股息率 (TTM) = TTM 现金分红 / 总市值（高分红蓝筹核心指标）
+ROE (TTM) = TTM 归母净利润 / 平均归母净资产
 ```
+
+**A 股行业 PE/PB 经验区间（合理估值锚）：**
+| 申万行业 | PE 中性区间 | PB 中性区间 | 备注 |
+|---------|------------|------------|------|
+| 白酒（食品饮料二级）| 25-40x | 6-10x | 龙头溢价显著 |
+| 银行 | 4-7x | 0.5-1.2x | 估值压制，重在分红 |
+| 新能源（电力设备）| 15-30x | 2-5x | 周期性强 |
+| 医药创新（生物科技）| 30-80x | 4-10x | 管线驱动 |
+| 半导体（电子）| 30-60x | 4-8x | 国产替代叙事 |
+| 房地产 | 5-10x | 0.5-1.5x | NAV 优于 PE |
+| 钢铁 / 化工（周期股） | 5-12x（周期低位） | 0.8-2x | PB 优于 PE |
+| 公用事业 / 高速 | 10-15x | 1-2x | 戈登模型适用 |
+| 消费电子 | 15-25x | 2-4x | 苹果链溢价 |
+| 软件 / SaaS | 30-60x | - | PS 辅助 |
 
 #### D. Create Comparable Companies Table (MANDATORY FORMAT)
 
 ```
-COMPARABLE COMPANIES ANALYSIS
+申万行业可比公司估值表（数据截至 YYYY-MM-DD）
 
-Company      Ticker  Mkt Cap  EV/Rev  EV/Rev  EV/EBITDA  EV/EBITDA  P/E   Rev     EBITDA
-                     ($B)     LTM     NTM     LTM        NTM        NTM   Growth  Margin
-Peer A       PRA     45.2     3.5x    3.2x    15.2x      13.8x      25x   18%     23%
-Peer B       PRB     32.8     3.2x    2.9x    14.1x      12.5x      22x   15%     23%
-Peer C       PRC     28.5     2.8x    2.6x    12.8x      11.2x      20x   12%     22%
-Peer D       PRD     52.1     4.1x    3.7x    17.5x      15.2x      29x   22%     23%
-Peer E       PRE     38.9     3.6x    3.3x    15.8x      14.1x      25x   17%     23%
-Peer F       PRF     41.2     3.7x    3.4x    16.1x      13.9x      26x   19%     23%
-Peer G       PRG     35.5     3.3x    3.0x    14.5x      12.8x      23x   16%     22%
+公司         股票代码    总市值    PE      PE      PB      PEG    股息率   ROE     营收增速
+                       (亿元)    TTM     2025E   LF              TTM     TTM     YoY
+可比公司 A   600XXX.SH   452     35.2x   28.5x    8.2x   1.2x   1.5%    22%     18%
+可比公司 B   000XXX.SZ   328     32.5x   26.8x    7.5x   1.1x   2.0%    21%     15%
+可比公司 C   002XXX.SZ   285     28.8x   24.2x    6.8x   1.0x   2.5%    19%     12%
+可比公司 D   300XXX.SZ   521     41.5x   33.2x    9.5x   1.5x   1.0%    24%     22%
+可比公司 E   600XXX.SH   389     36.6x   29.8x    8.5x   1.3x   1.8%    22%     17%
+可比公司 F   688XXX.SH   412     37.4x   30.2x    8.8x   1.4x   1.2%    23%     19%
+可比公司 G   002XXX.SZ   355     33.5x   27.4x    7.9x   1.2x   2.2%    20%     16%
 
-[Target]     TRGT    38.0     3.4x    3.1x    14.8x      13.0x      24x   17%     23%
+[标的]       XXXXXX.XX   380     34.8x   28.0x    8.0x   1.2x   1.8%    21%     17%
 
-STATISTICAL SUMMARY
-Maximum              52.1     4.1x    3.7x    17.5x      15.2x      29x   22%     23%
-75th Percentile      45.2     3.7x    3.4x    16.1x      14.1x      26x   19%     23%
-Median               38.9     3.5x    3.2x    15.2x      13.8x      25x   17%     23%
-25th Percentile      32.8     3.2x    2.9x    14.1x      12.5x      22x   15%     22%
-Minimum              28.5     2.8x    2.6x    12.8x      11.2x      20x   12%     22%
+统计摘要
+最大值                    521     41.5x   33.2x    9.5x   1.5x   2.5%    24%     22%
+75 分位                   452     37.4x   30.2x    8.8x   1.4x   2.2%    23%     19%
+中位数                    389     35.2x   28.5x    8.2x   1.2x   1.8%    22%     17%
+25 分位                   328     32.5x   26.8x    7.5x   1.1x   1.2%    20%     15%
+最小值                    285     28.8x   24.2x    6.8x   1.0x   1.0%    19%     12%
 
-Note: Market data as of [Date]. LTM = Last Twelve Months. NTM = Next Twelve Months.
-Source: FactSet, company filings, [Analyst] estimates.
+注：市场数据截至 [日期]。TTM = 最近四个季度。LF = 最新一期（年报或半年报披露）。2025E = 当年一致预期。
+来源：AKShare / Tushare、巨潮资讯网、Wind 一致预期。
 ```
 
-**CRITICAL**: The statistical summary (max/75th/median/25th/min) is MANDATORY.
+**CRITICAL**: 统计摘要（max/75 分位 / 中位数 / 25 分位 / min）必须呈现。
 
 #### E. Apply Multiples to Target Company
 
-**Choose primary multiple (typically EV/EBITDA for mature companies):**
+**A 股建议主估值倍数选择：**
+- 成熟稳定盈利公司：PE（当年 E 或次年 E）
+- 银行 / 房地产 / 重资产周期股：PB
+- 高成长（30%+ 增速）：PEG
+- 亏损或低利润率：PS（市销率）或 EV/Revenue
+- 高分红蓝筹：股息贴现 / 戈登模型
 
+**示例（消费股，主估值用 PE）：**
 ```
-Target Company NTM EBITDA = $550M (from financial model)
+标的公司 2025E 归母净利润 = ¥5.5 亿（来自财务模型）
 
-Apply Median Peer Multiple:
-Peer Median EV/EBITDA (NTM) = 13.8x
-Implied EV = $550M × 13.8x = $7,590M
+应用申万行业可比公司中位数倍数：
+可比中位数 PE (2025E) = 28.5x
+隐含市值 = ¥5.5 亿 × 28.5x = ¥156.75 亿
 
-Apply 25th Percentile (Conservative):
-25th Percentile EV/EBITDA (NTM) = 12.5x
-Implied EV = $550M × 12.5x = $6,875M
+应用 25 分位（保守）：
+25 分位 PE (2025E) = 26.8x
+隐含市值 = ¥5.5 亿 × 26.8x = ¥147.4 亿
 
-Apply 75th Percentile (Optimistic):
-75th Percentile EV/EBITDA (NTM) = 14.1x
-Implied EV = $550M × 14.1x = $7,755M
+应用 75 分位（乐观）：
+75 分位 PE (2025E) = 30.2x
+隐含市值 = ¥5.5 亿 × 30.2x = ¥166.1 亿
 
-Valuation Range (Comps): $6,875M - $7,755M
-Midpoint: $7,315M
+估值区间（PE 法）：¥147.4 亿 - ¥166.1 亿
+中点：¥156.8 亿
 
-Convert to Equity Value:
-Implied EV (Median)        $7,590M
-- Net Debt                 ($450M)
-= Implied Equity Value     $7,140M
-
-Shares Outstanding         100M
-Implied Price/Share        $71.40
+转换为每股价值：
+隐含市值（中位数）     ¥156.75 亿
+÷ 总股本                1.00 亿股
+= 每股价值              ¥156.75 / 股
 ```
 
-**Justify Premium/Discount:**
-- Target is growing 17% vs. peer median 17% → In-line
-- Target EBITDA margin 23% vs. peer median 23% → In-line
-- Target market position → [Justify premium/discount]
-- **Conclusion**: Apply median multiple (no adjustment)
+**给予溢价 / 折价的理由（A 股估值差异化考量）：**
+- 标的营收增速 17% vs. 可比中位数 17% → 持平
+- 标的 ROE 21% vs. 可比中位数 22% → 略低
+- 标的市场地位 / 国央企背景 / 龙头溢价 → [说明溢价 / 折价]
+- **A 股专属溢价 / 折价因子：**
+  - 龙头溢价（行业第一）：+10-30%
+  - 国央企背景（资金成本低 / 政策红利）：+5-15%
+  - 大股东高质押 / 商誉占净资产高 / 业绩承诺到期临近：-10-25%
+  - 限售股密集解禁（未来 6-12 个月）：-5-15%
+  - 流通市值偏小（< 50 亿，流动性折价）：-10-20%
+  - 高分红 + 低估值 + 高 ROE 三高：+10-20%
+- **结论：** 给予中位数估值（无调整）/ 溢价 X% / 折价 X%
 
-### Step 4: Precedent Transactions (Optional)
+### Step 4: A 股并购重组案例对标（Optional）
 
-**Note**: Only if M&A is relevant for this sector/company.
+**Note**: A 股并购重组活跃度低于美股，仅当目标行业近 3-5 年有可比 A 股重大重组（重大资产重组 / 借壳上市 / 产业整合）时使用。
 
-#### A. Identify Relevant Transactions
+#### A. Identify Relevant Transactions（A 股并购数据源）
 
-**Search for 5-10 M&A deals:**
-- Same industry, last 3-5 years
-- Similar size (0.5x to 2x target's size)
-- Announced and closed deals
+**Search for 5-10 A 股 M&A 重组案例：**
+- 同申万二级行业，最近 3-5 年
+- 相似规模（0.5x 至 2x 标的规模）
+- 已完成的重组（已通过证监会并购重组委审核 / 注册制下交易所审核）
+- 数据源：巨潮资讯网"重大资产重组"专栏、Wind 并购数据库、上市公司公告
 
-**Example:**
+**Example（A 股并购重组案例对标）：**
 ```
-PRECEDENT TRANSACTIONS ANALYSIS
+A 股并购重组案例分析
 
-Date     Target        Acquirer      Deal     EV/Rev  EV/EBITDA  Premium  Rationale
-                                    Value($B)  LTM     LTM
-Q1 2024  Comp A       Strategic      $5.2B    4.2x    16.5x      35%      Consolidation
-Q3 2023  Comp B       PE Firm        $3.8B    3.8x    14.2x      28%      Platform
-Q4 2023  Comp C       Strategic      $4.5B    4.0x    15.8x      32%      Geographic
-Q2 2023  Comp D       Strategic      $6.1B    4.5x    17.2x      38%      Strategic fit
-Q1 2023  Comp E       PE Firm        $3.2B    3.5x    13.5x      25%      Carve-out
+公告日期    标的             收购方         交易     PE          PB     备注
+                                          对价(亿元) (LTM)
+2024Q1      A 公司           上市公司 A     ¥52     35.0x       6.5x   产业整合 / 横向并购
+2023Q3      B 公司           产业基金       ¥38     30.5x       5.8x   平台型并购
+2023Q4      C 公司           上市公司 C     ¥45     32.0x       6.2x   区域扩张
+2023Q2      D 公司           上市公司 D     ¥61     38.5x       7.0x   战略协同
+2023Q1      E 公司           上市公司 E     ¥32     28.5x       5.5x   分拆收购
 
-Median                                        4.0x    15.8x      32%
+中位数                                              32.0x       6.2x
 
-Source: CapitalIQ, company filings, press releases.
+来源：巨潮资讯网、Wind 并购数据库、上市公司重组报告书。
 ```
+
+**注：A 股并购重组特殊考量：**
+- 重组配套业绩承诺（通常 3-5 年承诺净利润 CAGR 15-30%）
+- 商誉风险（并购溢价计入商誉，承诺期满后高发减值）
+- 注册制下重组审核效率提升，但仍需关注交易所问询函
 
 #### B. Apply to Target Company
 
 ```
-Target Company LTM EBITDA = $500M
-Precedent Median EV/EBITDA (LTM) = 15.8x
+标的 LTM 归母净利润 = ¥5.0 亿
+A 股可比并购中位数 PE = 32.0x
 
-Implied EV (Precedent) = $500M × 15.8x = $7,900M
+隐含市值（并购对标）= ¥5.0 亿 × 32.0x = ¥160 亿
 
-Note: Precedent multiples typically 10-20% higher than trading comps
-due to control premium and synergies.
+注：A 股并购倍数通常比二级市场可比公司溢价 10-30%（控制权溢价 + 协同效应）。
+但 A 股并购对小市值公司（< 50 亿）有更明显的"借壳预期"溢价，需剔除壳价值因素。
 ```
 
 ### Step 5: Valuation Reconciliation
@@ -462,32 +499,36 @@ due to control premium and synergies.
 #### A. Create Valuation Summary Table
 
 ```
-VALUATION SUMMARY
+估值汇总（A 股以 PE 法为主，DCF 与 EV/EBITDA 辅助）
 
-Method                  Low     Base    High    Weight  Weighted Value
-DCF Analysis            $42     $46     $51     50%     $23.00
-Trading Comps (NTM)     $64     $71     $78     40%     $28.40
-Precedent Trans.        $70     $79     $88     10%     $7.90
+方法                       低     中性     高      权重    加权值
+PE 可比公司法（主估值）    ¥147   ¥157   ¥166    50%     ¥78.50
+DCF（永续增长）            ¥54    ¥61    ¥70     30%     ¥18.30
+PB 可比公司法              ¥130   ¥145   ¥160    10%     ¥14.50
+A 股并购重组对标           ¥150   ¥160   ¥175    10%     ¥16.00
                                                         -------
-Weighted Average Target                         100%    $59.30
+加权平均目标价                                  100%    ¥127.30
 
-Rounded Price Target: $59.00
+四舍五入目标价：¥127.00
 
-Current Price (as of [Date]):    $42.00
-Upside to Target:                40% ($59.00 / $42.00 - 1)
+当前股价（截至 [日期]）：           ¥100.00
+目标空间：                          27%（¥127.00 / ¥100.00 - 1）
 ```
 
-#### B. Determine Weighting Rationale
+#### B. 权重分配理由
 
-**Typical Weighting:**
-- DCF: 40-60% (higher when forecasts reliable)
-- Trading Comps: 25-40% (reflects market sentiment)
-- Precedent Trans: 10-25% (lower unless M&A likely)
+**A 股典型权重分配（与美股不同，主估值是 PE 而非 DCF）：**
+- PE 法（主估值）：40-60%（A 股市场最常用，与卖方研报一致）
+- DCF：20-40%（成熟稳定盈利公司高，高成长 / 周期股低）
+- PB 法：10-30%（重资产 / 周期股高，轻资产消费股低）
+- 戈登模型：高分红蓝筹 / 银行 / 公用事业 30-50%
+- 并购重组对标：5-20%（A 股并购重组活跃度有限，仅作为补充）
 
-**For this example:**
-- DCF 50%: High confidence in projections
-- Comps 40%: Robust peer set
-- Precedent 10%: M&A unlikely near-term
+**For this example（消费股）：**
+- PE 法 50%：A 股市场主流估值锚
+- DCF 30%：业绩稳定性较高
+- PB 法 10%：辅助下限验证
+- 并购对标 10%：补充验证
 
 #### C. Create Valuation Football Field Chart
 
@@ -533,20 +574,27 @@ Expected Value (probability-weighted): $59
 
 ```
 ═══════════════════════════════════════════════════════════
-INVESTMENT RECOMMENDATION
+投资建议
 ═══════════════════════════════════════════════════════════
 
-Current Price:          $42.00 (as of [Date])
-Price Target:           $59.00 (12-month)
-Upside/(Downside):      +40.5%
+当前股价：                ¥100.00（截至 [日期]）
+12 个月目标价：           ¥127.00
+预期收益率：              +27%
 
-Rating:                 BUY / OUTPERFORM
+评级：                    买入 / 增持 / 中性 / 减持 / 卖出（A 股五档评级）
 
-Valuation Methodology:  Based on weighted average of DCF (50%),
-                       trading comparables (40%), and precedent
-                       transactions (10%).
+估值方法：                以申万行业可比公司 PE 法为主（50%），
+                          DCF 永续增长法（30%），PB 法（10%），
+                          A 股并购重组对标（10%）综合加权。
 
-Time Horizon:          12 months
+时间窗口：                12 个月
+
+A 股评级标准（参考券商研报惯例）：
+- 买入：未来 12 个月跑赢行业指数 15% 以上
+- 增持：跑赢行业指数 5-15%
+- 中性：跑输行业指数 5% 至跑赢 5% 之间
+- 减持：跑输行业指数 5-15%
+- 卖出：跑输行业指数 15% 以上
 
 ───────────────────────────────────────────────────────────
 KEY INVESTMENT CATALYSTS
@@ -657,10 +705,11 @@ Upside Risks:
    - Is terminal value < 60-70% of total enterprise value?
    - If > 70%, projections may not be long enough
 
-6. **WACC Reasonableness**
-   - Is WACC 8-14% range for typical companies?
-   - Tech/high-growth: 10-14%
-   - Mature/stable: 7-10%
+6. **WACC Reasonableness（A 股区间）**
+   - A 股 WACC 7-11% 区间合理（低于美股 8-14%，因无风险利率低）
+   - 银行 / 公用：6-8%
+   - 消费 / 医药：8-10%
+   - 科技 / 周期：9-12%
 
 7. **Implied Returns Check**
    - What IRR from current price to target over 12 months?
@@ -673,7 +722,8 @@ Upside Risks:
 Create the following deliverables:
 
 ### 1. Valuation Analysis Document
-**File**: `[Company]_Valuation_Analysis_[Date].md` (written analysis)
+**File**: `[公司名]_[股票代码]_Valuation_Analysis_[Date].md` (written analysis)
+示例：`贵州茅台_600519.SH_Valuation_Analysis_2026-05-06.md`
 
 **Contents** (4-6 pages):
 - Executive summary with price target
@@ -685,7 +735,7 @@ Create the following deliverables:
 - Key catalysts and risks (1 page)
 
 ### 2. Excel Valuation Tabs
-**Add to Task 2's financial model file:** `[Company]_Financial_Model_[Date].xlsx`
+**追加到 Task 2 财务模型文件中：** `[公司名]_[股票代码]_Financial_Model_[Date].xlsx`
 
 **IMPORTANT**: Do NOT create a separate Excel file. Add these tabs to the existing financial model from Task 2. This keeps all quantitative data in one place.
 

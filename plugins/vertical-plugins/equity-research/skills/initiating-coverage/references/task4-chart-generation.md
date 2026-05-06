@@ -22,9 +22,11 @@ This document provides step-by-step instructions for executing Task 4 (Chart Gen
   - DCF sensitivity table
   - Comparable companies data
   - Valuation ranges
-- **Required**: External market data
-  - Historical stock price data (Yahoo Finance, Bloomberg)
-  - Historical valuation multiples (optional for chart 34)
+- **Required**: 外部市场数据
+  - A 股历史股价数据（AKShare `stock_zh_a_hist` / Tushare `daily` / 雪球 / 同花顺，前复权）
+  - 历史估值倍数（PE-Band / PB-Band，AKShare `stock_a_pe` / Wind / 同花顺 iFinD）
+  - 行业指数对比基准：沪深 300、申万一级行业指数（如电子、食品饮料、电力设备）、创业板指、科创 50
+  - **A 股专属图表数据：** 北向资金持仓变动（AKShare `stock_hsgt_*`）、机构调研频次、龙虎榜上榜历史、限售解禁日历、申万行业相对强弱
 
 **⚠️ CRITICAL: DO NOT START THIS TASK UNLESS TASKS 1, 2, AND 3 ARE COMPLETE**
 
@@ -71,14 +73,15 @@ Do not attempt to create placeholder charts or skip charts due to missing data.
 - [ ] Valuation ranges calculated? (for chart 32 ⭐)
 
 ### External Data Verification
-- [ ] Can access historical stock price data? (Yahoo Finance, Bloomberg for chart 01)
-- [ ] Can access historical valuation data? (Optional, for chart 34)
+- [ ] 能否访问 A 股历史股价数据？（AKShare / Tushare / 雪球，用于 chart 01）
+- [ ] 能否访问历史估值数据？（PE-Band / PB-Band，用于 chart 34）
+- [ ] 能否访问北向资金 / 机构调研 / 龙虎榜 / 解禁日历数据？（A 股专属图表）
 
 **IF ANY VERIFICATION FAILS**:
-- Missing Task 1? → Complete Task 1 (Company Research) first
-- Missing Task 2? → Complete Task 2 (Financial Modeling) first
-- Missing Task 3? → Complete Task 3 (Valuation Analysis) first
-- Missing external data? → Gather from Yahoo Finance, Bloomberg, or similar sources
+- Missing Task 1? → Complete Task 1 (公司研究) first
+- Missing Task 2? → Complete Task 2 (财务建模) first
+- Missing Task 3? → Complete Task 3 (估值分析) first
+- Missing external data? → 从 AKShare / Tushare / Wind / 同花顺 iFinD / 雪球获取
 
 ---
 
@@ -140,20 +143,31 @@ Create all 25 of these charts. Each has a specific purpose in Task 5:
 
 ### 10 OPTIONAL Charts (For 30-35 Range)
 
-Add these for greater visual density and storytelling (reach 26-35 total):
+Add these for greater visual density and storytelling (reach 26-35 total)。**A 股研究建议优先采用 A 股专属图表替代部分通用图：**
 
-- chart_19: Customer Acquisition Trends
-- chart_20: Unit Economics Evolution
-- chart_21: Product Roadmap Timeline
-- chart_22: Geographic Expansion Map
-- chart_23: R&D Investment Trends
-- chart_24: Sales & Marketing Efficiency
-- chart_25: Working Capital Trends
-- chart_26: Debt Maturity Schedule
-- chart_27: Ownership Structure
-- chart_35: Analyst Price Target Distribution
+- chart_19: 客户获取趋势 / 经销商数量变动
+- chart_20: 单位经济（如白酒吨价、半导体单晶圆价）演变
+- chart_21: 产品路线图 / 产品矩阵迭代
+- chart_22: 地理扩张 / 渠道分布（A 股按"华东 / 华南 / 华北 / 海外"）
+- chart_23: 研发投入趋势（含资本化率，A 股专属）
+- chart_24: 销售费用率 / 管理费用率趋势
+- chart_25: 营运资本（应收 / 存货周转天数）
+- chart_26: 债务到期结构 / 短期借款 vs 长期借款
+- chart_27: 股权结构 / 实控人持股 / 大股东质押率（A 股专属）
+- chart_35: 卖方分析师目标价分布（A 股 Wind / 同花顺一致预期）
 
-**Total Range: 25-35 Charts (25 required + 0-10 optional)**
+### A 股专属推荐图表（替代或补充上述可选图）
+
+- **北向资金持仓变动图**：日 / 周 / 月度北向持股变化（AKShare `stock_hsgt_individual_em`），反映外资态度
+- **申万行业相对强弱图**：标的 vs 申万一级 / 二级行业指数 vs 沪深 300，过去 12-24 个月
+- **机构调研频次图**：月度调研机构数量（AKShare `stock_jgdy_detail`），反映机构关注度
+- **龙虎榜上榜历史图**：上榜次数与游资 / 机构席位占比（A 股短线情绪指标）
+- **限售解禁日历图**：未来 12 个月解禁数量与占总股本比（A 股流动性冲击指标）
+- **PE-Band / PB-Band 历史估值带**：标的 vs 行业中位数（A 股研报常见图）
+- **股息率历史走势图**：高分红蓝筹必备
+- **机构持仓集中度图**：基金 / 社保 / QFII / 险资持股变动
+
+**Total Range: 25-35 Charts (25 required + 0-10 optional + A 股专属图)**
 
 ---
 
@@ -191,8 +205,8 @@ Understanding where each chart's data comes from:
 - chart_33: Price Target Scenarios → Valuation Summary tab (or calculate from scenarios)
 
 ### From External Sources - 2 charts
-- chart_01: Stock Price Performance → Yahoo Finance, Bloomberg, Alpha Vantage
-- chart_34: Historical Valuation Multiples → Yahoo Finance, Bloomberg (historical P/E, EV/EBITDA)
+- chart_01: 股价表现 → AKShare `stock_zh_a_hist`（前复权）/ Tushare `daily` / 雪球 / 同花顺，对比沪深 300 / 申万行业指数
+- chart_34: 历史估值倍数（PE-Band / PB-Band）→ AKShare `stock_a_pe` / Wind / 同花顺 iFinD（历史 PE / PB / PEG）
 
 **IMPORTANT**: Require ALL three tasks (1, 2, 3) complete PLUS external data access to create all 25 required charts.
 
@@ -204,7 +218,15 @@ Understanding where each chart's data comes from:
 
 **Install required libraries:**
 ```bash
-pip install matplotlib seaborn pandas numpy plotly
+pip install matplotlib seaborn pandas numpy plotly akshare tushare
+# matplotlib 中文字体支持：需配置 'SimHei' 或 'Microsoft YaHei' / 'PingFang SC'
+```
+
+**中文字体配置（A 股图表中文标签必备）：**
+```python
+import matplotlib.pyplot as plt
+plt.rcParams['font.sans-serif'] = ['PingFang SC', 'Microsoft YaHei', 'SimHei']
+plt.rcParams['axes.unicode_minus'] = False  # 避免负号显示为方块
 ```
 
 **Create Python script header:**
@@ -243,11 +265,11 @@ product_b = [80, 95, 115, 138, 165, 198, 238, 285, 342, 411]
 product_c = [50, 62, 78, 98, 122, 153, 191, 239, 299, 374]
 product_d = [30, 38, 48, 61, 77, 97, 122, 153, 191, 239]
 
-# Revenue by Geography
-north_america = [150, 180, 220, 265, 320, 384, 461, 553, 664, 797]
-europe = [80, 95, 115, 140, 170, 204, 245, 294, 353, 423]
-asia_pacific = [40, 50, 63, 80, 101, 127, 159, 199, 249, 311]
-rest_of_world = [20, 25, 32, 40, 51, 64, 80, 100, 125, 156]
+# 按地区营收（A 股年报披露口径，单位：百万元）
+huadong = [150, 180, 220, 265, 320, 384, 461, 553, 664, 797]   # 华东
+huanan = [80, 95, 115, 140, 170, 204, 245, 294, 353, 423]      # 华南
+huabei = [40, 50, 63, 80, 101, 127, 159, 199, 249, 311]        # 华北
+overseas = [20, 25, 32, 40, 51, 64, 80, 100, 125, 156]         # 境外
 ```
 
 #### B. Extract Margin Data
@@ -277,12 +299,12 @@ dcf_sensitivity = np.array([
 
 #### D. Extract Valuation Ranges
 ```python
-# Valuation Football Field (from Task 3)
-valuation_methods = ['DCF Analysis', 'Trading Comps\n(NTM)', 'Precedent\nTransactions']
-valuation_low = [48, 45, 52]
-valuation_high = [62, 57, 66]
-current_price = 50
-target_price = 55
+# 估值橄榄球图（来自 Task 3，A 股以 PE 为主）
+valuation_methods = ['PE 可比公司法\n（主估值）', 'DCF\n（永续增长）', 'PB 可比公司法', 'A 股并购重组对标']
+valuation_low = [147, 54, 130, 150]    # 单位：元 / 股
+valuation_high = [166, 70, 160, 175]
+current_price = 100  # 元
+target_price = 127   # 元
 ```
 
 ### Step 3: Create Mandatory Charts
@@ -297,14 +319,14 @@ def create_revenue_by_product_chart():
 
     # Create stacked area chart
     ax.stackplot(years, product_a, product_b, product_c, product_d,
-                 labels=['Product A', 'Product B', 'Product C', 'Product D'],
+                 labels=['产品 A', '产品 B', '产品 C', '产品 D'],
                  colors=['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728'],
                  alpha=0.8)
 
     # Formatting
-    ax.set_xlabel('Year', fontsize=12, fontweight='bold')
-    ax.set_ylabel('Revenue ($M)', fontsize=12, fontweight='bold')
-    ax.set_title('Figure 3 - Revenue by Product/Segment (2020-2029E)',
+    ax.set_xlabel('年度', fontsize=12, fontweight='bold')
+    ax.set_ylabel('营业收入（百万元）', fontsize=12, fontweight='bold')
+    ax.set_title('图 3 - 按产品 / 业务分部营收（2020-2029E）',
                  fontsize=14, fontweight='bold', pad=20)
 
     # Legend
@@ -320,11 +342,11 @@ def create_revenue_by_product_chart():
 
     # Add vertical line to separate historical from projected
     ax.axvline(x=2024, color='gray', linestyle='--', linewidth=1, alpha=0.5)
-    ax.text(2024.2, ax.get_ylim()[1]*0.95, 'Projected →',
+    ax.text(2024.2, ax.get_ylim()[1]*0.95, '预测期 →',
             fontsize=9, color='gray', ha='left')
 
     # Source line
-    fig.text(0.12, 0.02, 'Source: Company data, [Firm] estimates',
+    fig.text(0.12, 0.02, '数据来源：公司年报（巨潮资讯网）、AKShare、[研究机构] 测算',
              fontsize=9, style='italic', color='gray')
 
     # Save
@@ -352,20 +374,20 @@ def create_revenue_by_geography_chart():
     width = 0.6
     x = np.arange(len(years_labels))
 
-    p1 = ax.bar(x, north_america, width, label='North America', color='#1f77b4')
-    p2 = ax.bar(x, europe, width, bottom=north_america,
-                label='Europe', color='#ff7f0e')
-    p3 = ax.bar(x, asia_pacific, width,
-                bottom=np.array(north_america) + np.array(europe),
-                label='Asia-Pacific', color='#2ca02c')
-    p4 = ax.bar(x, rest_of_world, width,
-                bottom=np.array(north_america) + np.array(europe) + np.array(asia_pacific),
-                label='Rest of World', color='#d62728')
+    p1 = ax.bar(x, huadong, width, label='华东', color='#1f77b4')
+    p2 = ax.bar(x, huanan, width, bottom=huadong,
+                label='华南', color='#ff7f0e')
+    p3 = ax.bar(x, huabei, width,
+                bottom=np.array(huadong) + np.array(huanan),
+                label='华北', color='#2ca02c')
+    p4 = ax.bar(x, overseas, width,
+                bottom=np.array(huadong) + np.array(huanan) + np.array(huabei),
+                label='境外', color='#d62728')
 
     # Formatting
-    ax.set_xlabel('Year', fontsize=12, fontweight='bold')
-    ax.set_ylabel('Revenue ($M)', fontsize=12, fontweight='bold')
-    ax.set_title('Figure 4 - Revenue by Geography (2020-2029E)',
+    ax.set_xlabel('年度', fontsize=12, fontweight='bold')
+    ax.set_ylabel('营业收入（百万元）', fontsize=12, fontweight='bold')
+    ax.set_title('图 4 - 按地区营收（2020-2029E，年报披露口径）',
                  fontsize=14, fontweight='bold', pad=20)
     ax.set_xticks(x)
     ax.set_xticklabels(years_labels, rotation=45, ha='right')
@@ -382,7 +404,7 @@ def create_revenue_by_geography_chart():
     ax.spines['right'].set_visible(False)
 
     # Source line
-    fig.text(0.12, 0.02, 'Source: Company data, [Firm] estimates',
+    fig.text(0.12, 0.02, '数据来源：公司年报（巨潮资讯网）、AKShare、[研究机构] 测算',
              fontsize=9, style='italic', color='gray')
 
     # Save
@@ -410,21 +432,21 @@ def create_dcf_sensitivity_heatmap():
 
     # Create heatmap
     sns.heatmap(df, annot=True, fmt='d', cmap='RdYlGn',
-                cbar_kws={'label': 'Price per Share ($)'},
+                cbar_kws={'label': '每股价值（元）'},
                 linewidths=0.5, linecolor='white',
                 ax=ax, vmin=35, vmax=95)
 
     # Formatting
-    ax.set_xlabel('Terminal Growth Rate', fontsize=12, fontweight='bold')
-    ax.set_ylabel('WACC', fontsize=12, fontweight='bold')
-    ax.set_title('Figure 28 - DCF Sensitivity Analysis ($/share)',
+    ax.set_xlabel('永续增长率 g', fontsize=12, fontweight='bold')
+    ax.set_ylabel('WACC（A 股区间 7-11%）', fontsize=12, fontweight='bold')
+    ax.set_title('图 28 - DCF 敏感性分析（元 / 股）',
                  fontsize=14, fontweight='bold', pad=20)
 
     # Rotate y-axis labels
     plt.yticks(rotation=0)
 
     # Source line
-    fig.text(0.12, 0.02, 'Source: [Firm] estimates',
+    fig.text(0.12, 0.02, '数据来源：[研究机构] 测算',
              fontsize=9, style='italic', color='gray')
 
     # Save
@@ -449,32 +471,34 @@ def create_valuation_football_field():
     y_positions = np.arange(len(valuation_methods))
     colors = ['#1f77b4', '#ff7f0e', '#2ca02c']
 
+    colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728']  # 4 种估值方法
+
     for i, (method, low, high, color) in enumerate(
             zip(valuation_methods, valuation_low, valuation_high, colors)):
         ax.barh(i, high - low, left=low, height=0.6,
                 color=color, alpha=0.7, label=method)
 
         # Add value labels at ends
-        ax.text(low - 1, i, f'${low}', va='center', ha='right', fontsize=10)
-        ax.text(high + 1, i, f'${high}', va='center', ha='left', fontsize=10)
+        ax.text(low - 1, i, f'¥{low}', va='center', ha='right', fontsize=10)
+        ax.text(high + 1, i, f'¥{high}', va='center', ha='left', fontsize=10)
 
     # Add current price line
     ax.axvline(x=current_price, color='red', linestyle='--', linewidth=2,
-               label=f'Current: ${current_price}', alpha=0.7)
+               label=f'当前股价：¥{current_price}', alpha=0.7)
 
     # Add target price line
     ax.axvline(x=target_price, color='black', linestyle='-', linewidth=2,
-               label=f'Target: ${target_price}')
+               label=f'目标价：¥{target_price}')
 
     # Formatting
     ax.set_yticks(y_positions)
     ax.set_yticklabels(valuation_methods, fontsize=11)
-    ax.set_xlabel('Price Per Share ($)', fontsize=12, fontweight='bold')
-    ax.set_title('Figure 32 - Valuation Football Field',
+    ax.set_xlabel('每股价值（元）', fontsize=12, fontweight='bold')
+    ax.set_title('图 32 - 估值橄榄球图',
                  fontsize=14, fontweight='bold', pad=20)
 
     # Set x-axis limits
-    ax.set_xlim(40, 70)
+    ax.set_xlim(40, 200)
 
     # Remove spines
     ax.spines['top'].set_visible(False)
@@ -489,7 +513,7 @@ def create_valuation_football_field():
     ax.legend(loc='upper right', frameon=False, fontsize=9)
 
     # Source line
-    fig.text(0.12, 0.02, 'Source: [Firm] estimates',
+    fig.text(0.12, 0.02, '数据来源：AKShare / Wind 一致预期、申万行业可比公司、[研究机构] 测算',
              fontsize=9, style='italic', color='gray')
 
     # Save
@@ -508,9 +532,10 @@ create_valuation_football_field()
 
 #### Investment Summary (1 chart)
 ```python
-# chart_01: Stock Price Performance (12-24 months)
-# - Line chart showing stock price over time vs. market index
-# - Used on Page 1 of final report
+# chart_01: A 股股价表现（12-24 个月，前复权）
+# - 折线图：标的股价 vs 沪深 300 vs 申万行业指数（如食品饮料 / 电子 / 电力设备）
+# - 数据源：AKShare `stock_zh_a_hist` / Tushare `daily`
+# - 用于报告封面页
 ```
 
 #### Financial Performance (5 additional charts beyond chart_03 and chart_04)
@@ -904,7 +929,7 @@ Create a zip file containing all chart files and the chart index:
 └── chart_index.txt
 ```
 
-**Example**: `Tesla_Charts_2024-10-28.zip`
+**Example**: `贵州茅台_600519.SH_Charts_2026-05-06.zip` 或 `宁德时代_300750.SZ_Charts_2026-05-06.zip`
 
 **Why this matters**: Task 5 will embed ALL charts created (25-35) throughout the report. The report requires visual density (1 chart per 200-300 words), so all charts serve a purpose—either for specific analytical sections or for visual storytelling and page density.
 - Verify all 25-35 charts are present

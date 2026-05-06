@@ -32,6 +32,12 @@
 - `scripts/check.py` 不验证 hooks.json schema，只验证 manifest 引用
 - subagent 改子目录时容易漏改 references/，主 SKILL.md 改完后要确认子文档同步
 
+### 工具使用纪律
+
+- **Edit 工具要求 Read 工具读过的文件**：用 `cat`/`grep` 在 Bash 里看文件不算。批量改文件时，先 Read 再 Edit/Write，否则全部失败但报错可能被忽略
+- **TaskUpdate completed 必须有真实证据**：不能基于"我以为 Edit 成功了"标记完成。每个改造文件后要 grep 验证关键词消失，或者读改后的几行看效果
+- **真实失败信号**：lint 通过 ≠ 改造成功。lint 不验证内容含义，只验证语法 / 引用。语义层面的改造（如 CapIQ → AKShare）必须用 grep 关键词验证
+
 ## 关键改造文件清单
 
 ### 已改造的 skill（核心 6 个）

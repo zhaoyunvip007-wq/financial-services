@@ -20,14 +20,16 @@
 
 原版未覆盖、A 股特色的工作流：
 
-| Skill | 命令 | 功能 |
+| Skill | 命令（plugin 命名空间） | 功能 |
 |---|---|---|
-| `dragon-tiger-list` | `/dragon-tiger` | 龙虎榜：机构 / 游资席位拆解、资金流向 |
-| `north-bound-flow` | `/north-bound` | 北向资金：净流入、行业偏好、个股增减仓 |
-| `sw-industry-comp` | `/sw-industry` | 申万行业成分股横向对比（多维度排序）|
-| `restricted-stock-unlock` | `/unlock-calendar` | 限售股解禁日历 + 压力测试 |
-| `block-trade` | `/block-trade` | 大宗交易：折溢价 / 机构接盘判断 |
-| `china-macro` | `/macro` | PMI/CPI/PPI/社融/LPR + 板块影响 |
+| `dragon-tiger-list` | `/equity-research-ashare:dragon-tiger` | 龙虎榜：机构 / 游资席位拆解、资金流向 |
+| `north-bound-flow` | `/equity-research-ashare:north-bound` | 北向资金：净流入、行业偏好、个股增减仓 |
+| `sw-industry-comp` | `/equity-research-ashare:sw-industry` | 申万行业成分股横向对比（多维度排序）|
+| `restricted-stock-unlock` | `/equity-research-ashare:unlock-calendar` | 限售股解禁日历 + 压力测试 |
+| `block-trade` | `/equity-research-ashare:block-trade` | 大宗交易：折溢价 / 机构接盘判断 |
+| `china-macro` | `/equity-research-ashare:macro` | PMI/CPI/PPI/社融/LPR + 板块影响 |
+
+注：plugin slash 命令使用 `<plugin-name>:<command>` 格式。三个 plugin 名：`equity-research-ashare`、`financial-analysis-ashare`、`wealth-management-china`。
 
 ## 安装
 

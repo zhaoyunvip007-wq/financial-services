@@ -8,9 +8,15 @@
     },
     "ashare-extras": {
       "type": "stdio",
-      "command": "/Users/zhaozhangyun/projects/ashare-extras-mcp/.venv/bin/ashare-extras-mcp",
-      "args": [],
-      "_comment": "A 股市场级 MCP（25 个工具）：龙虎榜 / 北向资金 / 限售解禁 / 大宗交易 / 宏观（PMI/CPI/PPI/M2/社融/LPR/进出口）/ 申万行业。直接调用 venv 里 editable 安装的 console script，绕过 uvx 缓存——代码改动立刻生效。"
+      "command": "uvx",
+      "args": [
+        "--refresh-package",
+        "ashare-extras-mcp",
+        "--from",
+        "git+https://github.com/zhaoyunvip007-wq/ashare-extras-mcp.git@v0.1.1",
+        "ashare-extras-mcp"
+      ],
+      "_comment": "A 股市场级 MCP（25 个工具，v0.1.1）：龙虎榜 / 北向资金 / 限售解禁 / 大宗交易 / 宏观 / 申万行业。从 GitHub 拉取，--refresh-package 保证版本更新时自动刷新。版本号锁在 v0.1.1 防止 main 分支变动破坏稳定性，升级时改 tag。"
     },
     "tushare": {
       "type": "stdio",

@@ -37,6 +37,8 @@
 - **Edit 工具要求 Read 工具读过的文件**：用 `cat`/`grep` 在 Bash 里看文件不算。批量改文件时，先 Read 再 Edit/Write，否则全部失败但报错可能被忽略
 - **TaskUpdate completed 必须有真实证据**：不能基于"我以为 Edit 成功了"标记完成。每个改造文件后要 grep 验证关键词消失，或者读改后的几行看效果
 - **真实失败信号**：lint 通过 ≠ 改造成功。lint 不验证内容含义，只验证语法 / 引用。语义层面的改造（如 CapIQ → AKShare）必须用 grep 关键词验证
+- **MCP 测试要看工具调用日志，不能只信 Claude 的文本输出**：Claude 可能用训练数据 / web search 编造看起来真实的数据，输出"86 只上榜""股价 1375 元"等具体数字。验证 MCP 真实调用要：(1) 检查 MCP server 是否暴露了对应工具，(2) 在 prompt 里明确"只用 MCP 不要兜底"，(3) 看 stream-json 的 tool_use 事件
+- **AKShare MCP（zwldarren/akshare-one-mcp）覆盖范围**：仅 9 个股票级接口（财报 + 行情 + 内部交易 + 新闻 + 时间），无龙虎榜 / 北向 / 解禁 / 大宗 / 宏观 / 申万指数。SKILL.md 假设这些接口可用是错的
 
 ## 关键改造文件清单
 

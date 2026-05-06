@@ -1,115 +1,231 @@
-# Financial Plan
+---
+name: financial-plan
+description: 中国家庭综合财富规划 — 养老（基本养老 + 企业年金 + 个人养老金 + 商业险）、子女教育规划、财富传承（遗嘱 / 家族信托 / 保险金信托）、现金流分析。客户新签、年度复核、情景建模。触发词："财富规划""家庭理财""退休规划""能不能退休""教育金""遗产规划""财富传承""现金流""个人养老金""年金险""家族信托"。
+---
 
-description: Build or update a comprehensive financial plan covering retirement projections, education funding, estate planning, and cash flow analysis. Use for new client onboarding, annual plan reviews, or scenario modeling. Triggers on "financial plan", "retirement plan", "can I retire", "education funding", "estate plan", "cash flow analysis", or "plan update".
+# 中国家庭财富综合规划
 
-## Workflow
+## 工作流
 
-### Step 1: Client Profile
+### Step 1：客户画像
 
-Gather or confirm:
-- **Demographics**: Age, spouse age, dependents, life expectancy assumptions
-- **Employment**: Current income, expected raises, retirement age target
-- **Accounts**: All investment accounts with balances and asset allocation
-- **Income sources**: Salary, bonuses, rental income, Social Security estimates, pensions
-- **Expenses**: Current annual spending, expected changes (mortgage payoff, kids' independence)
-- **Liabilities**: Mortgage, student loans, other debt
-- **Insurance**: Life, disability, LTC, health
-- **Estate**: Wills, trusts, beneficiary designations, gifting strategy
+确认或采集：
+- **基本情况**：本人 + 配偶年龄、子女数与年龄、父母赡养情况、户籍所在地（影响社保 / 房产 / 教育资源）、健康状况
+- **职业与收入**：行业、稳定性（公务员 / 国企 / 民企 / 自由职业 / 创业），现金流稳定 vs 波动
+- **资产负债**：
+  - 现金 + 银行理财 + 货币基金
+  - 公募基金（股 / 债 / 混合 / QDII / REIT）
+  - 股票（A 股 / 港股通 / 美股）
+  - 私募基金（如有，合格投资者门槛 100 万）
+  - 信托 / 银行理财 / 保险产品
+  - 房产（自住 / 投资房，区分一线 / 强二线 / 普通城市）
+  - 公司股权（如有创业股份 / 股权激励）
+  - 黄金 / 外币 / 加密资产
+  - 负债：房贷 / 车贷 / 经营贷 / 信用贷 / 信用卡分期
+- **保险情况**：重疾 / 医疗 / 寿险 / 意外 / 财产，保额是否足够
+- **预期支出**：日常 + 教育 + 医疗 + 养老 + 大额一次性（购房 / 装修 / 婚礼 / 海外旅行）
+- **传承意愿**：是否需要遗嘱 / 信托 / 保险金信托
 
-### Step 2: Cash Flow Analysis
+### Step 2：现金流测算
 
-Build annual cash flow projections:
+按年度构建现金流预测表：
 
-| Year | Age | Gross Income | Taxes | Living Expenses | Savings | Net Cash Flow |
-|------|-----|-------------|-------|-----------------|---------|--------------|
-| | | | | | | |
+| 年份 | 年龄 | 工作收入 | 投资收益 | 个税 | 房贷 | 教育支出 | 生活开销 | 净现金流 | 累计资产 |
+|---|---|---|---|---|---|---|---|---|---|
+| | | | | | | | | | |
 
-Key inputs:
-- Inflation rate assumption (typically 2.5-3%)
-- Tax rate (marginal and effective)
-- Savings rate and where savings are directed (pre-tax, Roth, taxable)
+关键假设：
+- **通胀率**：CPI 长期 2-3%（医疗教育通胀更高，4-5%）
+- **个税**：综合所得累进 3-45%，年终奖单独计税或合并计税选择
+- **投资回报**：股票长期 8-10%，债券 3-4%，理财 2-3%，房产 3-6%（地段差异大）
+- **储蓄率**：建议工资的 30-50%（年轻期）→ 20-30%（中年期）
 
-### Step 3: Retirement Projections
+### Step 3：养老规划（A 股语境核心模块）
 
-**Accumulation Phase:**
-- Current portfolio value
-- Annual contributions (401k, IRA, taxable)
-- Expected return by asset class
-- Monte Carlo simulation: probability of success at various spending levels
+**中国养老三大支柱：**
 
-**Distribution Phase:**
-- Required annual spending in retirement (today's dollars → inflation-adjusted)
-- Social Security start age and benefit
-- Pension income (if any)
-- Portfolio withdrawal rate and sequence
-- Required Minimum Distributions (RMDs)
+**第一支柱：基本养老保险（强制）**
+- 企业职工：单位缴 16% + 个人缴 8%（个人账户）
+- 灵活就业 / 自由职业：自行缴纳，按当地基数 60-300%
+- 个人账户：累计 / 计发月数（60 岁退休是 139 个月，55 岁是 170 个月）
+- 替代率：当前约 40-45%（北京 / 上海更低，可能 35%）
 
-**Key Output:**
-- Projected portfolio value at retirement
-- Sustainable withdrawal rate
-- Probability of not running out of money (target >85%)
-- "What if" scenarios: retire early, market downturn, higher spending
+**第二支柱：企业年金 / 职业年金（自愿）**
+- 企业年金：单位 + 个人共缴，单位上限 8% / 工资，个人上限 4%
+- 职业年金：机关事业单位，单位 8% + 个人 4%
+- 投资管理：投资风险偏低（股票上限 30%）
+- 替代率提升：5-15%
 
-### Step 4: Goal-Specific Analysis
+**第三支柱：个人养老金账户（2022 年启动，2024 全国推开）**
+- 年缴上限 12000 元
+- 税收优惠：缴费时按 3% 税率优惠（高税率人群最划算）
+- 投资范围：理财产品 / 储蓄 / 公募基金 / 商业养老险
+- 60 岁前不能提取（除特殊情形）
+- 替代率：长期累积 5-10%
 
-#### Education Funding
-- Children's ages and target college start
-- Current 529 balances
-- Target funding level (public vs. private, 4-year vs. graduate)
-- Required monthly savings to reach goal
-- Financial aid considerations
+**第四层：商业养老 + 个人投资**
+- 增额终身寿险（IRR 约 2.5-3%，长期固定收益）
+- 商业年金险（IRR 2.0-2.5%，60+ 岁开始领取）
+- 个人投资组合（股票 / 基金 / 房产 / 黄金）
 
-#### Estate Planning
-- Current estate value and projected growth
-- Estate tax exposure (federal and state)
-- Trust structures in place
-- Gifting strategy (annual exclusion, lifetime exemption usage)
-- Charitable giving plans
-- Beneficiary review
+**养老资金缺口测算：**
+```
+退休后年支出（今天的钱）= 当前年支出 × 80%（医疗增加，工作减少）
+退休后年支出（退休时的钱）= 当前年支出 × 80% × (1 + 通胀)^(退休年龄 - 当前年龄)
 
-#### Risk Management
-- Life insurance needs analysis (income replacement, debt payoff, education funding)
-- Disability insurance adequacy
-- Long-term care planning
-- Umbrella liability coverage
+需要的退休本金 = 退休后年支出 × 25（4% 安全提取率）
+                 - 第一支柱年金现值
+                 - 第二支柱年金现值
+                 - 第三支柱年金现值
+```
 
-### Step 5: Scenario Modeling
+**蒙特卡洛模拟：**
+- 输入：当前组合、年储蓄、各类资产收益分布
+- 输出：90 岁时不破产的概率（目标 > 85%）
 
-Run key scenarios:
+### Step 4：子女教育规划
 
-| Scenario | Probability of Success | Portfolio at 90 | Notes |
-|----------|----------------------|-----------------|-------|
-| Base case | | | |
-| Retire 2 years early | | | |
-| 20% market drop in Year 1 | | | |
-| Higher spending (+20%) | | | |
-| One spouse lives to 95 | | | |
-| Long-term care event | | | |
+**教育阶段成本（2026 年人民币口径）：**
+- 公立小学 + 初中：基本免费（学杂费、课外培训另算）
+- 公立高中：每年 5000-2 万
+- 重点大学（本科 4 年）：每年 2-5 万
+- 出国留学（本科 / 研究生）：每年 30-80 万（美国 / 英国 / 香港 / 新加坡）
+- 课外培训 + 兴趣班：每年 2-10 万（一线城市）
 
-### Step 6: Recommendations
+**教育金工具：**
+- 教育金保险（终身寿 + 年金组合）：IRR 2.5-3%，确定性高
+- 银行 / 公募基金（专项账户）：长期股债组合，预期 5-7%
+- 国债 / 银行理财：3% 左右，保本
+- 房产（学区房）：高额一次性投入，流动性差
 
-Prioritized action items:
-1. Savings rate changes
-2. Asset allocation adjustments
-3. Tax optimization (Roth conversions, tax-loss harvesting, asset location)
-4. Insurance gaps to fill
-5. Estate document updates
-6. Beneficiary designation review
+**关键决策点：**
+- 国内升学 vs 出国留学（路径选择影响资金量级）
+- 学区房 vs 教育金（资产配置形式不同）
+- 18 岁开始独立 vs 资助到研究生 / 婚房
 
-### Step 7: Output
+### Step 5：财富传承规划
 
-- Financial plan document (Word/PDF, 15-25 pages)
-- Cash flow projection spreadsheet (Excel)
-- Retirement projection charts
-- Goal funding analysis
-- Scenario comparison table
-- Action item checklist
+**中国遗产税状况：**
+- 截至 2026 年中国未开征遗产税
+- 但已有相关学术讨论和试点研究，未来 5-10 年可能性存在
+- **不要假设永远不开征**，规划要留出空间
 
-## Important Notes
+**传承工具：**
 
-- Financial plans are living documents — review and update annually or after major life events
-- Be conservative with return assumptions — overestimating returns gives false confidence
-- Tax planning is as important as investment returns — model tax implications of every recommendation
-- Social Security timing is a major lever — model start ages of 62, 67, and 70
-- Always stress-test the plan — a plan that only works in the base case isn't a good plan
-- Compliance: ensure recommendations align with suitability/fiduciary standards
+**a. 法定继承（默认）**
+- 第一顺位：配偶 + 子女 + 父母
+- 风险：分配不可定制、可能引发家庭纠纷、企业股权传承复杂
+
+**b. 遗嘱**
+- 自书 / 公证 / 律师见证
+- 自定继承方案
+- 风险：可能被遗漏 / 篡改 / 司法争议
+
+**c. 家族信托**
+- 委托财产 ≥ 1000 万（信托公司门槛）
+- 资产隔离：免于债务追偿、婚姻分割、税务穿透
+- 受益人定制（孙辈分批领取、附条件激励）
+- 适合：超高净值家庭（千万级以上）
+
+**d. 保险金信托**
+- 委托财产门槛 100-300 万（比家族信托低）
+- 大额保单 + 信托嵌套
+- 同时享受保险免税 + 信托资产隔离功能
+
+**e. 赠与（生前规划）**
+- 直系亲属赠与：现金 / 房产暂免赠与税（中国未开征）
+- 注意：未来若开征赠与税，需追溯期
+
+**f. 慈善捐赠**
+- 公益捐赠抵税（个人最高 30% 应纳税所得额）
+- 慈善信托（资产管理 + 公益使命）
+
+### Step 6：风险保障
+
+**保障型保险（按重要性排序）：**
+
+**1. 重疾险（最重要，不可省）**
+- 保额：年家庭收入 5 倍 + 房贷余额
+- 一线城市建议保额 100-200 万
+- 类型：定期重疾（保到 70 岁）vs 终身重疾，前者杠杆高
+- 投保年龄：年轻越早越便宜
+
+**2. 医疗险**
+- 百万医疗（限免赔额 1 万 / 年），杠杆极高
+- 中端医疗（含特需 / 国际部）
+- 高端医疗（全球理赔）
+
+**3. 寿险**
+- 仅家庭顶梁柱必须
+- 保额：年家庭支出 × 10 + 房贷
+- 类型：定期寿（最便宜）vs 终身寿（增额终身寿，兼具理财）
+
+**4. 意外险**
+- 综合意外（含交通 / 一般 / 高风险运动）
+- 保额 50-100 万
+
+**5. 失能险（中国市场不发达）**
+- 长期残疾失去工作能力的收入替代
+- 国内多嵌入重疾险中
+
+**6. 财产保险**
+- 房产财产险（含家庭责任险）
+- 家庭财产综合险（含家电 / 室内装修）
+
+### Step 7：情景建模
+
+跑关键情景：
+
+| 情景 | 90 岁不破产概率 | 备注 |
+|---|---|---|
+| 基础情景 | | |
+| 提前 5 年退休 | | |
+| 退休次年市场跌 30% | | |
+| 大病 30 万一次性支出 | | |
+| 子女出国留学（多花 200 万） | | |
+| 配偶活到 95 岁 | | |
+| 父母重大疾病 50 万支出 | | |
+| 房产价格跌 20% | | 一线城市 |
+
+### Step 8：行动建议
+
+按优先级排序的行动清单：
+
+1. **立刻补保**：重疾 / 医疗 / 寿险 / 意外（保额不够立刻补）
+2. **完善社保**：基本养老 / 医保 + 企业年金（如单位有）
+3. **个人养老金账户**：开户 + 年缴 12000（高税率人群必做）
+4. **子女教育金**：单独账户长期定投
+5. **资产配置调整**：股票 / 债券 / 房产 / 现金比例
+6. **税务优化**：年终奖计税方式选择 / 公益捐赠 / 退税申报
+7. **传承文件**：遗嘱 / 信托 / 保险受益人
+8. **流动性储备**：3-6 个月生活费应急
+
+### Step 9：交付物
+
+- 综合财富规划报告（Word / PDF，15-25 页中文）
+- 现金流测算表（Excel）
+- 养老资金缺口测算图
+- 教育金分阶段目标
+- 保险保障缺口分析
+- 情景对比表
+- 行动清单 + 时间表
+
+## 重要提示
+
+- **财富规划是动态的**：每年至少复核一次，重大事件（结婚 / 生子 / 换工作 / 买房 / 父母去世）后立即更新
+- **回报假设要保守**：不要按历史最好年份外推，长期股票按 7-8%，房产按 3-5%
+- **税务比投资回报更可控**：合理利用个税专项扣除（房贷利息 / 房租 / 子女教育 / 继续教育 / 大病医疗 / 赡养老人 / 婴幼儿照护 / 个人养老金）
+- **社保 + 个人养老金是底线**：再激进的投资组合都要先把这两层夯实
+- **学区房争议**：单一学区房可能锁死流动性，建议家庭总资产中房产占比 < 60%
+- **A 股个人投资税务**：股息红利持有 1 月内 20%、1 月-1 年 10%、1 年以上免税；公募基金分红暂免；QDII 收益按 20% 缴税
+- **私募基金合格投资者门槛**：金融资产 ≥ 300 万 + 近 3 年个人年均收入 ≥ 50 万，单只产品投资 ≥ 100 万
+- **合规底线**：理财顾问需具备相关资质（CFP / EFP / 银行 / 券商 / 保险持牌），承担适当性义务
+
+## 数据源
+
+1. **AKShare MCP**：宏观数据 / 利率 / 通胀 / 房价指数
+2. **国家统计局**：CPI / 工资 / 房价
+3. **人社部**：基本养老金 / 个人养老金政策
+4. **银行理财登记中心** + **中国证券投资基金业协会**：理财产品 / 私募登记
+5. **保险业协会**：保险产品备案 / 增额寿 IRR 测算
+6. **客户提供资料**：账户对账单 / 持仓明细 / 工资条 / 个税 APP 数据

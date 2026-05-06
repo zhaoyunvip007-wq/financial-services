@@ -7,19 +7,19 @@ This document provides step-by-step instructions for executing Task 2 (Financial
 **Purpose**: Extract historical financials and build comprehensive Excel financial model with projections and scenarios.
 
 **Prerequisites**: ⚠️ Verify before starting
-- **Required**: Access to company financial data
-  - For public companies: Latest 10-K and recent 10-Qs from SEC EDGAR
-  - For private companies: Financial statements or estimates from available sources
-  - OR: Pre-extracted historical financials provided by user
-- **Optional**: Company research (Task 1) for business context
+- **Required**: 公司财务数据来源
+  - A 股上市公司：最新年报、半年报、季报（巨潮资讯网 cninfo.com.cn）
+  - 结构化数据：AKShare MCP / Tushare MCP / Wind / 同花顺 iFinD
+  - 或：用户提供的预提取历史财务数据
+- **Optional**: 公司研究文档（Task 1）作为业务背景
 
-**Output**: Excel Financial Model (.xlsx) with 6 essential tabs:
-1. Revenue Model
-2. Income Statement
-3. Cash Flow Statement
-4. Balance Sheet
-5. Scenarios
-6. DCF Inputs
+**Output**: Excel 财务模型（.xlsx），包含 6 个核心 tab（按 CAS 中国会计准则口径）：
+1. 收入模型（Revenue Model）
+2. 利润表（Income Statement，对应"合并利润表"）
+3. 现金流量表（Cash Flow Statement，对应"合并现金流量表"）
+4. 资产负债表（Balance Sheet，对应"合并资产负债表"）
+5. 情景分析（Scenarios，乐观 / 中性 / 悲观）
+6. DCF 输入（DCF Inputs）
 
 ---
 
@@ -27,20 +27,20 @@ This document provides step-by-step instructions for executing Task 2 (Financial
 
 **BEFORE STARTING - CHECK:**
 
-**Option A: Extract financials directly (most common)**
-- [ ] Have access to 10-K filings (public company)?
-- [ ] OR have access to financial statements (private company)?
-- [ ] Ready to create Excel file for historical extraction?
+**Option A: 直接抓取财务数据（最常用）**
+- [ ] 是否能从巨潮资讯网获取最新年报、半年报、季报？
+- [ ] 或能通过 AKShare MCP / Tushare MCP / Wind / 同花顺拉取结构化财务数据？
+- [ ] 是否准备好创建 Excel 历史财务文件？
 
-**Option B: User has pre-extracted financials**
-- [ ] Historical financials file provided? (.xlsx or other format)
-- [ ] Contains 3-5 years of income statement, cash flow, balance sheet?
-- [ ] Data is clean and ready to use?
+**Option B: 用户已提供预提取财务数据**
+- [ ] 是否提供历史财务文件？（.xlsx 或其他格式）
+- [ ] 是否包含 3-5 年利润表、现金流量表、资产负债表？
+- [ ] 数据是否干净可用？
 
 **Optional Context:**
-- [ ] Company research (Task 1) complete for business understanding?
+- [ ] 公司研究（Task 1）是否已完成业务理解？
 
-**IF VERIFICATION FAILS**: Stop and obtain access to financial statements (10-K or equivalent) before proceeding.
+**IF VERIFICATION FAILS**: 暂停并获取定期报告（年报 / 半年报 / 季报）后再继续。
 
 ---
 
@@ -58,7 +58,7 @@ This document provides step-by-step instructions for executing Task 2 (Financial
 - Grouped rows for collapsibility
 - Named ranges for key inputs/outputs
 - No hardcoded numbers in formulas (except constants like 12 months)
-- Clear units ($ thousands, $ millions, etc.)
+- 单位统一标注（人民币万元 / 百万元 / 亿元，A 股年报默认"元"或"万元"，建模时建议统一为"百万元"或"亿元"）
 
 ### Formula Best Practices
 - All numbers should flow from assumptions
@@ -76,103 +76,104 @@ This document provides step-by-step instructions for executing Task 2 (Financial
 
 **If historical financials are already extracted, skip to Step 2.**
 
-**For Public Companies:**
+**For A 股上市公司：**
 
-1. **Download 10-K Filing**
-   - Go to SEC EDGAR (https://www.sec.gov/edgar/searchedgar/companysearch.html)
-   - Search for company name or ticker
-   - Download latest 10-K (annual report)
-   - Navigate to Item 8: Financial Statements and Supplementary Data
+1. **抓取定期报告**
+   - 访问巨潮资讯网（https://www.cninfo.com.cn）搜索公司代码 / 名称
+   - 下载最新年报（次年 4 月 30 日前披露）、半年报（当年 8 月 31 日前）、一季报（4 月 30 日前）、三季报（10 月 31 日前）
+   - 关注业绩预告（1 月 31 日前对亏损 / 扭亏 / 大增 / 大减强制披露）和业绩快报
+   - 优先用 AKShare / Tushare 接口直接拉结构化数据（节省提取时间）
 
 2. **Create Historical Financials Excel File**
-   - File name: `[Company]_Historical_Financials_[Date].xlsx`
+   - File name: `[公司名]_[股票代码]_Historical_Financials_[Date].xlsx`
    - This file will be the foundation for the model
 
-3. **Extract Income Statement (3-5 years)**
+3. **提取利润表（3-5 年，CAS 科目）**
    - Create Sheet 1: "Historical Income Statement"
-   - Extract ALL line items for 3-5 years:
-     - Revenue (total and by segment if disclosed)
-     - Cost of revenue / COGS
-     - Gross profit
-     - Operating expenses (R&D, Sales & Marketing, G&A broken out)
-     - EBITDA (calculate if not disclosed: EBIT + D&A)
-     - EBIT / Operating income
-     - Interest expense/income
-     - Other income/expense
-     - Pre-tax income
-     - Income tax and tax rate
-     - Net income
-     - EPS (basic and diluted)
-     - Shares outstanding (basic and diluted)
+   - 提取全部科目（A 股利润表标准科目）：
+     - 营业总收入（含主营业务收入 / 其他业务收入）、营业收入分部数据（如年报"分行业 / 分产品 / 分地区"披露）
+     - 营业成本（主营业务成本 + 其他业务成本）
+     - 毛利（营业收入 - 营业成本）
+     - 营业税金及附加（消费税 / 城建税 / 教育费附加等）
+     - 销售费用、管理费用、研发费用（2018 年起单列）、财务费用（A 股 P&L 四费分列）
+     - 信用减值损失、资产减值损失（A 股专属，含商誉减值）
+     - 投资收益、公允价值变动损益、其他收益（政府补助）
+     - **营业利润**（A 股口径含投资收益与公允价值变动，与美股 EBIT 不同！）
+     - 营业外收入 / 营业外支出
+     - 利润总额、所得税费用、有效税率
+     - 净利润、归母净利润、扣非归母净利润（A 股核心利润口径）
+     - EPS（基本 / 稀释）、加权平均股本
 
-4. **Extract Cash Flow Statement (3-5 years)**
+4. **提取现金流量表（3-5 年，CAS 科目）**
    - Create Sheet 2: "Historical Cash Flow"
-   - Extract ALL line items:
-     - Operating activities (starting from net income)
-     - Depreciation & amortization
-     - Stock-based compensation
-     - Changes in working capital (receivables, inventory, payables)
-     - Cash from operations
-     - Investing activities (CapEx, acquisitions)
-     - Financing activities (debt issuance/repayment, equity, dividends)
-     - Net change in cash
-     - Beginning and ending cash
+   - Extract ALL line items（A 股现金流量表标准科目）：
+     - 经营活动（从净利润开始的间接法附注）
+     - 销售商品 / 提供劳务收到的现金、收到的税费返还、购买商品 / 接受劳务支付的现金、支付给职工的现金、支付的各项税费
+     - 折旧与摊销、股份支付（A 股股权激励）
+     - 经营性应收 / 应付项目变动（应收账款、存货、应付账款）
+     - **经营活动产生的现金流量净额**（A 股核心指标）
+     - 投资活动：购建固定资产 / 无形资产支付的现金（CapEx）、取得子公司支付的现金（并购）、收回投资 / 处置长期资产收到的现金
+     - 投资活动产生的现金流量净额
+     - 筹资活动：取得借款 / 偿还债务、吸收投资 / 分配股利（A 股分红普遍较低，注意 ROE 与分红率匹配）、回购股份
+     - 筹资活动产生的现金流量净额
+     - 汇率变动对现金的影响、现金及现金等价物净增加额、期初 / 期末现金及现金等价物余额
 
-5. **Extract Balance Sheet (3-5 years)**
+5. **提取资产负债表（3-5 年，CAS 科目）**
    - Create Sheet 3: "Historical Balance Sheet"
-   - Extract ALL line items:
-     - Current assets (cash, receivables, inventory, other)
-     - Non-current assets (PP&E, intangibles, goodwill)
-     - Total assets
-     - Current liabilities (payables, accrued expenses, current debt)
-     - Non-current liabilities (long-term debt, deferred taxes)
-     - Total liabilities
-     - Shareholders' equity (common stock, retained earnings)
-     - Total liabilities + equity
+   - Extract ALL line items（A 股资产负债表标准科目）：
+     - 流动资产：货币资金、交易性金融资产、应收票据、应收账款、应收账款融资、预付款项、其他应收款、存货、合同资产、其他流动资产
+     - 非流动资产：长期股权投资、其他权益工具投资、固定资产（含累计折旧）、在建工程、使用权资产（新租赁准则）、无形资产、开发支出、商誉（A 股专属重点关注科目）、长期待摊费用、递延所得税资产
+     - 资产总计
+     - 流动负债：短期借款、应付票据、应付账款、合同负债（替代预收账款，新收入准则）、应付职工薪酬、应交税费、其他应付款、一年内到期的非流动负债
+     - 非流动负债：长期借款、应付债券、租赁负债、长期应付款、递延所得税负债
+     - 负债合计
+     - 所有者权益：实收资本（或股本）、资本公积、盈余公积、未分配利润、其他综合收益、少数股东权益（合并报表必有）
+     - 所有者权益（或股东权益）合计、负债和所有者权益合计
 
-6. **Calculate Historical Metrics**
+6. **Calculate Historical Metrics（A 股核心指标）**
    - Create Sheet 4: "Historical Metrics"
    - Calculate from statements:
-     - Revenue growth % (YoY)
-     - Gross margin %
-     - EBITDA margin %
-     - Operating margin %
-     - Net margin %
-     - Free cash flow (CFO - CapEx)
-     - FCF margin %
-     - ROIC (approximate: NOPAT / Invested Capital)
-     - Debt/Equity ratio
-     - Current ratio (Current Assets / Current Liabilities)
+     - 营业总收入增长率（YoY）
+     - 毛利率（毛利 / 营业总收入）
+     - 营业利润率、净利率、归母净利率、扣非归母净利率
+     - 经营活动现金流净额 / 净利润（现金含金量，A 股重点）
+     - 自由现金流（经营活动现金流净额 - CapEx）
+     - ROE（归母净利润 / 期初期末净资产平均；杜邦三要素拆解）
+     - ROIC（NOPAT / 投入资本）
+     - 资产负债率（总负债 / 总资产）
+     - 流动比率、速动比率
+     - **A 股专属指标：** 商誉占净资产比、应收账款 / 营收、存货周转天数、有息负债率、大股东质押率、扣非净利率与净利率差（识别非经常性损益占比）
 
 7. **Document Sources and Notes**
    - Create Sheet 5: "Notes"
    - Document:
-     - 10-K filing date and fiscal year end
-     - Any one-time items or adjustments noted
-     - Non-GAAP vs GAAP differences
-     - Segment breakdown (if revenue split by product/geography)
-     - Data quality notes and limitations
+     - 年报披露日期与会计年度（A 股一律 12 月 31 日年末）
+     - 任何非经常性损益项目（A 股扣非利润口径）
+     - CAS 与 IFRS 差异（A 股 H 股双重上市公司需关注）
+     - 分部数据（按产品 / 地区 / 行业披露）
+     - 数据质量与披露限制
+     - 审计意见类型（标准无保留 / 保留 / 无法表示意见 / 否定，非标审计意见为重大红旗）
 
-**For Private Companies:**
+**For 拟上市 / 未上市公司：**
 
 1. **Gather Available Data**
-   - Financial statements (if available)
-   - Press releases with revenue figures
-   - Funding announcements
-   - Industry estimates or comparable company data
+   - 招股说明书 / 公开转让说明书（新三板）
+   - 媒体披露的营收数据
+   - 融资公告
+   - 行业估算或可比公司数据（用申万行业内 A 股可比公司）
 
 2. **Create Simplified Historical File**
-   - Estimated revenue (if available)
-   - Estimated margins (from comparables if needed)
-   - Key ratios and metrics
-   - Document all assumptions and sources
+   - 估算营业总收入（如可获得）
+   - 估算毛利率 / 净利率（从可比公司）
+   - 关键比率与指标
+   - 全部假设与来源备注
 
 **Verification:**
 - [ ] All 3 financial statements extracted (3-5 years)
-- [ ] Numbers reconcile across statements (net income ties)
+- [ ] Numbers reconcile across statements（净利润 → 现金流量表 → 资产负债表未分配利润勾稽）
 - [ ] Key metrics calculated correctly
 - [ ] Excel file saved and can be opened
-- [ ] Data sources documented (10-K dates, page numbers)
+- [ ] 数据来源已记录（年报披露日期、巨潮 URL、AKShare 拉取时间戳）
 
 **Foundation for projection model is now complete. Proceed to Step 2.**
    - Capital expenditures
@@ -232,36 +233,33 @@ Total Revenue Growth %  -       X%      X%      X%      X%      X%      X%      
 - Show mix shift over time
 - Link all projections to Assumptions tab
 
-#### B. Revenue by Geography (15-20 rows)
+#### B. Revenue by Geography (15-20 rows，A 股年报"按地区"分类口径)
 
 Create detailed table:
 ```
                         2021A   2022A   2023A   2024A   2025E   2026E   2027E   2028E   2029E
-North America
-  United States         XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Canada                XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Mexico                XX      XX      XX      XX      XX      XX      XX      XX      XX
-  NA Total              XX      XX      XX      XX      XX      XX      XX      XX      XX
-  % of Total            X%      X%      X%      X%      X%      X%      X%      X%      X%
-  YoY Growth %          -       X%      X%      X%      X%      X%      X%      X%      X%
+境内
+  华东                  XX      XX      XX      XX      XX      XX      XX      XX      XX
+  华南                  XX      XX      XX      XX      XX      XX      XX      XX      XX
+  华北                  XX      XX      XX      XX      XX      XX      XX      XX      XX
+  华中 / 西部           XX      XX      XX      XX      XX      XX      XX      XX      XX
+  境内合计              XX      XX      XX      XX      XX      XX      XX      XX      XX
+  占比 %                X%      X%      X%      X%      X%      X%      X%      X%      X%
+  YoY 增速 %            -       X%      X%      X%      X%      X%      X%      X%      X%
 
-Europe
-  UK                    XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Germany               XX      XX      XX      XX      XX      XX      XX      XX      XX
-  France                XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Other Europe          XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Europe Total          XX      XX      XX      XX      XX      XX      XX      XX      XX
-  % of Total            X%      X%      X%      X%      X%      X%      X%      X%      X%
-  YoY Growth %          -       X%      X%      X%      X%      X%      X%      X%      X%
+境外
+  亚洲（除中国）        XX      XX      XX      XX      XX      XX      XX      XX      XX
+  欧洲                  XX      XX      XX      XX      XX      XX      XX      XX      XX
+  美洲                  XX      XX      XX      XX      XX      XX      XX      XX      XX
+  其他                  XX      XX      XX      XX      XX      XX      XX      XX      XX
+  境外合计              XX      XX      XX      XX      XX      XX      XX      XX      XX
+  占比 %                X%      X%      X%      X%      X%      X%      X%      X%      X%
+  YoY 增速 %            -       X%      X%      X%      X%      X%      X%      X%      X%
 
-Asia-Pacific
-  [Similar structure]
-
-Rest of World
-  [Similar structure]
-
-TOTAL REVENUE           XX      XX      XX      XX      XX      XX      XX      XX      XX
+营业总收入合计           XX      XX      XX      XX      XX      XX      XX      XX      XX
 ```
+
+**注：A 股年报披露的地区分布粒度通常为"境内 / 境外"或"华东 / 华南 / 华北等"，部分公司按国家或省份披露。出口型企业（如家电、消费电子、机械）需特别关注境外营收占比与汇率敏感性。
 
 **Verification:**
 - Revenue by product total = Revenue by geography total = Total revenue
@@ -284,217 +282,270 @@ Other Channels          XX      XX      XX      XX      XX      XX      XX      
 TOTAL REVENUE           XX      XX      XX      XX      XX      XX      XX      XX      XX
 ```
 
-### Step 3: Model Operating Expenses
+### Step 3: Model Operating Expenses（A 股四费 + 营业成本结构）
 
-#### A. Cost of Revenue
-1. **Break down COGS components**
-   - Product costs (materials, manufacturing)
-   - Shipping and logistics
-   - Service delivery costs
-   - Other direct costs
+#### A. 营业成本（Cost of Revenue）
+1. **拆解营业成本构成**
+   - 直接材料（原材料 / 大宗商品价格敏感）
+   - 直接人工
+   - 制造费用（折旧 / 能源 / 辅料）
+   - 物流与运输（新收入准则下，运输费可计入合同履约成本或销售费用）
 
 2. **Link to revenue**
-   - Calculate COGS as % of revenue
-   - Model gross margin by year
-   - Link to Assumptions tab
+   - 计算营业成本占营收比
+   - 按年度建模毛利率
+   - 链接到假设 tab
 
-#### B. R&D Expenses
+#### B. 销售费用（Selling Expenses，A 股科目）
 ```
-Research & Development  2021A   2022A   2023A   2024A   2025E   2026E   2027E   2028E   2029E
-R&D Headcount           XX      XX      XX      XX      XX      XX      XX      XX      XX
-R&D Comp per head       XX      XX      XX      XX      XX      XX      XX      XX      XX
-R&D Personnel Costs     XX      XX      XX      XX      XX      XX      XX      XX      XX
-R&D Other Costs         XX      XX      XX      XX      XX      XX      XX      XX      XX
-Total R&D               XX      XX      XX      XX      XX      XX      XX      XX      XX
-% of Revenue            X%      X%      X%      X%      X%      X%      X%      X%      X%
-```
-
-#### C. Sales & Marketing Expenses
-```
-Sales & Marketing       2021A   2022A   2023A   2024A   2025E   2026E   2027E   2028E   2029E
-S&M Headcount           XX      XX      XX      XX      XX      XX      XX      XX      XX
-S&M Comp per head       XX      XX      XX      XX      XX      XX      XX      XX      XX
-S&M Personnel Costs     XX      XX      XX      XX      XX      XX      XX      XX      XX
-Marketing Spend         XX      XX      XX      XX      XX      XX      XX      XX      XX
-S&M Other Costs         XX      XX      XX      XX      XX      XX      XX      XX      XX
-Total S&M               XX      XX      XX      XX      XX      XX      XX      XX      XX
-% of Revenue            X%      X%      X%      X%      X%      X%      X%      X%      X%
+销售费用                2021A   2022A   2023A   2024A   2025E   2026E   2027E   2028E   2029E
+销售人员人数             XX      XX      XX      XX      XX      XX      XX      XX      XX
+人均薪酬                 XX      XX      XX      XX      XX      XX      XX      XX      XX
+职工薪酬                 XX      XX      XX      XX      XX      XX      XX      XX      XX
+广告与市场推广费         XX      XX      XX      XX      XX      XX      XX      XX      XX
+其他销售费用             XX      XX      XX      XX      XX      XX      XX      XX      XX
+销售费用合计             XX      XX      XX      XX      XX      XX      XX      XX      XX
+占营业总收入 %           X%      X%      X%      X%      X%      X%      X%      X%      X%
 ```
 
-#### D. General & Administrative
+#### C. 管理费用（Administrative Expenses，A 股科目）
 ```
-G&A                     2021A   2022A   2023A   2024A   2025E   2026E   2027E   2028E   2029E
-G&A Headcount           XX      XX      XX      XX      XX      XX      XX      XX      XX
-G&A Comp per head       XX      XX      XX      XX      XX      XX      XX      XX      XX
-G&A Personnel Costs     XX      XX      XX      XX      XX      XX      XX      XX      XX
-G&A Other Costs         XX      XX      XX      XX      XX      XX      XX      XX      XX
-Total G&A               XX      XX      XX      XX      XX      XX      XX      XX      XX
-% of Revenue            X%      X%      X%      X%      X%      X%      X%      X%      X%
+管理费用                2021A   2022A   2023A   2024A   2025E   2026E   2027E   2028E   2029E
+管理人员人数             XX      XX      XX      XX      XX      XX      XX      XX      XX
+人均薪酬                 XX      XX      XX      XX      XX      XX      XX      XX      XX
+职工薪酬                 XX      XX      XX      XX      XX      XX      XX      XX      XX
+中介机构费 / 折旧摊销     XX      XX      XX      XX      XX      XX      XX      XX      XX
+其他管理费用             XX      XX      XX      XX      XX      XX      XX      XX      XX
+管理费用合计             XX      XX      XX      XX      XX      XX      XX      XX      XX
+占营业总收入 %           X%      X%      X%      X%      X%      X%      X%      X%      X%
 ```
 
-#### E. Depreciation & Amortization
+#### D. 研发费用（R&D Expenses，A 股 2018 年起单列）
+```
+研发费用                2021A   2022A   2023A   2024A   2025E   2026E   2027E   2028E   2029E
+研发人员人数             XX      XX      XX      XX      XX      XX      XX      XX      XX
+人均薪酬                 XX      XX      XX      XX      XX      XX      XX      XX      XX
+研发人员薪酬             XX      XX      XX      XX      XX      XX      XX      XX      XX
+研发投入资本化金额        XX      XX      XX      XX      XX      XX      XX      XX      XX
+研发投入费用化金额        XX      XX      XX      XX      XX      XX      XX      XX      XX
+研发投入合计             XX      XX      XX      XX      XX      XX      XX      XX      XX
+占营业总收入 %           X%      X%      X%      X%      X%      X%      X%      X%      X%
+研发资本化率             X%      X%      X%      X%      X%      X%      X%      X%      X%
+```
+
+**注：A 股研发投入分"资本化"（计入开发支出 / 无形资产）和"费用化"（计入研发费用），资本化率过高需警惕利润操纵嫌疑（行业惯例：硬件企业 10-30%、纯软件企业 0-10%、创新药企较高）。
+
+#### E. 财务费用（Financial Expenses，A 股科目，含利息净支出 + 汇兑损益 + 手续费）
+```
+财务费用                2021A   2022A   2023A   2024A   2025E   2026E   2027E   2028E   2029E
+利息支出                 XX      XX      XX      XX      XX      XX      XX      XX      XX
+减：利息收入             (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
+汇兑损益                 XX      XX      XX      XX      XX      XX      XX      XX      XX
+手续费                   XX      XX      XX      XX      XX      XX      XX      XX      XX
+财务费用合计             XX      XX      XX      XX      XX      XX      XX      XX      XX
+占营业总收入 %           X%      X%      X%      X%      X%      X%      X%      X%      X%
+```
+
+#### F. Depreciation & Amortization
 - Link to CapEx schedule
-- Apply depreciation rates from Assumptions
+- Apply depreciation rates from 假设 tab（A 股年报披露固定资产折旧年限：房屋 20-50 年、机器 5-15 年、运输工具 4-10 年、电子设备 3-5 年）
 - Calculate annual D&A
+- 注：A 股折旧摊销分散在营业成本（生产用设备）、销售 / 管理 / 研发费用（办公设备）多个科目，需穿透还原
 
 ### Step 4: Build Income Statement
 
-**Create full P&L with 40-50 line items:**
+**Create 完整利润表（CAS 中国会计准则口径，40-50 行科目）：**
 
 ```
-INCOME STATEMENT        2021A   2022A   2023A   2024A   2025E   2026E   2027E   2028E   2029E
+合并利润表（单位：百万元）   2021A   2022A   2023A   2024A   2025E   2026E   2027E   2028E   2029E
 
-REVENUE
+营业总收入
 [Link to Revenue Model tab]
-Total Revenue           XX      XX      XX      XX      XX      XX      XX      XX      XX
-  YoY Growth %          -       X%      X%      X%      X%      X%      X%      X%      X%
+营业总收入              XX      XX      XX      XX      XX      XX      XX      XX      XX
+  YoY 增速 %            -       X%      X%      X%      X%      X%      X%      X%      X%
 
-COST OF REVENUE
-[Link to COGS breakdown]
-Total COGS              XX      XX      XX      XX      XX      XX      XX      XX      XX
+营业总成本
+营业成本                XX      XX      XX      XX      XX      XX      XX      XX      XX
+营业税金及附加          XX      XX      XX      XX      XX      XX      XX      XX      XX
+销售费用                XX      XX      XX      XX      XX      XX      XX      XX      XX
+管理费用                XX      XX      XX      XX      XX      XX      XX      XX      XX
+研发费用                XX      XX      XX      XX      XX      XX      XX      XX      XX
+财务费用                XX      XX      XX      XX      XX      XX      XX      XX      XX
+信用减值损失            (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
+资产减值损失（含商誉减值） (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
 
-GROSS PROFIT            XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Gross Margin %        X%      X%      X%      X%      X%      X%      X%      X%      X%
+毛利                    XX      XX      XX      XX      XX      XX      XX      XX      XX
+  毛利率 %              X%      X%      X%      X%      X%      X%      X%      X%      X%
 
-OPERATING EXPENSES
-Total R&D               XX      XX      XX      XX      XX      XX      XX      XX      XX
-  % of Revenue          X%      X%      X%      X%      X%      X%      X%      X%      X%
-Total S&M               XX      XX      XX      XX      XX      XX      XX      XX      XX
-  % of Revenue          X%      X%      X%      X%      X%      X%      X%      X%      X%
-Total G&A               XX      XX      XX      XX      XX      XX      XX      XX      XX
-  % of Revenue          X%      X%      X%      X%      X%      X%      X%      X%      X%
-Depreciation & Amort.   XX      XX      XX      XX      XX      XX      XX      XX      XX
+加：投资收益            XX      XX      XX      XX      XX      XX      XX      XX      XX
+加：公允价值变动损益    XX      XX      XX      XX      XX      XX      XX      XX      XX
+加：其他收益（政府补助） XX      XX      XX      XX      XX      XX      XX      XX      XX
 
-Total Operating Exp.    XX      XX      XX      XX      XX      XX      XX      XX      XX
-  % of Revenue          X%      X%      X%      X%      X%      X%      X%      X%      X%
+营业利润                XX      XX      XX      XX      XX      XX      XX      XX      XX
+  营业利润率 %          X%      X%      X%      X%      X%      X%      X%      X%      X%
 
-EBITDA                  XX      XX      XX      XX      XX      XX      XX      XX      XX
-  EBITDA Margin %       X%      X%      X%      X%      X%      X%      X%      X%      X%
+加：营业外收入          XX      XX      XX      XX      XX      XX      XX      XX      XX
+减：营业外支出          (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
 
-EBIT                    XX      XX      XX      XX      XX      XX      XX      XX      XX
-  EBIT Margin %         X%      X%      X%      X%      X%      X%      X%      X%      X%
+利润总额                XX      XX      XX      XX      XX      XX      XX      XX      XX
+减：所得税费用          (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
+  有效税率 %            X%      X%      X%      X%      X%      X%      X%      X%      X%
+                       （A 股标准 25%；高新技术企业 15%；西部大开发 / 海南自贸 15%；小微企业减免）
 
-Interest expense        (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
-Interest income         XX      XX      XX      XX      XX      XX      XX      XX      XX
-Other income/(expense)  XX      XX      XX      XX      XX      XX      XX      XX      XX
+净利润                  XX      XX      XX      XX      XX      XX      XX      XX      XX
+减：少数股东损益        XX      XX      XX      XX      XX      XX      XX      XX      XX
+归属于母公司净利润      XX      XX      XX      XX      XX      XX      XX      XX      XX
+  归母净利率 %          X%      X%      X%      X%      X%      X%      X%      X%      X%
+扣非归母净利润          XX      XX      XX      XX      XX      XX      XX      XX      XX
+  扣非净利率 %          X%      X%      X%      X%      X%      X%      X%      X%      X%
 
-Pre-tax income          XX      XX      XX      XX      XX      XX      XX      XX      XX
+EBITDA（计算项）        XX      XX      XX      XX      XX      XX      XX      XX      XX
+  EBITDA 利润率 %       X%      X%      X%      X%      X%      X%      X%      X%      X%
 
-Income tax              (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
-  Tax rate %            X%      X%      X%      X%      X%      X%      X%      X%      X%
+股本（亿股）
+基本股数（亿股）         XX      XX      XX      XX      XX      XX      XX      XX      XX
+稀释股数（亿股）         XX      XX      XX      XX      XX      XX      XX      XX      XX
 
-NET INCOME              XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Net Margin %          X%      X%      X%      X%      X%      X%      X%      X%      X%
-
-SHARES OUTSTANDING
-Basic shares (M)        XX      XX      XX      XX      XX      XX      XX      XX      XX
-Diluted shares (M)      XX      XX      XX      XX      XX      XX      XX      XX      XX
-
-EARNINGS PER SHARE
-Basic EPS               $X.XX   $X.XX   $X.XX   $X.XX   $X.XX   $X.XX   $X.XX   $X.XX   $X.XX
-Diluted EPS             $X.XX   $X.XX   $X.XX   $X.XX   $X.XX   $X.XX   $X.XX   $X.XX   $X.XX
+每股收益
+基本 EPS（元）           ¥X.XX   ¥X.XX   ¥X.XX   ¥X.XX   ¥X.XX   ¥X.XX   ¥X.XX   ¥X.XX   ¥X.XX
+稀释 EPS（元）           ¥X.XX   ¥X.XX   ¥X.XX   ¥X.XX   ¥X.XX   ¥X.XX   ¥X.XX   ¥X.XX   ¥X.XX
+扣非 EPS（元）           ¥X.XX   ¥X.XX   ¥X.XX   ¥X.XX   ¥X.XX   ¥X.XX   ¥X.XX   ¥X.XX   ¥X.XX
 ```
 
-### Step 5: Build Cash Flow Statement
+### Step 5: Build Cash Flow Statement（合并现金流量表，CAS 口径）
 
 ```
-CASH FLOW STATEMENT     2021A   2022A   2023A   2024A   2025E   2026E   2027E   2028E   2029E
+合并现金流量表（百万元）  2021A   2022A   2023A   2024A   2025E   2026E   2027E   2028E   2029E
 
-OPERATING ACTIVITIES
-Net Income              XX      XX      XX      XX      XX      XX      XX      XX      XX
-Adjustments:
-  Depreciation & Amort. XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Stock-based comp      XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Other non-cash        XX      XX      XX      XX      XX      XX      XX      XX      XX
+经营活动产生的现金流量
+销售商品提供劳务收到现金   XX      XX      XX      XX      XX      XX      XX      XX      XX
+收到的税费返还             XX      XX      XX      XX      XX      XX      XX      XX      XX
+收到其他经营活动现金       XX      XX      XX      XX      XX      XX      XX      XX      XX
+经营活动现金流入小计       XX      XX      XX      XX      XX      XX      XX      XX      XX
 
-Changes in WC:
-  Accounts Receivable   (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
-  Inventory             (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
-  Accounts Payable      XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Other working capital (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
+购买商品接受劳务支付现金   (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
+支付给职工以及为职工支付   (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
+支付的各项税费             (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
+支付其他经营活动现金       (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
+经营活动现金流出小计       (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
 
-Cash from Operations    XX      XX      XX      XX      XX      XX      XX      XX      XX
+经营活动产生的现金流量净额  XX     XX      XX      XX      XX      XX      XX      XX      XX
+（间接法附注核对：净利润 + 折旧摊销 + 减值损失 + 信用损失 + 经营性应收应付变动）
 
-INVESTING ACTIVITIES
-Capital Expenditures    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
-Acquisitions            (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
-Other investing         XX      XX      XX      XX      XX      XX      XX      XX      XX
+投资活动产生的现金流量
+收回投资收到的现金         XX      XX      XX      XX      XX      XX      XX      XX      XX
+取得投资收益收到的现金     XX      XX      XX      XX      XX      XX      XX      XX      XX
+处置长期资产收回的现金     XX      XX      XX      XX      XX      XX      XX      XX      XX
+投资活动现金流入小计       XX      XX      XX      XX      XX      XX      XX      XX      XX
 
-Cash from Investing     (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
+购建固定资产无形资产支付   (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
+（即 CapEx，A 股核心科目）
+投资支付的现金             (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
+取得子公司支付的现金净额   (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
+投资活动现金流出小计       (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
 
-FREE CASH FLOW          XX      XX      XX      XX      XX      XX      XX      XX      XX
-  FCF Margin %          X%      X%      X%      X%      X%      X%      X%      X%      X%
+投资活动产生的现金流量净额 (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
 
-FINANCING ACTIVITIES
-Debt issuance           XX      XX      XX      XX      XX      XX      XX      XX      XX
-Debt repayment          (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
-Equity issuance         XX      XX      XX      XX      XX      XX      XX      XX      XX
-Dividends paid          (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
-Other financing         XX      XX      XX      XX      XX      XX      XX      XX      XX
+自由现金流（经营 - CapEx）  XX     XX      XX      XX      XX      XX      XX      XX      XX
+  FCF / 营业总收入 %        X%      X%      X%      X%      X%      X%      X%      X%      X%
 
-Cash from Financing     XX      XX      XX      XX      XX      XX      XX      XX      XX
+筹资活动产生的现金流量
+吸收投资收到的现金         XX      XX      XX      XX      XX      XX      XX      XX      XX
+（A 股 IPO / 定增 / 配股）
+取得借款收到的现金         XX      XX      XX      XX      XX      XX      XX      XX      XX
+筹资活动现金流入小计       XX      XX      XX      XX      XX      XX      XX      XX      XX
 
-NET CHANGE IN CASH      XX      XX      XX      XX      XX      XX      XX      XX      XX
+偿还债务支付的现金         (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
+分配股利利润支付现金       (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
+（A 股股息率普遍偏低，高股息蓝筹另当别论）
+回购股份支付的现金         (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
+筹资活动现金流出小计       (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
 
-Beginning Cash          XX      XX      XX      XX      XX      XX      XX      XX      XX
-Ending Cash             XX      XX      XX      XX      XX      XX      XX      XX      XX
+筹资活动产生的现金流量净额  XX     XX      XX      XX      XX      XX      XX      XX      XX
+
+汇率变动对现金的影响        XX     XX      XX      XX      XX      XX      XX      XX      XX
+现金及现金等价物净增加额    XX     XX      XX      XX      XX      XX      XX      XX      XX
+
+期初现金及等价物            XX     XX      XX      XX      XX      XX      XX      XX      XX
+期末现金及等价物            XX     XX      XX      XX      XX      XX      XX      XX      XX
 ```
 
-### Step 6: Build Balance Sheet
+### Step 6: Build Balance Sheet（合并资产负债表，CAS 口径）
 
-Create full balance sheet with 35-45 line items:
+Create full 资产负债表 with 35-45 行科目：
 
 ```
-BALANCE SHEET           2021A   2022A   2023A   2024A   2025E   2026E   2027E   2028E   2029E
+合并资产负债表（百万元）    2021A   2022A   2023A   2024A   2025E   2026E   2027E   2028E   2029E
 
-ASSETS
-Current Assets:
-  Cash & Equivalents    XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Accounts Receivable   XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Inventory             XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Prepaid expenses      XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Other current assets  XX      XX      XX      XX      XX      XX      XX      XX      XX
-Total Current Assets    XX      XX      XX      XX      XX      XX      XX      XX      XX
+资产
+流动资产：
+  货币资金                 XX      XX      XX      XX      XX      XX      XX      XX      XX
+  交易性金融资产           XX      XX      XX      XX      XX      XX      XX      XX      XX
+  应收票据及应收账款       XX      XX      XX      XX      XX      XX      XX      XX      XX
+  应收账款融资             XX      XX      XX      XX      XX      XX      XX      XX      XX
+  预付款项                 XX      XX      XX      XX      XX      XX      XX      XX      XX
+  其他应收款               XX      XX      XX      XX      XX      XX      XX      XX      XX
+  存货                     XX      XX      XX      XX      XX      XX      XX      XX      XX
+  合同资产                 XX      XX      XX      XX      XX      XX      XX      XX      XX
+  其他流动资产             XX      XX      XX      XX      XX      XX      XX      XX      XX
+流动资产合计                XX      XX      XX      XX      XX      XX      XX      XX      XX
 
-Non-Current Assets:
-  PP&E, gross           XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Accumulated Depr.     (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
-  PP&E, net             XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Intangible assets     XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Goodwill              XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Other non-current     XX      XX      XX      XX      XX      XX      XX      XX      XX
-Total Non-Current       XX      XX      XX      XX      XX      XX      XX      XX      XX
+非流动资产：
+  长期股权投资             XX      XX      XX      XX      XX      XX      XX      XX      XX
+  其他权益工具投资         XX      XX      XX      XX      XX      XX      XX      XX      XX
+  固定资产（原值）         XX      XX      XX      XX      XX      XX      XX      XX      XX
+  减：累计折旧             (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
+  固定资产净值             XX      XX      XX      XX      XX      XX      XX      XX      XX
+  在建工程                 XX      XX      XX      XX      XX      XX      XX      XX      XX
+  使用权资产（新租赁准则） XX      XX      XX      XX      XX      XX      XX      XX      XX
+  无形资产（土地 / 软件）  XX      XX      XX      XX      XX      XX      XX      XX      XX
+  开发支出（资本化研发）   XX      XX      XX      XX      XX      XX      XX      XX      XX
+  商誉                     XX      XX      XX      XX      XX      XX      XX      XX      XX
+  （A 股专属重点关注：商誉 / 净资产 >30% 即重大减值风险）
+  长期待摊费用             XX      XX      XX      XX      XX      XX      XX      XX      XX
+  递延所得税资产           XX      XX      XX      XX      XX      XX      XX      XX      XX
+  其他非流动资产           XX      XX      XX      XX      XX      XX      XX      XX      XX
+非流动资产合计              XX      XX      XX      XX      XX      XX      XX      XX      XX
 
-TOTAL ASSETS            XX      XX      XX      XX      XX      XX      XX      XX      XX
+资产总计                    XX      XX      XX      XX      XX      XX      XX      XX      XX
 
-LIABILITIES
-Current Liabilities:
-  Accounts Payable      XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Accrued expenses      XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Deferred revenue      XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Current debt          XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Other current liab.   XX      XX      XX      XX      XX      XX      XX      XX      XX
-Total Current Liab.     XX      XX      XX      XX      XX      XX      XX      XX      XX
+负债
+流动负债：
+  短期借款                 XX      XX      XX      XX      XX      XX      XX      XX      XX
+  应付票据及应付账款       XX      XX      XX      XX      XX      XX      XX      XX      XX
+  合同负债（替代预收账款） XX      XX      XX      XX      XX      XX      XX      XX      XX
+  应付职工薪酬             XX      XX      XX      XX      XX      XX      XX      XX      XX
+  应交税费                 XX      XX      XX      XX      XX      XX      XX      XX      XX
+  其他应付款               XX      XX      XX      XX      XX      XX      XX      XX      XX
+  一年内到期的非流动负债   XX      XX      XX      XX      XX      XX      XX      XX      XX
+  其他流动负债             XX      XX      XX      XX      XX      XX      XX      XX      XX
+流动负债合计                XX      XX      XX      XX      XX      XX      XX      XX      XX
 
-Non-Current Liabilities:
-  Long-term debt        XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Deferred taxes        XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Other non-current     XX      XX      XX      XX      XX      XX      XX      XX      XX
-Total Non-Current Liab. XX      XX      XX      XX      XX      XX      XX      XX      XX
+非流动负债：
+  长期借款                 XX      XX      XX      XX      XX      XX      XX      XX      XX
+  应付债券                 XX      XX      XX      XX      XX      XX      XX      XX      XX
+  租赁负债                 XX      XX      XX      XX      XX      XX      XX      XX      XX
+  长期应付款               XX      XX      XX      XX      XX      XX      XX      XX      XX
+  递延所得税负债           XX      XX      XX      XX      XX      XX      XX      XX      XX
+  其他非流动负债           XX      XX      XX      XX      XX      XX      XX      XX      XX
+非流动负债合计              XX      XX      XX      XX      XX      XX      XX      XX      XX
 
-TOTAL LIABILITIES       XX      XX      XX      XX      XX      XX      XX      XX      XX
+负债合计                    XX      XX      XX      XX      XX      XX      XX      XX      XX
 
-EQUITY
-  Common stock          XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Additional paid-in    XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Retained earnings     XX      XX      XX      XX      XX      XX      XX      XX      XX
-  Treasury stock        (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
-  Other equity          XX      XX      XX      XX      XX      XX      XX      XX      XX
-TOTAL EQUITY            XX      XX      XX      XX      XX      XX      XX      XX      XX
+所有者权益
+  实收资本（或股本）       XX      XX      XX      XX      XX      XX      XX      XX      XX
+  资本公积                 XX      XX      XX      XX      XX      XX      XX      XX      XX
+  减：库存股               (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)    (XX)
+  其他综合收益             XX      XX      XX      XX      XX      XX      XX      XX      XX
+  盈余公积                 XX      XX      XX      XX      XX      XX      XX      XX      XX
+  未分配利润               XX      XX      XX      XX      XX      XX      XX      XX      XX
+  归属母公司股东权益       XX      XX      XX      XX      XX      XX      XX      XX      XX
+  少数股东权益             XX      XX      XX      XX      XX      XX      XX      XX      XX
+所有者权益合计              XX      XX      XX      XX      XX      XX      XX      XX      XX
 
-TOTAL LIAB + EQUITY     XX      XX      XX      XX      XX      XX      XX      XX      XX
+负债与所有者权益总计        XX      XX      XX      XX      XX      XX      XX      XX      XX
 
-BALANCE CHECK           OK      OK      OK      OK      OK      OK      OK      OK      OK
+平衡校验                    OK      OK      OK      OK      OK      OK      OK      OK      OK
 ```
 
 **Balance Check Formula:**
@@ -506,23 +557,27 @@ BALANCE CHECK           OK      OK      OK      OK      OK      OK      OK      
 Prepare inputs for valuation (Task 3):
 
 ```
-DCF INPUTS              2025E   2026E   2027E   2028E   2029E
+DCF 输入（百万元）       2025E   2026E   2027E   2028E   2029E
 
-EBIT                    XX      XX      XX      XX      XX
-Tax Rate                X%      X%      X%      X%      X%
+营业利润（CAS 口径，含投资收益与公允价值变动）
+                        XX      XX      XX      XX      XX
+（注：A 股 DCF 建议用"营业利润 - 投资收益 - 公允价值变动"还原至经营性 EBIT，避免重复计算非经常项目）
+经营性 EBIT             XX      XX      XX      XX      XX
+有效税率                X%      X%      X%      X%      X%
+（A 股标准 25%；高新技术企业 15%；西部大开发 / 海南自贸 15%）
 NOPAT                   XX      XX      XX      XX      XX
 
-Add: D&A                XX      XX      XX      XX      XX
-Less: CapEx             (XX)    (XX)    (XX)    (XX)    (XX)
-Less: Chg in NWC        (XX)    (XX)    (XX)    (XX)    (XX)
+加：折旧摊销             XX      XX      XX      XX      XX
+减：CapEx               (XX)    (XX)    (XX)    (XX)    (XX)
+减：营运资本变动         (XX)    (XX)    (XX)    (XX)    (XX)
 
-UNLEVERED FCF           XX      XX      XX      XX      XX
+无杠杆自由现金流（FCFF） XX      XX      XX      XX      XX
 
-Terminal Year Metrics:
-  2029E Revenue         $X,XXX
-  2029E EBITDA          $XXX
-  2029E EBIT            $XXX
-  2029E Unlevered FCF   $XXX
+终值年指标:
+  2029E 营业总收入       ¥X,XXX
+  2029E EBITDA          ¥XXX
+  2029E 经营性 EBIT     ¥XXX
+  2029E FCFF            ¥XXX
 ```
 
 ### Step 8: Build Scenarios Tab
@@ -612,7 +667,7 @@ Cumulative FCF 2025-2029 ($M)   $XXX        $XXX        $XXX
 Save the financial model as:
 `[Company]_Financial_Model_[Date].xlsx`
 
-Example: `Tesla_Financial_Model_2024-10-27.xlsx`
+Example: `贵州茅台_600519.SH_Financial_Model_2026-05-06.xlsx` 或 `宁德时代_300750.SZ_Financial_Model_2026-05-06.xlsx`
 
 ---
 
@@ -634,26 +689,37 @@ A successful financial model should:
 
 ## Common Model Types - Special Considerations
 
-### High-Growth Tech/SaaS
-- Focus on ARR growth and net retention
-- Model by product line and geography
-- Heavy R&D and S&M spend
-- Path to profitability timeline
-- Unit economics (LTV/CAC)
+### 高成长科创板 / 创业板（半导体 / 创新药 / SaaS）
+- 关注 ARR 增长与续费率（SaaS）、新管线进度（创新药）、订单 / 出货数据（半导体）
+- 按产品线 / 客户分类建模
+- 研发费用率与销售费用率高（科创板研发资本化率上限关注）
+- 盈利时间表（科创板第五套标准允许未盈利上市）
+- 单位经济（LTV/CAC、客户净留存）
 
-### E-commerce/Retail
-- Revenue by product category and channel
-- Store count and comp store growth (if applicable)
-- Inventory turns and working capital
-- Fulfillment costs
-- Customer acquisition
+### 消费 / 零售（家电 / 白酒 / 食品饮料 / 服装）
+- 按产品大类与渠道（线上 / 线下 / 经销 / 直营）拆分
+- 门店数量与同店增长（连锁零售）
+- 存货周转天数与营运资金（白酒囤货周期长，存货周转慢但毛利高）
+- 物流与履约成本
+- 经销商体系与渠道库存（高端白酒重点跟踪）
 
-### Manufacturing/Industrial
-- Production capacity utilization
-- Raw material costs and pricing
-- Gross margin bridge (volume/price/mix/cost)
-- CapEx heavy models
-- Working capital cycles
+### 制造业 / 周期股（化工 / 钢铁 / 有色 / 工程机械）
+- 产能利用率与产能扩张周期
+- 原材料价格与产品价格（周期股 PB 估值优于 PE）
+- 毛利率桥接分析（销量 / 价格 / 产品组合 / 成本）
+- 重资产高 CapEx 模式（关注资本开支节奏与折旧拐点）
+- 营运资金周期与应收账款管理
+
+### 银行 / 非银金融 / 房地产
+- 银行：关注净息差、不良率、拨备覆盖率、ROE，PB 为主估值（0.5-1.2x PB）
+- 非银金融（保险 / 券商）：内含价值（EV）、新业务价值（NBV）
+- 房地产：销售金额、销售面积、土储、债务结构（三道红线）、NAV 估值优于 PE
+
+### 公用 / 高分红蓝筹（电力 / 高速 / 港口 / 银行）
+- 长期稳定现金流，戈登增长模型适用
+- 关注分红率与股息率
+- 资产负债率较高但现金流稳定
+- WACC 下行受益（低利率环境估值修复）
 
 ---
 

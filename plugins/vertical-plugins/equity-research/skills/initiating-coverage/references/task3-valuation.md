@@ -4,7 +4,7 @@ This document provides step-by-step instructions for executing Task 3 (Valuation
 
 ## Task Overview
 
-**Purpose**: Perform comprehensive valuation using DCF, comparables, and precedent transactions.
+**Purpose**: 综合运用 PE / PB / PEG / DCF / EV/EBITDA 完成估值分析（A 股偏好 PE / PB，EV/EBITDA 仅辅助，DCF 用于成熟期与公用类）。
 
 **Prerequisites**: ⚠️ Verify before starting
 - **Required**: Financial model from Task 2
@@ -20,11 +20,12 @@ This task requires the financial model from Task 2. Starting without it will res
 **IF TASK 2 IS NOT COMPLETE**: Stop immediately and inform the user that Task 2 (Financial Modeling) must be completed first. Do not attempt to proceed or create placeholder valuations.
 
 **Output**: Valuation Analysis (4-6 pages + Excel tabs)
-- DCF analysis with sensitivity tables
-- Comparable companies analysis
-- Precedent transactions (if applicable)
-- Valuation football field
-- Price target and recommendation
+- 主估值（PE / PB / PEG，A 股核心方法）含申万行业可比公司
+- DCF 分析与敏感性表（成熟稳定期 / 公用类首选；高成长股辅助）
+- 戈登增长模型（高分红蓝筹 / 银行 / 公用类适用）
+- EV/EBITDA（重资产周期股辅助验证）
+- 估值橄榄球图（Football Field）
+- 目标价与五档评级（买入 / 增持 / 中性 / 减持 / 卖出）
 
 ---
 
@@ -104,170 +105,195 @@ This workflow document focuses on execution steps. Reference the methodology fil
 
 #### A. Calculate WACC
 
-**1. Determine Risk-Free Rate**
-   - Use 10-year Treasury yield (check current rate)
-   - Example: 4.0-4.5% as of late 2024
+**1. 确定无风险利率（Risk-Free Rate）**
+   - 使用 10 年期中国国债收益率（中国央行 / Wind 数据）
+   - 当前参考区间：约 2.0-2.5%（2024-2026 年低利率环境）
+   - 数据源：AKShare `bond_zh_us_rate` / Wind / 中债登
 
-**2. Determine Cost of Equity (CAPM)**
+**2. 计算权益成本（CAPM）**
    ```
    Cost of Equity = Risk-Free Rate + Beta × Equity Risk Premium
 
    Inputs:
-   - Risk-Free Rate: [Current 10-year Treasury, e.g., 4.2%]
-   - Beta: [Company beta from Bloomberg/FactSet or peer average]
-   - Equity Risk Premium: 5-6% (historical average)
+   - Risk-Free Rate: 当前 10Y 中国国债收益率（如 2.3%）
+   - Beta: 沪深 300 或申万一级 / 二级行业指数 60 个月回归（AKShare / Tushare 可拉取）
+   - Equity Risk Premium（A 股 ERP）: 5.5-7%（高于美股 4.5-5.5%，反映新兴市场风险溢价）
 
    Example:
-   Cost of Equity = 4.2% + 1.3 × 5.5% = 11.35%
+   Cost of Equity = 2.3% + 1.2 × 6.0% = 9.5%
    ```
 
-**3. Determine Cost of Debt**
+**3. 确定债务成本（Cost of Debt）**
    ```
-   Cost of Debt = Current borrowing rate or implied yield on bonds
+   Cost of Debt = 公司当前借款利率（年报附注披露）或公司债到期收益率
 
-   For private companies:
-   Cost of Debt = Risk-Free Rate + Credit Spread (based on rating)
+   或参考行业基准：
+   Cost of Debt = LPR（贷款基础利率，1Y / 5Y）+ 信用利差（按主体评级 AAA/AA+/AA）
 
-   Example:
-   Cost of Debt (pre-tax) = 6.5%
-   Cost of Debt (after-tax) = 6.5% × (1 - 25% tax rate) = 4.875%
+   A 股参考：
+   - AAA 级央国企：4.0-4.8%
+   - AA+ 级地方国企 / 龙头民企：5.0-6.0%
+   - AA 级民企：6.5-8.0%
+
+   Example（高新技术企业，税率 15%）:
+   Cost of Debt (pre-tax) = 5.0%
+   Cost of Debt (after-tax) = 5.0% × (1 - 15%) = 4.25%
+
+   Example（标准企业，税率 25%）:
+   Cost of Debt (after-tax) = 5.0% × (1 - 25%) = 3.75%
    ```
 
-**4. Determine Capital Structure**
+**4. 确定资本结构**
    ```
-   Use market values (not book values):
+   使用市场价值（而非账面价值）：
 
-   Market Value of Equity (E) = Share Price × Shares Outstanding
-   Market Value of Debt (D) = Total Debt (use book value if bonds not traded)
-   Total Value (V) = E + D
+   股权市值 (E) = A 股收盘价 × 总股本
+   债务市值 (D) = 短期借款 + 应付债券 + 长期借款 + 一年内到期非流动负债（年报口径，无可交易债券时用账面）
+   总价值 (V) = E + D
 
-   Weight of Equity = E / V
-   Weight of Debt = D / V
+   股权权重 = E / V
+   债务权重 = D / V
 
-   Example:
-   E = $5,000M (90.9%)
-   D = $500M (9.1%)
-   V = $5,500M (100%)
+   Example（典型 A 股消费股）:
+   E = ¥50 亿（90.9%）
+   D = ¥5 亿（9.1%）
+   V = ¥55 亿（100%）
    ```
 
 **5. Calculate WACC**
    ```
    WACC = (E/V × Cost of Equity) + (D/V × Cost of Debt × (1 - Tax Rate))
 
-   Example:
-   WACC = (90.9% × 11.35%) + (9.1% × 6.5% × (1 - 25%))
-   WACC = 10.32% + 0.44% = 10.76%
+   Example（A 股标准企业，税率 25%）:
+   WACC = (90.9% × 9.5%) + (9.1% × 5.0% × (1 - 25%))
+   WACC = 8.64% + 0.34% = 8.98%
 
-   Round to: 10.8% for base case
+   Round to: 9.0% for base case
+
+   注：A 股 WACC 经验区间约 7-11%，低于美股（10-14%），主因无风险利率偏低。
+   - 银行 / 公用：6-8%
+   - 消费 / 医药：8-10%
+   - 科技 / 周期：9-12%
    ```
 
 #### B. Calculate Terminal Value
 
-**Method 1: Perpetuity Growth (Preferred)**
+**Method 1: 永续增长法（优先）**
 ```
 Terminal Value = FCF(2029) × (1 + g) / (WACC - g)
 
 Where:
-- FCF(2029) = Final year unlevered FCF from model
-- g = Perpetual growth rate (typically 2.0-3.0%)
-  - Should not exceed long-term GDP growth
-  - Use 2.5% as base case
+- FCF(2029) = 模型末年 FCFF
+- g = 永续增长率（建议 2.0-3.0%）
+  - 不应超过长期中国 GDP 增长（当前约 4-5%，潜在增长率下行至 3-4%）
+  - 中性建议 2.5%；高分红蓝筹与公用股 1.5-2%；高景气赛道 3%
 
 Example:
-FCF(2029) = $500M
+FCF(2029) = ¥5 亿
 g = 2.5%
-WACC = 10.8%
+WACC = 9.0%
 
-Terminal Value = $500M × (1.025) / (0.108 - 0.025)
-Terminal Value = $512.5M / 0.083 = $6,175M
+Terminal Value = ¥5 亿 × (1.025) / (0.09 - 0.025)
+Terminal Value = ¥5.125 亿 / 0.065 = ¥78.85 亿
 ```
 
-**Method 2: Exit Multiple (Alternative)**
+**Method 2: 退出倍数法（备选）**
 ```
 Terminal Value = EBITDA(2029) × Exit Multiple
 
 Where:
-- Exit Multiple = Current peer trading median (e.g., 12-15x EBITDA)
+- Exit Multiple = 申万行业内 A 股可比公司当前 EV/EBITDA 中位数（A 股偏好用 PE 退出，10-25x 区间）
 
 Example:
-EBITDA(2029) = $800M
-Exit Multiple = 13x
+EBITDA(2029) = ¥8 亿
+Exit Multiple = 12x（消费类）
 
-Terminal Value = $800M × 13x = $10,400M
+Terminal Value = ¥8 亿 × 12x = ¥96 亿
 ```
 
-**Choose one method or average both.**
+**Method 3: 戈登增长模型（高分红蓝筹 / 银行 / 公用类）**
+```
+P = D₁ / (r - g)
+
+适用条件：稳定现金流 + 稳定分红率 + 永续经营
+- 银行 / 高速 / 港口 / 电力 / 高分红蓝筹
+- D₁ = 下一年股息
+- r = 权益成本（无杠杆，因银行 / 保险口径）
+- g = 永续增长率
+```
+
+**A 股建议优先级：消费 / 医药首选永续增长法；周期 / 制造首选退出倍数法；银行 / 公用首选戈登模型。**
 
 #### C. Discount Cash Flows to Present Value
 
 ```
 PV of Projected FCF = Σ [FCFt / (1 + WACC)^t] for t = 1 to 5
 
-Example:
+Example（WACC=9.0%）:
 Year    FCF      Discount    PV of FCF
-        ($M)     Factor      ($M)
-2025    $250     1/(1.108)^1 = 0.9026    $226
-2026    $320     1/(1.108)^2 = 0.8147    $261
-2027    $390     1/(1.108)^3 = 0.7353    $287
-2028    $450     1/(1.108)^4 = 0.6636    $299
-2029    $500     1/(1.108)^5 = 0.5988    $299
-                              Total PV:  $1,372M
+        (亿元)   Factor      (亿元)
+2025    ¥2.5     1/(1.09)^1 = 0.917      ¥2.29
+2026    ¥3.2     1/(1.09)^2 = 0.842      ¥2.69
+2027    ¥3.9     1/(1.09)^3 = 0.772      ¥3.01
+2028    ¥4.5     1/(1.09)^4 = 0.708      ¥3.19
+2029    ¥5.0     1/(1.09)^5 = 0.650      ¥3.25
+                              Total PV:  ¥14.43 亿
 
 PV of Terminal Value = Terminal Value / (1 + WACC)^5
-PV of Terminal Value = $6,175M / (1.108)^5 = $6,175M × 0.5988 = $3,697M
+PV of Terminal Value = ¥78.85 亿 / (1.09)^5 = ¥78.85 亿 × 0.650 = ¥51.25 亿
 
-Enterprise Value = $1,372M + $3,697M = $5,069M
+Enterprise Value = ¥14.43 亿 + ¥51.25 亿 = ¥65.68 亿
 ```
 
 #### D. Calculate Equity Value and Price Per Share
 
 ```
-Enterprise Value                 $5,069M
-- Net Debt (Debt - Cash)         ($450M)
-+ Non-operating Assets           $0M
-- Minority Interest              $0M
-- Preferred Stock                $0M
-= Equity Value                   $4,619M
+Enterprise Value                 ¥65.68 亿
+- 净债务（有息负债 - 货币资金）   (¥4.5 亿)
++ 非经营性资产（交易性金融资产 / 长期股权投资可变现部分）  ¥0 亿
+- 少数股东权益                    ¥0 亿
+- 优先股 / 永续债                 ¥0 亿
+= 股权价值                        ¥61.18 亿
 
-Diluted Shares Outstanding       100M
+总股本（亿股）                     1.00 亿股
 
-Price Per Share = $4,619M / 100M = $46.19
+每股价值 = ¥61.18 亿 / 1.00 亿股 = ¥61.18
 
-Current Stock Price: $42.00
-Implied Upside: 10.0%
+当前股价：                         ¥42.00
+隐含上行空间：                     45.7%
 ```
 
 #### E. DCF Sensitivity Analysis **CRITICAL**
 
-**Table 1: WACC vs. Terminal Growth Rate**
+**Table 1: WACC vs. 永续增长率（A 股 WACC 区间 7-11%）**
 
 Create 2-way sensitivity table:
 ```
-Price Per Share ($)     Terminal Growth Rate
+每股价值 (¥)            永续增长率 g
 WACC        1.5%    2.0%    2.5%    3.0%    3.5%
-9.0%        $52     $55     $59     $63     $68
-9.5%        $48     $51     $54     $58     $62
-10.0%       $45     $48     $51     $54     $57
-10.5%       $42     $45     $47     $50     $53
-11.0%       $40     $42     $44     $47     $50
-11.5%       $38     $40     $42     $44     $47
-12.0%       $36     $38     $40     $42     $44
+7.5%        ¥68     ¥73     ¥78     ¥84     ¥91
+8.0%        ¥63     ¥67     ¥72     ¥77     ¥83
+8.5%        ¥58     ¥62     ¥66     ¥70     ¥75
+9.0%        ¥54     ¥57     ¥61     ¥65     ¥70
+9.5%        ¥50     ¥53     ¥56     ¥60     ¥64
+10.0%       ¥47     ¥50     ¥52     ¥56     ¥60
+10.5%       ¥44     ¥46     ¥49     ¥52     ¥55
 
-Base Case: WACC = 10.8%, g = 2.5% → $46
-Format as heatmap: Green (high values) → Yellow → Red (low values)
+中性基准：WACC = 9.0%, g = 2.5% → ¥61
+热力图：绿色（高值）→ 黄色 → 红色（低值）
 ```
 
-**Table 2: Revenue CAGR vs. Terminal EBITDA Margin**
+**Table 2: 营收 CAGR vs. 终值年归母净利率（A 股偏好用净利率而非 EBITDA 利润率）**
 ```
-Price Per Share ($)     Terminal EBITDA Margin (2029E)
-Revenue CAGR    28%     30%     32%     34%     36%
-15%             $38     $42     $46     $50     $54
-20%             $42     $46     $51     $56     $61
-25%             $46     $51     $56     $62     $68
-30%             $51     $56     $62     $68     $75
-35%             $56     $62     $68     $75     $83
+每股价值 (¥)            归母净利率（2029E）
+营收 CAGR       12%     15%     18%     21%     24%
+10%             ¥42     ¥48     ¥54     ¥60     ¥66
+15%             ¥48     ¥56     ¥63     ¥71     ¥78
+20%             ¥56     ¥65     ¥74     ¥83     ¥92
+25%             ¥65     ¥75     ¥86     ¥97     ¥108
+30%             ¥75     ¥87     ¥99     ¥112    ¥125
 
-Base Case: Rev CAGR = 25%, EBITDA Margin = 32% → $56
+中性基准：营收 CAGR = 20%, 归母净利率 = 18% → ¥74
 ```
 
 ### Step 3: Comparable Companies Analysis

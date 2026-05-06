@@ -7,6 +7,31 @@
 
 工作分支：`ashare-localization`（默认 main 保持与上游同步，A 股改造在此分支）
 
+## 开发纪律（本项目内）
+
+### 必跑的验证步骤（改 plugin 后）
+
+光跑 `scripts/check.py` lint 不够，必须按以下顺序验证：
+
+1. **Lint**：`python3 scripts/check.py` — 验证文件引用合规
+2. **Sync**：`python3 scripts/sync-agent-skills.py` — 把 vertical-plugins/ 的改动传播到 agent-plugins/ bundles
+3. **MCP 启动**：`uvx <mcp-name> --help` — 验证 MCP 依赖能装能起
+4. **Plugin Install（必做）**：
+   ```bash
+   claude plugin marketplace update claude-for-financial-services
+   claude plugin uninstall <name>@claude-for-financial-services
+   claude plugin install <name>@claude-for-financial-services
+   claude plugin list | grep <name>   # 看 Status: enabled
+   ```
+   不能只看安装成功消息，必须看 list 状态。`Status: ✘ failed to load` 才是失败的真信号
+5. **Slash 命令实测**：在新 Claude Code session 跑一个 slash 命令看是否触发 skill
+
+### 已知陷阱
+
+- `hooks/hooks.json` 上游用 `[]`，但 Claude Code 加载器要求 `{"hooks": {}}`（object）。新增 plugin 时手动检查，否则 enabled 失败
+- `scripts/check.py` 不验证 hooks.json schema，只验证 manifest 引用
+- subagent 改子目录时容易漏改 references/，主 SKILL.md 改完后要确认子文档同步
+
 ## 关键改造文件清单
 
 ### 已改造的 skill（核心 6 个）

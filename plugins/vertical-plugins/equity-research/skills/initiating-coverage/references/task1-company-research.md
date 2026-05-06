@@ -7,7 +7,7 @@ This document provides step-by-step instructions for executing Task 1 (Company R
 **Purpose**: Research company's business, management, competitive position, industry, and risks.
 
 **Prerequisites**: ✅ None (fully independent)
-- Company name or ticker symbol only
+- 公司名称或 A 股代码（如 600519.SH / 000858.SZ / 300750.SZ / 688981.SH）
 
 **Output**: Company Research Document (6,000-8,000 words)
 
@@ -16,43 +16,44 @@ This document provides step-by-step instructions for executing Task 1 (Company R
 ## Data Sources to Gather
 
 ### Primary Sources (Company)
-- **SEC Filings (for public companies):**
-  - Latest 10-K: Business description, risk factors, MD&A, financials
-  - Recent 10-Qs: Quarterly updates
-  - DEF 14A (Proxy): Executive compensation, board composition
-  - 8-Ks: Material events, acquisitions, management changes
+- **巨潮资讯网（cninfo.com.cn）定期报告：**
+  - 最新年报：业务描述、风险因素、管理层讨论与分析（MD&A）、财务报表
+  - 最新半年报与季报（一季报 / 三季报）
+  - 业绩预告 / 业绩快报（披露超预期或低预期信号）
+  - 临时公告：重大事项、并购重组、高管变动、股东减持、回购、对外担保
+  - 业绩说明会通稿 / 投资者关系活动记录表
 
-- **Company Website & IR:**
-  - Investor presentations
-  - Earnings transcripts (last 2-3 quarters)
-  - Press releases
-  - Product documentation
+- **公司官网与投资者关系（IR）：**
+  - 路演 PPT / 业绩说明会材料
+  - 业绩说明会通稿（最近 2-3 个季度）
+  - 公司公告与新闻稿
+  - 产品资料
 
-- **For Private Companies:**
-  - Company website and blog
-  - Press releases and media coverage
-  - LinkedIn for management bios
-  - Crunchbase or PitchBook for funding history
+- **数据接口（结构化数据优先）：**
+  - AKShare MCP / Tushare MCP（首选，免费/低成本）
+  - Wind / 同花顺 iFinD（付费，机构数据）
+  - 上证 e 互动 / 深交所互动易（管理层公开问答）
 
 ### Secondary Sources (Industry/Competitive)
-- Competitor websites and SEC filings
-- Industry research reports (Gartner, Forrester, IDC, etc.)
-- News articles and trade publications
-- Market research reports
-- LinkedIn profiles for key executives
+- 竞争对手官网与定期报告（巨潮资讯网）
+- 行业研究报告（券商研报、艾瑞、易观、中商产业研究院、wind 行业数据库）
+- 财经媒体（财联社、第一财经、证券时报、新浪财经、雪球大 V）
+- 行业协会数据（如汽车工业协会、半导体行业协会、中国电力企业联合会）
+- 高管背景：天眼查 / 企查查 / 公司公告中的董监高履历
 
 ### Key Information to Extract
 
 **Key Information:**
-- Company founding date, headquarters, employee count
-- Revenue size and growth trajectory (if available)
-- Product portfolio and pricing
-- Customer segments and case studies
-- Management backgrounds and track records
-- Competitive landscape and market share
-- Industry trends and growth drivers
-- Regulatory considerations
-- High-level financial metrics (from 10-K prose, not detailed extraction)
+- 公司成立日期、注册地、上市板块（沪主板 / 深主板 / 创业板 / 科创板 / 北交所）、员工人数
+- 营业总收入规模与增长轨迹（最近 3-5 年）
+- 产品矩阵与价格体系
+- 客户结构与典型案例（前五大客户占比）
+- 董监高背景与履历
+- 竞争格局与市场份额（申万行业内排名）
+- 行业趋势与增长驱动
+- 政策与监管考量（行业新政、补贴、税收优惠）
+- 高频财务指标（来自年报正文 MD&A，非详细数据提取，详细财务建模在 Task 2）
+- 实控人与股权结构、大股东质押率、限售解禁日历
 
 ---
 
@@ -66,16 +67,17 @@ This document provides step-by-step instructions for executing Task 1 (Company R
    - Identify customer case studies
    - Note key metrics mentioned (employees, customers, etc.)
 
-2. **Gather SEC filings (if public)**
-   - Download latest 10-K from SEC EDGAR
-   - Download most recent 10-Q
-   - Download latest DEF 14A (proxy statement)
-   - Note filing dates
+2. **抓取定期报告（巨潮资讯网 / AKShare / Tushare）**
+   - 下载最新年报
+   - 下载最新季报 / 半年报
+   - 下载最近 12 个月的临时公告（重大事项 / 并购 / 担保 / 关联交易 / 高管减持）
+   - 关注披露窗口：年报次年 4 月 30 日前、半年报当年 8 月 31 日前、一季报当年 4 月 30 日前、三季报当年 10 月 31 日前；业绩预告 1 月 31 日前（亏损 / 扭亏 / 大增 / 大减强制预告）
 
-3. **Read earnings materials**
-   - Latest earnings transcript
-   - Most recent investor presentation
-   - Press releases from last 12 months
+3. **阅读业绩材料**
+   - 最近一次业绩说明会通稿 / 投资者关系活动记录表
+   - 最新路演 PPT
+   - 最近 12 个月的公司公告与新闻稿
+   - 上证 e 互动 / 深交所互动易上的高频问答
 
 4. **Document basic facts**
    - Founding date and story
@@ -93,10 +95,10 @@ This document provides step-by-step instructions for executing Task 1 (Company R
    - What are typical deal sizes?
 
 2. **Understand customer segments**
-   - Enterprise vs. SMB vs. consumer
-   - Industries served
-   - Geographic distribution
-   - Customer concentration (top 10 customers)
+   - 大客户（如车企 / 三大运营商 / 国央企）vs. 中小企业 vs. 终端消费者（C 端）
+   - 服务行业（按申万行业分类）
+   - 区域分布（境内 vs. 海外；华东 / 华南 / 华北等）
+   - 客户集中度（前五大客户占比，年报"经营情况讨论与分析"或"重大销售合同"披露）
 
 3. **Document go-to-market**
    - Direct sales vs. channel partners
@@ -115,29 +117,31 @@ This document provides step-by-step instructions for executing Task 1 (Company R
 **For each of 3-4 key executives:**
 
 1. **Identify key leaders**
-   - CEO (always required)
-   - CFO (always required)
-   - COO, CTO, or other C-suite (2 additional)
+   - 董事长 / 实控人（必查）
+   - 总经理（必查）
+   - 财务总监 / 董秘 / 核心技术带头人 / 核心业务事业部负责人（2 位）
 
 2. **Research each executive**
-   - Find LinkedIn profile
-   - Review DEF 14A for background
-   - Search for press interviews
-   - Note tenure at company
+   - 年报"董监高及员工情况"章节披露的履历
+   - 天眼查 / 企查查的关联企业与对外投资
+   - 媒体专访与业绩说明会发言
+   - 在公司任职年限、是否实控人或一致行动人
 
 3. **Write 300-400 word bio including:**
-   - Current role and responsibilities
-   - Prior roles and companies (last 2-3 positions)
-   - Key accomplishments and track record
-   - Education and credentials
-   - Years of experience in industry
-   - Time at current company
+   - 当前职务与分工
+   - 过往任职经历（最近 2-3 段）
+   - 主要业绩与履历亮点
+   - 教育背景与专业资质（高级工程师 / CPA / 行业奖项）
+   - 行业从业年限
+   - 在本公司任职时间、持股数量与股权激励情况
 
 4. **Assess governance**
-   - Board composition and independence
-   - Key board members and their backgrounds
-   - Insider ownership percentage
-   - Executive compensation structure
+   - 董事会结构（独立董事比例 ≥1/3，A 股强制要求）
+   - 监事会构成（A 股特有，不同于美股审计委员会）
+   - 实控人与一致行动人持股比例
+   - 大股东质押率（>50% 重点风险）
+   - 高管薪酬与股权激励（限制性股票 / 股票期权）
+   - 业绩承诺与对赌（重大重组后 3-5 年承诺期）
 
 ### Step 4: Competitive Intelligence
 
@@ -145,14 +149,14 @@ This document provides step-by-step instructions for executing Task 1 (Company R
    - Direct competitors (same products/markets)
    - Indirect competitors (substitute solutions)
    - Emerging competitors (disruptors)
-   - Check 10-K for company's own list of competitors
+   - 查阅年报"行业竞争格局"或"经营情况讨论与分析"章节中公司列出的竞争对手
 
 2. **Research each competitor**
-   - Visit competitor website
-   - Review their SEC filings (if public)
-   - Note key products and positioning
-   - Identify differentiators
-   - Estimate market share (if data available)
+   - 访问竞争对手官网
+   - 阅读其定期报告（A 股竞争对手用巨潮，港股用披露易，美股标的用 SEC EDGAR）
+   - 关注核心产品与定位
+   - 识别差异化要素
+   - 估算市场份额（结合行业协会 / 券商研报 / wind 行业数据库）
 
 3. **Create competitive framework**
    - Map on key dimensions (price, features, scale, etc.)
@@ -169,15 +173,16 @@ This document provides step-by-step instructions for executing Task 1 (Company R
 ### Step 5: Industry Analysis
 
 1. **Define the industry**
-   - Industry classification (NAICS/SIC)
-   - Scope and boundaries
-   - Related/adjacent industries
+   - 申万一级 / 二级 / 三级行业分类（A 股权威分类，共 31 个一级行业）
+   - 中证 / 国证行业指数对应板块
+   - 范围与边界
+   - 相邻 / 关联行业（产业链上下游）
 
 2. **Size the market**
-   - Total addressable market (TAM)
-   - Serviceable addressable market (SAM)
-   - Serviceable obtainable market (SOM)
-   - Current penetration rate
+   - 总体可触达市场（TAM，参考行业协会 / 券商研报 / 国家统计局）
+   - 可服务市场（SAM）
+   - 可获得市场（SOM）
+   - 当前渗透率（如新能源车渗透率、SaaS 渗透率、国产替代率）
 
 3. **Research growth drivers**
    - Historical market growth rate
@@ -196,31 +201,33 @@ This document provides step-by-step instructions for executing Task 1 (Company R
 
 Identify 8-12 risks across four categories. For each risk, write 50-100 words.
 
-**Company-Specific Risks (4-6 risks):**
-- Execution risk (can management deliver?)
-- Customer concentration (top customers)
-- Key person dependency
-- Product/technology obsolescence
-- Geographic concentration
-- Integration risk (if recent M&A)
+**Company-Specific Risks（公司层面，4-6 项）：**
+- 经营执行风险（管理层能否兑现承诺）
+- 客户集中度（前五大客户占比 >50% 重点关注）
+- 核心人员依赖（创始人 / 核心技术带头人）
+- 产品 / 技术迭代风险
+- 区域集中度
+- 并购整合风险（近 3 年完成的重大重组）
+- **A 股专属：** 商誉减值风险（商誉 / 净资产 >30%）、大股东质押风险（质押率 >50%）、限售股解禁压力、关联交易占比偏高、业绩承诺到期风险（重组对赌期满）、实控人变更 / 高管减持密集、审计意见非标（保留 / 无法表示意见）、退市新规风险（连续亏损 / 财务造假 / 市值低于阈值）
 
-**Industry/Market Risks (3-4 risks):**
-- Competitive intensity
-- Regulatory changes
-- Technology disruption
-- Market saturation
+**Industry/Market Risks（行业 / 市场层面，3-4 项）：**
+- 行业竞争加剧（价格战、内卷）
+- 政策与监管变化（行业新政、补贴退坡、税收优惠到期、双减 / 反垄断 / 数据合规）
+- 技术替代风险
+- 市场饱和
 
-**Financial Risks (2-3 risks):**
-- Profitability timeline
-- Funding requirements
-- Debt levels and covenants
-- Cash burn rate (if unprofitable)
+**Financial Risks（财务层面，2-3 项）：**
+- 盈利时间表（仍处亏损期的科创板 / 创业板公司）
+- 融资需求（再融资节奏、定增受限）
+- 资产负债率与短债压力
+- 经营性现金流转负
+- 应收账款 / 存货占营收比偏高
 
-**Macroeconomic Risks (2-3 risks):**
-- Economic sensitivity (cyclical vs. defensive)
-- Interest rate sensitivity
-- Foreign exchange exposure
-- Geopolitical factors
+**Macroeconomic Risks（宏观层面，2-3 项）：**
+- 经济周期敏感性（顺周期 vs. 防御）
+- 利率敏感性（10Y 中国国债走势）
+- 汇率敞口（出口型企业 / 海外营收占比高）
+- 地缘政治（中美关系、出口管制、产业链转移）
 
 **For each risk:**
 - Describe the risk clearly
@@ -442,7 +449,7 @@ Save the output as:
 
 `[Company]_Research_Document_[Date].md`
 
-Example: `Tesla_Research_Document_2024-10-27.md`
+Example: `贵州茅台_600519.SH_Research_Document_2026-05-06.md` 或 `宁德时代_300750.SZ_Research_Document_2026-05-06.md`
 
 ---
 

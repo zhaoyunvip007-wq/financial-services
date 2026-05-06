@@ -1,96 +1,129 @@
-# Client Report
+---
+name: client-report
+description: 中国财富管理客户对账单 / 业绩报告。组合收益、配置明细、持仓清单、市场点评。季度 / 年度分发。触发："客户报告""业绩报告""客户对账单""[客户名] 季度报告""出报告""客户报表"。
+---
 
-description: Generate professional client-facing performance reports with portfolio returns, allocation breakdowns, and market commentary. Suitable for quarterly or annual distribution. Triggers on "client report", "performance report", "quarterly report for [client]", "generate reports", or "client statement".
+# 客户业绩报告（中国财富管理）
 
-## Workflow
+## 工作流
 
-### Step 1: Report Parameters
+### Step 1：报告参数
 
-- **Client name** and household
-- **Reporting period**: Quarter, YTD, annual, custom range
-- **Accounts**: All accounts or specific account
-- **Benchmark**: S&P 500, 60/40 blend, custom benchmark matching IPS
-- **Firm branding**: Logo, colors, disclaimers
+- **客户姓名**及家庭
+- **报告期**：季度 / 年初至今 / 年度 / 自定义区间
+- **账户范围**：全账户 / 指定账户
+- **基准**：根据 IPS 选择（沪深 300 / 中证 500 / 60/40 股债 / 混合定制基准）
+- **机构品牌**：Logo / 配色 / 合规免责
 
-### Step 2: Performance Summary
+### Step 2：业绩摘要
 
-**Household Summary:**
+**家庭整体：**
 
-| | QTD | YTD | 1-Year | 3-Year Ann. | 5-Year Ann. | ITD Ann. |
-|---|-----|-----|--------|-------------|-------------|----------|
-| Portfolio | | | | | | |
-| Benchmark | | | | | | |
-| +/- | | | | | | |
+| | 季度 | 年初至今 | 1 年 | 3 年年化 | 5 年年化 | 自起始年化 |
+|---|---|---|---|---|---|---|
+| 组合 | | | | | | |
+| 基准 | | | | | | |
+| 超额收益 | | | | | | |
 
-**By Account:**
+**分账户：**
 
-| Account | Type | Value | QTD | YTD | Benchmark |
-|---------|------|-------|-----|-----|-----------|
-| Joint Taxable | Brokerage | | | | |
-| John IRA | Traditional | | | | |
-| Jane Roth | Roth IRA | | | | |
-| 529 Plan | Education | | | | |
-| **Total** | | | | | |
+| 账户 | 类型 | 总值（元） | 季度 | 年初至今 | 基准 |
+|---|---|---|---|---|---|
+| 主账户（A 股） | 普通证券 | | | | 沪深 300 |
+| 港股通账户 | 沪港通 | | | | 恒生指数 |
+| QDII 公募 | 公募基金 | | | | MSCI 全球 |
+| 私募 / 信托 | 合格投资者 | | | | 中证 500 |
+| 银行理财 | 净值化产品 | | | | 中债综合 |
+| 个人养老金账户 | 锁定账户 | | | | 60/40 |
+| 保险（增额寿） | 长期固收 | | | | 中债国债 |
+| **合计** | | | | | |
 
-### Step 3: Allocation Overview
+### Step 3：配置概览
 
-Current allocation with visual (pie chart or bar chart):
+当前资产配置（饼图或柱状图）：
 
-| Asset Class | % of Portfolio | $ Value | Benchmark % |
-|------------|---------------|---------|-------------|
-| | | | |
+| 大类资产 | 组合占比 | 金额（元） | 目标占比 |
+|---|---|---|---|
+| A 股股票 | | | |
+| 港股 / 港股通 | | | |
+| 海外股票（QDII） | | | |
+| 国内债券 | | | |
+| 银行理财 / 货基 | | | |
+| 房地产 + REITs | | | |
+| 私募 / 信托 | | | |
+| 保险 + 年金 | | | |
+| 黄金 + 大宗 | | | |
+| 现金 | | | |
 
-### Step 4: Holdings Detail
+### Step 4：持仓明细
 
-| Security | Asset Class | Shares | Price | Value | % of Portfolio | QTD Return |
-|----------|-----------|--------|-------|-------|---------------|-----------|
-| | | | | | | |
+| 标的名称 | 代码 | 大类 | 数量 / 份额 | 单价 | 市值（元） | 占比 % | 季度涨幅 |
+|---|---|---|---|---|---|---|---|
+| 贵州茅台 | 600519.SH | A 股 | | | | | |
+| 招商银行 | 600036.SH | A 股 | | | | | |
+| 沪深 300 ETF | 510300.SH | A 股 ETF | | | | | |
+| 中欧时代先锋 A | 001856.OF | 公募 | | | | | |
 
-### Step 5: Market Commentary
+**A 股持仓特别提示：**
+- 标记持有期 ≥ 1 年的票（分红免税）
+- 标记 30 天内即将满足"持有 1 年"的票（避免误卖损失免税权益）
+- 标记单一股票 > 10% 的集中度风险
 
-Brief market summary tailored to the client's level of sophistication:
-- What happened in markets this quarter (2-3 sentences)
-- How it affected the portfolio
-- Outlook and positioning rationale (2-3 sentences)
-- No jargon for retail clients; can be more technical for sophisticated investors
+### Step 5：市场点评
 
-### Step 6: Activity Summary
+按客户专业水平定制：
+- 季度市场综述（2-3 句话）：A 股 / 港股 / 全球主要走势
+- 关键事件影响：央行货币政策、地产政策、科技 / 消费 / 新能源行业事件
+- 对组合的影响（2-3 句话）：哪些配置受益、哪些承压
+- 后市展望和持仓理由（2-3 句话）：为什么继续持有 / 为什么减仓
+- 通俗版 vs 专业版：散户客户少用专业术语，机构 / 高净值客户可深入讲行业逻辑
 
-- Trades executed during the period
-- Contributions and withdrawals
-- Dividends and interest received
-- Fees charged
-- Rebalancing activity
+### Step 6：活动摘要
 
-### Step 7: Planning Notes
+- **交易**：本期买入 / 卖出明细（合并显示，避免数十笔细节）
+- **资金进出**：本期定投 / 一次性追加 / 提取金额
+- **分红利息**：A 股股息（区分免税 / 应税）+ 公募基金分红 + 债券利息 + 银行理财收益
+- **管理费 / 顾问费**：本期收取金额（透明化）
+- **再平衡**：本期再平衡触发的交易概要
 
-- Progress toward financial goals (retirement, education, etc.)
-- Any plan changes or recommendations
-- Upcoming action items
-- Next review date
+### Step 7：规划备注
 
-### Step 8: Output
+- 财务目标进度（养老金积累 / 子女教育金 / 大额支出）
+- 计划调整建议
+- 待办行动项
+- 下次复盘日期
 
-- PDF report (8-12 pages) with firm branding
-- Word document for customization
-- Excel data appendix (optional)
+### Step 8：输出
 
-**Report Structure:**
-1. Cover page (client name, period, firm logo)
-2. Executive summary (1 page)
-3. Performance summary (1-2 pages)
-4. Allocation overview with charts (1 page)
-5. Holdings detail (1-2 pages)
-6. Market commentary (1 page)
-7. Activity summary (1 page)
-8. Planning notes (1 page)
-9. Disclosures and disclaimers (1 page)
+- PDF 报告（8-12 页）含机构品牌
+- Word 文档（便于客户经理定制）
+- Excel 数据附录（可选，机构 / 高净值客户）
 
-## Important Notes
+**报告结构：**
+1. 封面（客户姓名 / 期间 / 公司 logo）
+2. 执行摘要（1 页）
+3. 业绩摘要（1-2 页）
+4. 配置概览 + 图表（1 页）
+5. 持仓明细（1-2 页）
+6. 市场点评（1 页）
+7. 活动摘要（1 页）
+8. 规划备注（1 页）
+9. 风险提示与免责声明（1 页）
 
-- Performance must be calculated net of fees unless client/compliance requires gross
-- Always include appropriate disclaimers and disclosures (past performance, risk factors)
-- Reports should be consistent across clients — use a standard template
-- Match the level of detail to the client — some want every holding, others want a one-page summary
-- Benchmark selection matters — use the benchmark from the IPS, not whatever looks best
-- Review for compliance approval before first distribution of a new template
+## 重要提示
+
+- **业绩计算口径**：扣除费率后口径（除非客户和合规要求展示费前）
+- **必须含风险提示和免责**：过往业绩不代表未来、市场风险、产品适当性等标准段落
+- **报告模板要统一**：跨客户保持一致，不要每个客户一个新模板
+- **详略匹配客户水平**：散户要 1 页摘要为主，机构 / 高净值要全持仓明细
+- **基准选择不能"挑好看的"**：必须用 IPS 里规定的基准
+- **新模板首次分发前必须合规审批**
+- **货币单位**：人民币（不要美元 / 港币混用，国际客户单独说明）
+- **税务信息**：分红明细标注免税 / 应税情况（A 股个人持有 ≥ 1 年免税属于客户实际收益的一部分）
+
+## 数据源
+
+1. **AKShare MCP**：A 股 / 港股 / 公募基金 / 指数行情
+2. **券商对账单 API**：持仓 + 交易明细
+3. **银行 / 信托对账单**：理财 + 信托持仓
+4. **公募基金销售平台**：基金净值 + 分红记录

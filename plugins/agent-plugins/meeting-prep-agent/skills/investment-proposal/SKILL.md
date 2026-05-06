@@ -1,85 +1,115 @@
-# Investment Proposal
+---
+name: investment-proposal
+description: 中国财富管理新客户投资方案书。覆盖公司介绍、客户需求理解、推荐配置、收益预期、费率结构。新签客户 / 新策略推介使用。触发："投资方案""客户提案""新客户方案""投资建议书""[客户名] 方案""推介书""产品方案"。
+---
 
-description: Create professional investment proposals for prospective clients. Covers the firm's approach, proposed allocation, expected outcomes, and fee structure. Use when pitching new clients or presenting a new investment strategy. Triggers on "investment proposal", "prospect presentation", "pitch new client", "proposal for [client]", or "new client presentation".
+# 中国财富管理客户投资方案书
 
-## Workflow
+## 工作流
 
-### Step 1: Prospect Context
+### Step 1：客户基础调研
 
-Gather:
-- **Prospect name** and household details
-- **Current situation**: Existing advisor? Self-directed? What prompted the meeting?
-- **Assets**: Estimated AUM, account types, current holdings (if shared)
-- **Goals**: Retirement, wealth preservation, growth, income, education, estate
-- **Risk tolerance**: Conservative, moderate, aggressive (or questionnaire score)
-- **Constraints**: ESG preferences, concentrated stock, illiquidity needs
-- **Fee sensitivity**: What are they paying now?
-- **Competition**: Who else are they considering?
+获取：
+- **客户姓名**及家庭情况
+- **现状**：当前是否有理财顾问？自己打理？为何启动咨询？
+- **资产规模**：估算 AUM、账户类型、当前持仓（若客户分享）
+- **客户类别**：合格投资者认定（私募 / 信托 / 银行高净值产品需要）
+- **目标**：养老 / 资产保值 / 增值 / 现金流 / 教育金 / 传承
+- **风险偏好**：保守 / 稳健 / 平衡 / 进取 / 激进（或问卷打分）
+- **约束**：流动性需求、行业偏好（如不投房地产 / 不投白酒）、ESG / 不投烟酒博彩
+- **费率敏感度**：当前在付什么费率
+- **竞争方**：还在比较哪些机构（券商 / 银行 / 私行 / 三方独立）
 
-### Step 2: Proposal Structure
+### Step 2：方案结构
 
-**I. About Our Firm** (1 page)
-- Firm overview, history, AUM
-- Investment philosophy (in plain English)
-- Team bios (relevant to this client)
-- Client service model (how often do we meet, who do they call)
+**I. 公司介绍**（1 页）
+- 公司概况、成立年限、管理资产规模
+- 投资理念（用人话讲，避免行业黑话）
+- 团队介绍（与本客户相关的成员）
+- 服务模式（多久会面 / 联系人 / 应急响应）
+- 资质牌照（证券 / 基金 / 保险 / 信托代销 / 私募代销）
 
-**II. Understanding Your Needs** (1 page)
-- Restate their goals and concerns — show you listened
-- Key planning considerations identified in discovery
-- What success looks like for them
+**II. 客户需求理解**（1 页）
+- 复述客户目标和关注点（证明你在听）
+- 调研中识别的关键规划点
+- 客户的"成功"长什么样（具体到金额 / 时间 / 状态）
 
-**III. Proposed Investment Strategy** (2-3 pages)
-- Recommended asset allocation with rationale
-- How allocation maps to their goals and risk tolerance
-- Investment vehicles (ETFs, mutual funds, individual securities, alternatives)
-- Tax-aware strategy (asset location, tax-loss harvesting)
+**III. 推荐投资策略**（2-3 页）
 
-Proposed allocation:
+推荐配置：
 
-| Asset Class | Allocation | Vehicle | Rationale |
-|------------|-----------|---------|-----------|
-| | | | |
+| 大类资产 | 配置 % | 投资工具 | 推荐理由 |
+|---|---|---|---|
+| A 股股票 | | 沪深 300 ETF + 主动股基 | 长期增长 + 国内资产 |
+| 港股 + 港股通 | | 恒生 ETF + 高股息港股 | 估值低 + 分红高 |
+| 海外股票 | | QDII 公募 + 标普 500 ETF | 全球分散 |
+| 国内债券 | | 国债 ETF + 信用债基 | 稳定现金流 |
+| 银行理财 / 货基 | | T+0 货币基金 + 短债理财 | 流动性管理 |
+| 私募 / 信托 | | 量化中性 / 家族信托 | 高净值专属（合格投资者）|
+| 个人养老金 | | 养老目标基金 + 定存 + 商业养老险 | 60 岁前锁定 + 税收优惠 |
+| 保险 + 年金 | | 增额终身寿 + 商业年金 | 长期固收 + 资产传承 |
+| 黄金 | | 黄金 ETF | 通胀对冲 |
+| 现金 | | 银行活期 + 货币基金 | 应急 |
 
-**IV. Expected Outcomes** (1-2 pages)
-- Projected growth scenarios (conservative, moderate, optimistic)
-- Monte Carlo probability of meeting goals
-- Income projections (if retirement or income-focused)
-- Risk metrics (max drawdown, volatility)
-- Comparison to current portfolio (if known)
+**配置逻辑：**
+- 如何匹配客户的目标和风险偏好
+- 投资工具选择（ETF vs 主动基金 vs 直接持股 vs 私募）
+- 中国特色的税务考量：A 股 ≥ 1 年免税、个人养老金账户、个税专项扣除
+- 流动性结构（短期 / 中期 / 长期资产配置）
 
-**V. Fee Structure** (1 page)
-- Advisory fee schedule (tiered if applicable)
-- Underlying fund expenses
-- Total all-in cost estimate
-- How fees compare to industry averages
-- Value proposition — what they get for the fee
+**IV. 收益预期**（1-2 页）
+- 三档收益情景（保守 / 中性 / 乐观）
+- 蒙特卡洛模拟达成目标的概率
+- 退休 / 现金流目标客户：年度提取测算
+- 风险指标：最大回撤、波动率、压力测试
+- 与现有组合对比（若已知）
 
-**VI. Getting Started** (1 page)
-- Account opening process
-- Asset transfer timeline
-- Transition plan (if moving from another advisor)
-- First 90 days — what to expect
-- Required documents and next steps
+**V. 费用结构**（1 页）
+- 顾问费 / 管理费（按 AUM 收，分档）
+- 底层产品费率（公募管理费 / 托管费、私募业绩报酬、保险佣金）
+- 总成本估算（一站式费率）
+- 行业对标（与银行 / 券商私行 / 三方独立比较）
+- 价值主张：你付这笔费用得到什么
 
-### Step 3: Customization
+**VI. 入伙流程**（1 页）
+- 开户流程（券商 / 银行 / 信托）
+- 资产转入时间表（A 股转户 / 公募 / 私募赎回再申购）
+- 过渡方案（从现有顾问 / 自管平稳过渡）
+- 前 90 天：你将看到什么
+- 所需文件 + 下一步
 
-- Match the tone to the prospect (corporate executive vs. small business owner vs. retiree)
-- If they have a concentrated stock position, address it directly
-- If they're comparing you to robo-advisors, emphasize the planning and relationship value
-- If they're price-sensitive, lead with total value and outcomes, not just fees
+### Step 3：定制化
 
-### Step 4: Output
+- 语气匹配客户：企业高管 / 创业者 / 退休人员 / 拆迁户 / 二代继承人
+- 集中持仓：客户持有大量自家公司股权（A 股上市 / 准上市）要单独建议
+- 价格敏感型：先讲价值 + 全成本，不要只讲费率
+- 跟智能投顾比：强调规划 + 关系 + 复杂税务 / 传承场景的人工价值
+- **A 股客户特性**：很多客户来时已有 A 股经验，要尊重，不要"重新教育"
 
-- PowerPoint presentation (12-15 slides) with firm branding
-- PDF leave-behind version
-- One-page summary for follow-up email
+### Step 4：输出
 
-## Important Notes
+- PPT 演示（12-15 页）含公司品牌
+- PDF 留档版
+- 一页摘要（用于跟进邮件）
 
-- The proposal should feel personalized, not templated — reference their specific situation
-- Don't oversell performance — set realistic expectations and emphasize process
-- Always include disclaimers (projections are hypothetical, past performance, etc.)
-- The transition plan matters — clients fear the disruption of switching advisors
-- Follow up within 48 hours with the proposal and a clear next step
-- Compliance must review before presenting to prospects
+## 重要提示
+
+- **个性化 vs 模板化**：方案要让客户感觉是为他做的，不是抽屉里拿出来的模板
+- **不要过度承诺业绩**：A 股客户对绝对收益期望高，过度承诺会反噬。强调过程和概率
+- **必须含合规免责**：业绩预测仅供参考、过往不代表未来、产品适当性等标准段落
+- **过渡方案很重要**：客户怕"换一个顾问搞砸"，平滑过渡是安全感
+- **48 小时跟进**：会面后 48 小时内寄出方案 + 明确下一步
+- **合规审查必做**：方案首次外发前必须经过合规审查
+- **A 股语境关键合规线**：
+  - 私募 / 信托产品仅向合格投资者推介（金融资产 ≥ 300 万 + 近 3 年个人年均收入 ≥ 50 万）
+  - 不得保本保收益承诺
+  - 不得承诺最低收益率
+  - 适当性义务：风险评级匹配
+  - 投资者教育：必要的风险揭示
+
+## 数据源
+
+1. **AKShare MCP**：行情 / 指数历史业绩
+2. **公募基金 / 私募 / 信托产品资料**：尽调材料
+3. **AKShare 宏观数据**：通胀 / 利率假设
+4. **客户提供资料**：现有持仓、个税情况、生活目标

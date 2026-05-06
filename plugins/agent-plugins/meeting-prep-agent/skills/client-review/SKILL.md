@@ -1,87 +1,112 @@
-# Client Review Prep
+---
+name: client-review
+description: 中国财富管理客户复盘会议准备。整理组合表现、资产配置、个税优化、投资方案沟通要点。季度复盘 / 年度体检 / 临时会议前使用。触发："客户复盘""客户回顾""季度复盘""年度复盘""客户会议准备""复盘会""[客户名] 准备会议"。
+---
 
-description: Prepare for client review meetings with portfolio performance summary, allocation analysis, talking points, and action items. Pulls together account data into a concise meeting-ready format. Use before quarterly reviews, annual checkups, or ad-hoc client meetings. Triggers on "client review", "meeting prep for [client]", "quarterly review", "prep for [client name]", or "client meeting".
+# 客户复盘会议准备（中国财富管理）
 
-## Workflow
+## 工作流
 
-### Step 1: Client Context
+### Step 1：客户基本盘梳理
 
-Gather or look up:
-- **Client name** and household members
-- **Account types**: Taxable, IRA, Roth, 401(k), trust, etc.
-- **Total AUM** across accounts
-- **Investment Policy Statement (IPS)**: Target allocation, risk tolerance, constraints
-- **Life stage**: Accumulation, pre-retirement, retirement, legacy
-- **Last meeting date** and any outstanding action items
+获取或确认：
+- **客户姓名**及家庭成员
+- **账户类型**：A 股证券、港股通、QDII 公募、私募、信托、银行理财、个人养老金、保险、家族信托
+- **总管理资产（AUM）**：跨账户加总
+- **客户类型**：大众富裕（50-300 万）/ 高净值（300-1000 万）/ 超高净值（> 1000 万）
+- **投资策略说明书（IPS）**：目标配置、风险偏好、流动性约束、特殊要求（如 ESG / 不投房地产）
+- **生命阶段**：积累期 / 退休前 / 退休中 / 传承期
+- **上次会议日期**及待办行动项进度
 
-### Step 2: Portfolio Performance
+### Step 2：组合表现分析
 
-For each account and the household aggregate:
+每个账户和家庭整体：
 
-| Metric | QTD | YTD | 1-Year | 3-Year | Since Inception |
-|--------|-----|-----|--------|--------|----------------|
-| Portfolio return | | | | | |
-| Benchmark return | | | | | |
-| Alpha | | | | | |
+| 指标 | 季度 | 年初至今 | 1 年 | 3 年 | 自起始 |
+|---|---|---|---|---|---|
+| 组合收益率 | | | | | |
+| 基准收益率 | | | | | |
+| 超额收益（α） | | | | | |
 
-**Performance Attribution:**
-- Which asset classes / positions drove returns?
-- Top 3 contributors and top 3 detractors
-- Any outsized single-position impact?
+**A 股 / 港股常用基准：**
+- A 股股票：沪深 300 / 中证 500 / 万得全 A
+- 港股：恒生指数 / 恒生科技指数
+- 海外股票：MSCI 全球 / 标普 500
+- 国内债券：中债综合财富指数
+- 公募基金：晨星基金分类基准
+- 混合组合：60/40 股债基准（沪深 300 + 中债）
 
-### Step 3: Allocation Review
+**业绩归因：**
+- 哪个大类资产驱动了收益？哪个拖累？
+- 前 3 大贡献和前 3 大拖累
+- 是否存在单一持仓集中风险（A 股集中持仓很常见）
+- 行业偏向（白酒 / 新能源 / 银行 / 医药等典型 A 股配置的影响）
 
-Current vs. target allocation:
+### Step 3：资产配置审视
 
-| Asset Class | Target | Current | Drift | Action |
-|------------|--------|---------|-------|--------|
-| US Large Cap | | | | |
-| US Mid/Small | | | | |
-| International Developed | | | | |
-| Emerging Markets | | | | |
-| Fixed Income | | | | |
-| Alternatives | | | | |
-| Cash | | | | |
+当前 vs 目标配置：
 
-Flag any drift exceeding the IPS rebalancing threshold (typically 3-5%).
+| 大类资产 | 目标 % | 当前 % | 偏离 | 行动建议 |
+|---|---|---|---|---|
+| A 股股票（沪深 300 / 创业板等） | | | | |
+| 港股 + 港股通 | | | | |
+| 海外股票（QDII / 直投） | | | | |
+| 国内债券（信用 / 利率） | | | | |
+| 银行理财 / 货币基金 | | | | |
+| 房地产 + REITs | | | | |
+| 私募 / 信托 | | | | |
+| 保险（增额寿 / 年金） | | | | |
+| 黄金 + 大宗 | | | | |
+| 现金 + 应急储备 | | | | |
 
-### Step 4: Talking Points
+标记偏离超出 IPS 再平衡阈值（一般 3-5%）的部分。
 
-Generate a meeting agenda:
+### Step 4：会议议程
 
-1. **Market overview** (2-3 min): Brief macro context and outlook
-2. **Portfolio performance** (5 min): How did we do? Why?
-3. **Allocation review** (5 min): Any rebalancing needed?
-4. **Planning updates** (5-10 min):
-   - Life changes? (job, health, family, home, education)
-   - Income needs changing?
-   - Tax situation updates
-   - Estate planning updates
-5. **Action items** (5 min): What are we doing before next meeting?
+5 大模块：
 
-### Step 5: Proactive Recommendations
+1. **宏观回顾**（2-3 min）：A 股 / 港股 / 海外市场关键变化、政策事件（央行降准 / 地产政策 / 监管动作）
+2. **组合表现**（5 min）：本期收益 vs 基准、归因分析、超预期 / 低于预期的原因
+3. **配置审视**（5 min）：是否需要再平衡？跨账户调仓建议
+4. **客户更新**（5-10 min）：
+   - 生活变化（结婚 / 生子 / 工作变动 / 父母健康 / 子女升学）
+   - 现金流变化（收入增减 / 大额支出预期）
+   - 税务情况（个税专项扣除 / 个人养老金缴费 / 公益捐赠计划）
+   - 传承规划（遗嘱 / 信托 / 保险受益人调整）
+5. **行动清单**（5 min）：下次会议前要做的事 + 责任人 + 时间
 
-Based on the review, suggest:
-- Rebalancing trades (if drift exceeds thresholds)
-- Tax-loss harvesting opportunities
-- Cash deployment or withdrawal planning
-- Roth conversion opportunities (if applicable)
-- Beneficiary updates or estate planning needs
-- Insurance review (life, disability, LTC)
+### Step 5：主动建议（按优先级）
 
-### Step 6: Output
+基于本次复盘，提出：
+- **再平衡交易**（偏离超阈值时）
+- **个税优化**：年终奖计税方式、个人养老金缴费、公益捐赠
+- **现金部署 / 提取规划**：闲置现金的去向、生活费 / 教育金的备付
+- **保险 GAP 检查**：保额是否仍然足够（孩子长大 / 房贷增加 / 父母养老需求变化）
+- **传承文件更新**：遗嘱执行人 / 信托受益人 / 保险受益人
+- **流动性评估**：超过 50% 在低流动性资产（私募 / 信托 / 房产）需警示
+- **集中度风险**：单一股票 > 10% 总资产或单一行业 > 30%，提出分散建议
 
-- One-page client review summary (Word or PDF)
-- Performance table with benchmarks
-- Allocation pie chart (current vs. target)
-- Recommended action items
-- Meeting agenda
+### Step 6：输出
 
-## Important Notes
+- 一页纸客户复盘摘要（Word / PDF）
+- 收益率对比表（含基准）
+- 配置饼图（当前 vs 目标）
+- 推荐行动清单
+- 会议议程（中文格式）
 
-- Know your client before the meeting — review notes from last meeting
-- Lead with what the client cares about, not what you want to talk about
-- If performance was bad, address it directly — don't hide or spin
-- Always end with clear action items and next steps with dates
-- Document the meeting notes and any changes to the IPS
-- Compliance: ensure all materials are compliant with firm policies and regulatory requirements
+## 重要提示
+
+- **会议前要做功课**：把上次会议记录和待办看一遍，不要让客户感觉被忽略
+- **从客户关心的话题切入**：不是你想说的话题
+- **业绩不好直接面对**：不要回避或粉饰，A 股波动大，客户多数能接受真话
+- **永远以明确行动项收尾**：每个行动项有责任人和截止日
+- **记录会议纪要**：保留 IPS 任何变更的书面文件
+- **合规底线**：理财顾问需具备资质（CFP / EFP / 银行 / 券商 / 保险持牌），所有材料符合公司合规要求
+- **A 股语境的"客户管理"特点**：客户对绝对收益期望高（很少接受跑输基准的解释）、对短期波动敏感、对"专家""大V"建议易受影响 — 复盘要既给数据又给情绪安抚
+
+## 数据源
+
+1. **AKShare MCP**：行情 / 基准 / 公募基金净值
+2. **券商对账单**：A 股 / 港股 / QDII 持仓
+3. **银行 / 信托对账单**：理财 / 信托持仓
+4. **个税 APP**：客户税务情况（客户授权后）

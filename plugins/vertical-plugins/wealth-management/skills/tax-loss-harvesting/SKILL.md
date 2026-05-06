@@ -1,104 +1,186 @@
-# Tax-Loss Harvesting
+---
+name: tax-loss-harvesting
+description: A 股 / 中国家庭税务优化（不是美式 TLH）。识别个税专项扣除、年终奖最优计税、个人养老金账户、股息红利持有期优化、公益捐赠抵税、私募 / 信托所得税穿透。触发："税务优化""个税""个人所得税""专项扣除""年终奖计税""股息红利税""退税""公益捐赠""个人养老金"。注意：A 股个人卖出股票的差价免税，所以美式 TLH 不适用，本 skill 已改造为中国税务体系。
+---
 
-description: Identify tax-loss harvesting opportunities across taxable accounts. Finds positions with unrealized losses, suggests replacement securities, and tracks wash sale windows. Triggers on "tax-loss harvesting", "TLH", "harvest losses", "tax losses", "unrealized losses", or "year-end tax planning".
+# A 股 / 中国家庭税务优化
 
-## Workflow
+## 为什么不是 TLH
 
-### Step 1: Identify Candidates
+美国的 Tax-Loss Harvesting（TLH）是基于资本利得税的策略：卖出亏损证券实现损失，对冲其他投资的资本利得税。在中国 A 股环境**几乎不适用**：
 
-Scan taxable accounts for positions with unrealized losses:
+- **A 股个人卖出股票的差价免征个人所得税**（这是中国 A 股一大特色）
+- **公募基金分红暂免征收个税**
+- **股息红利**：持有 ≥ 1 年免税；1 月-1 年 10%；< 1 月 20%
+- **A 股不存在"wash sale"规则**
 
-| Security | Asset Class | Cost Basis | Current Value | Unrealized Loss | Holding Period | % Loss |
-|----------|-----------|-----------|---------------|-----------------|---------------|--------|
-| | | | | | ST / LT | |
+所以本 skill 改造为**中国家庭税务优化**，覆盖中国实际可操作的税务杠杆。
 
-**Prioritize by:**
-1. Largest absolute loss (biggest tax benefit)
-2. Short-term losses first (offset short-term gains taxed at ordinary income rates)
-3. Positions with the largest % loss (less likely to recover quickly)
+## 工作流
 
-### Step 2: Gain/Loss Budget
+### Step 1：客户基础税务画像
 
-Calculate the client's tax situation:
+采集：
+- **年综合所得**（工资 + 劳务报酬 + 稿酬 + 特许权使用费）
+- **家庭结构**：是否有子女、子女年龄、是否有 3 岁以下婴幼儿、是否有继续教育、是否赡养 60 岁以上父母
+- **住房情况**：首套房贷 / 租房 / 全款
+- **大病医疗**：本人 + 配偶 + 未成年子女自付部分（年度累计）
+- **个人养老金账户**：是否已开户、年缴金额
+- **公益捐赠**：年度捐赠金额（公益性社会组织 / 县级以上人民政府）
+- **股票持仓**：持有期分布（< 1 月 / 1 月-1 年 / ≥ 1 年）
 
-| Category | Amount |
-|----------|--------|
-| Realized short-term gains YTD | |
-| Realized long-term gains YTD | |
-| Realized losses YTD | |
-| Net gain/(loss) position | |
-| Carryforward losses from prior years | |
-| **Target harvesting amount** | |
+### Step 2：个税专项扣除清单（必查必用）
 
-**Tax savings estimate:**
-- Short-term losses × marginal ordinary income rate
-- Long-term losses × capital gains rate
-- Up to $3,000 net loss deduction against ordinary income
-- Excess carries forward
+中国个税专项附加扣除（2026 年标准）：
 
-### Step 3: Replacement Securities
+| 扣除项 | 扣除标准 | 备注 |
+|---|---|---|
+| **子女教育** | 每子女 2000 元/月（24000/年）| 满 3 岁至博士毕业，父母可选一方 100% 或各 50% |
+| **3 岁以下婴幼儿照护** | 每婴 2000 元/月 | 与子女教育互斥（同一孩子不能同时享） |
+| **继续教育** | 学历继续教育 400 元/月（48 月内）| 技能 / 专业资格 3600 元/年（取证当年） |
+| **大病医疗** | 自付部分超过 15000 元 / 年的部分 | 上限 80000 元/年，由本人或配偶扣除 |
+| **住房贷款利息** | 1000 元/月（12000/年） | 仅首套房贷，最长 240 月 |
+| **住房租金** | 1500 / 1100 / 800 元/月（按城市）| 与房贷利息互斥 |
+| **赡养老人** | 独生子女 3000 元/月（36000/年） | 非独生子女各兄弟姐妹分摊总额 3000 元 |
+| **个人养老金** | 12000 元/年 | 缴费时 3% 税率优惠 |
 
-For each harvest candidate, suggest a replacement that:
-- Maintains similar market exposure (same asset class, sector, geography)
-- Is NOT "substantially identical" (wash sale rule)
-- Has similar risk/return characteristics
+**关键操作建议：**
+- 所有可享受的项目都要在"个人所得税 APP"申报，不申报的扣除无效
+- 房贷利息 vs 房租：选择金额更大的（多数情况是房贷）
+- 子女教育：如夫妻均高税率（> 20%），双方各 50% 不如一方 100% 节税多（看具体测算）
+- 大病医疗：年底统一申报，要求保留医保结算单
 
-| Sell | Replace With | Reason | Tracking Error Risk |
-|------|-------------|--------|-------------------|
-| SPDR S&P 500 (SPY) | iShares Core S&P 500 (IVV) | Same index, different fund family | Minimal |
-| Vanguard Total Intl (VXUS) | iShares MSCI ACWI ex-US (ACWX) | Similar exposure, different index | Low |
-| Individual stock ABC | Sector ETF (XLK) | Broader exposure, no wash sale risk | Moderate |
+### Step 3：年终奖计税方式选择
 
-### Step 4: Wash Sale Check
+2026 年仍可选择：
+- **方式 A：年终奖单独计税**（按月度税率表）
+- **方式 B：年终奖并入综合所得计税**（按年度税率表）
 
-Before executing, verify no wash sales:
+**测算决策树：**
 
-- Check ALL accounts in the household (taxable, IRA, Roth, spouse accounts)
-- 30-day lookback: Did we buy substantially identical securities in the last 30 days?
-- 30-day forward: Block repurchase of the same security for 30 days
-- Check for dividend reinvestment plans (DRIPs) that could trigger wash sales
-- Document the wash sale window for each trade
+```
+若你的"综合所得 - 各项扣除 - 专项附加扣除"已经在低税率区间（3% / 10% / 20%）：
+   → 一般合并计税更划算
 
-| Security Sold | Wash Sale Window Start | Window End | DRIP Active? | Risk |
-|--------------|----------------------|-----------|-------------|------|
-| | | | | |
+若你的综合所得本身在高税率区间（25% / 30% / 35% / 45%）：
+   → 单独计税更划算（年终奖按月度税率不会推高综合所得税率）
 
-### Step 5: Execution Plan
+例外的"陷阱区间"：
+   - 单独计税在年终奖 36001-38566 / 144001-160500 等节点会出现"多发 1 元多缴 N 万"的临界点
+   - 一定要避开陷阱区间，宁愿少发不要多发
+```
 
-| Trade # | Account | Action | Security | Shares | Est. Proceeds | Est. Loss | Replacement | Notes |
-|---------|---------|--------|----------|--------|--------------|-----------|-------------|-------|
-| | | Sell | | | | | | |
-| | | Buy | | | | | | |
+**操作建议：**
+- 12 月底前一定要在个税 APP 切换好计税方式
+- 默认方式从 2024 年起是合并计税，但单独计税仍然可选
+- 对高收入人群（年综合所得 > 60 万），单独计税能省 5-15%
 
-**Summary:**
-- Total estimated losses harvested: $
-- Estimated tax savings: $ (at marginal rate of %)
-- Net portfolio impact: minimal (replacement securities maintain exposure)
-- Wash sale window management: [dates]
+### Step 4：个人养老金账户（强烈推荐）
 
-### Step 6: Post-Harvest Tracking
+2022 启动、2024 全国推开的政策红利：
 
-After 30+ days, optionally:
-- Swap back to original securities (if preferred)
-- Maintain replacement securities (if no reason to switch back)
-- Update cost basis records
-- Document for tax reporting
+**操作步骤：**
+1. 在"国家社会保险公共服务平台"或商业银行 APP 开户
+2. 选择资金账户银行（必须是开户银行）
+3. 年缴上限 12000（可一次性或分次）
+4. 资金账户余额可购买：储蓄 / 理财 / 公募基金 / 商业养老险
+5. 60 岁前不能提取（除特殊情形：身故 / 重病 / 出国定居）
 
-### Step 7: Output
+**税收测算：**
 
-- Harvest opportunity list (Excel)
-- Trade execution sheet
-- Wash sale tracking calendar
-- Tax savings estimate summary
-- Replacement security rationale
+| 综合所得税率档位 | 年缴 12000 节税额 | 提取时税率 | 净收益 |
+|---|---|---|---|
+| 3% | 360 元 | 3% | 0 |
+| 10% | 1200 元 | 3% | 840 元 |
+| 20% | 2400 元 | 3% | 2040 元 |
+| 25% | 3000 元 | 3% | 2640 元 |
+| 30% | 3600 元 | 3% | 3240 元 |
+| 35% | 4200 元 | 3% | 3840 元 |
+| 45% | 5400 元 | 3% | 5040 元 |
 
-## Important Notes
+**关键判断：**
+- 边际税率 ≥ 20% 必做（净收益 > 2000 / 年）
+- 边际税率 = 10% 可做（节税不多但锁定养老金）
+- 边际税率 = 3% 不必做（提取时还要缴 3%，零收益）
 
-- Wash sale rules are strict — violations disallow the loss AND adjust cost basis
-- Substantially identical means same security, not same asset class — ETFs tracking different indexes are generally fine
-- Always coordinate across all household accounts including retirement accounts
-- Consider the long-term cost basis step-down — harvesting resets cost basis, which means more gains later
-- Year-end is prime harvesting season but opportunities exist throughout the year
-- Mutual fund capital gains distributions in December can create additional harvesting urgency
-- Document everything for tax reporting and compliance
-- Not all losses are worth harvesting — transaction costs and tracking error have real costs
+### Step 5：股息红利持有期优化
+
+A 股股息红利税率：
+
+| 持有期 | 税率 |
+|---|---|
+| < 1 月 | 20% |
+| 1 月 - 1 年 | 10% |
+| ≥ 1 年 | 0% （免税）|
+
+**操作策略：**
+- 临近分红日不要买入新仓（持有期 < 1 月按 20% 缴税）
+- 已持有的票临近分红日不要卖出（前功尽弃）
+- 长期持有（≥ 1 年）的高股息股票分红免税
+- 高股息策略（银行 / 煤炭 / 公用 / 长江电力 / 中石化）配合长期持有，分红免税相当于额外收益率
+
+### Step 6：公益捐赠抵税
+
+**抵扣规则：**
+- 通过公益性社会组织或县级以上人民政府捐赠
+- 个人最高扣除限额：当年应纳税所得额的 30%
+- 捐赠对象：医院、学校、扶贫、抗灾、文化事业、科技创新等
+
+**典型应用：**
+- 高收入人群（年综合所得 > 100 万）：每年捐赠 10-30 万到公益基金会，可抵税 3-13.5 万
+- 善意 + 节税双赢
+- 注意：必须取得公益事业捐赠票据（捐赠方开具）
+
+### Step 7：QDII / 海外资产税务
+
+- **QDII 公募基金**：分红需缴 20% 个税（投资海外股票获得的分红已被预扣）
+- **港股通分红**：现金红利需缴 10% 红利税（恒生指数股）+ 内地端补缴差额（若内地税率更高）
+- **沪深港通买卖差价**：A 股个人卖港股的差价免税（同 A 股逻辑）
+- **直接持有美股 / 港股（开户在海外）**：理论上也属于个税应税收入，但实际申报率极低；未来 CRS 信息交换可能追溯
+
+### Step 8：私募 / 信托产品的税务穿透
+
+- **私募证券基金**：基金分配 / 赎回收益按"利息、股息、红利所得"或"经营所得"缴税（视产品结构）
+- **集合信托**：投资股票部分免税，投资债券 / 房地产收益按 20% 缴个税
+- **银行理财（净值化产品）**：投资股票部分免税，债券利息按 20% 缴税
+- **资管嵌套**：通过 SPV / 有限合伙嵌套可能改变税务认定，复杂结构需要专业税务师
+
+### Step 9：年度税务自检表
+
+每年 1-3 月汇算清缴前的检查清单：
+
+```
+[ ] 个税 APP 所有专项附加扣除是否完整申报
+[ ] 子女教育扣除是否申报到位
+[ ] 房贷利息或租金扣除是否选对
+[ ] 大病医疗是否统一申报
+[ ] 个人养老金账户是否年内缴满 12000
+[ ] 年终奖计税方式选择（合并 vs 单独）
+[ ] 公益捐赠票据是否齐全
+[ ] 股票持仓是否已识别"将满 1 年"的票避免卖飞
+[ ] 私募 / 信托 / QDII 收入是否如实申报
+[ ] 是否需要补税或退税（看汇算结果）
+```
+
+### Step 10：输出
+
+- 客户税务优化报告（Word / PDF，5-10 页）
+- 节税金额测算表（Excel）
+- 行动清单 + 时间表（按申报截止日排序）
+- 个税 APP 配置截图指引（如客户需要协助）
+
+## 重要提示
+
+- **个税 APP 是核心工具**：所有专项附加扣除都要在 APP 申报，纸质申报已基本退出
+- **数据真实性**：税务申报必须真实，造假构成偷税漏税（金额大 → 刑事责任）
+- **专业边界**：复杂税务规划（高收入 / 跨境 / 创业股权 / 信托）建议聘请注册税务师 / 注册会计师，本 skill 是产生方向性建议，不替代专业咨询
+- **税法变动**：中国税法每年都有局部调整，专项扣除标准 / 个人养老金政策可能微调，使用前确认最新文件
+- **不要规避法律**：合理避税（合法）≠ 偷税（违法），所有建议在法律框架内
+- **跨境信息交换**：CRS 已实施，海外账户被申报，主动合规优于事后追溯
+
+## 数据源
+
+1. **国家税务总局官网**：chinatax.gov.cn（政策原文 / 公告）
+2. **个人所得税 APP**：实操工具
+3. **AKShare MCP**：宏观税收数据
+4. **客户提供资料**：工资条 / 个税明细 / 家庭情况 / 投资账户

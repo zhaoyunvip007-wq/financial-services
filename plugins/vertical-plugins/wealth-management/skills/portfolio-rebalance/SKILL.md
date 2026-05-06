@@ -1,78 +1,150 @@
-# Portfolio Rebalance
+---
+name: portfolio-rebalance
+description: 中国家庭资产组合再平衡分析。检测大类资产配置偏离 IPS 目标比例，生成跨账户交易建议（A 股 / 公募 / 私募 / 信托 / 银行理财 / 房产 / 黄金 / 海外）。考虑印花税、交易费、个人养老金锁定期、合格投资者门槛等中国特色约束。触发："再平衡""资产配置偏离""组合调仓""调仓建议""组合不平衡""rebalance"。
+---
 
-description: Analyze portfolio allocation drift and generate rebalancing trade recommendations across accounts. Considers tax implications, transaction costs, and wash sale rules. Triggers on "rebalance", "portfolio drift", "allocation check", "rebalancing trades", or "my portfolio is out of balance".
+# 中国家庭资产组合再平衡
 
-## Workflow
+## 工作流
 
-### Step 1: Current State
+### Step 1：当前组合盘点
 
-For each account, capture:
-- Account type (taxable, IRA, Roth, 401k)
-- Holdings with current market value
-- Cost basis (for taxable accounts)
-- Unrealized gains/losses per position
+按账户类型分别盘点：
 
-### Step 2: Drift Analysis
+| 账户类型 | 是否锁定 / 限制 |
+|---|---|
+| **A 股证券账户**（普通 / 信用） | 流动性最高，T+1 |
+| **港股通账户** | T+0 / T+2，需开通权限（资产 50 万 + 2 年经验）|
+| **QDII 公募基金账户** | T+1 / T+N，每日额度限制 |
+| **公募基金账户**（场外） | T+1 / T+2 申赎 |
+| **私募基金 / 信托账户** | 锁定期通常 1-3 年，赎回开放日有限 |
+| **银行理财账户**（净值化） | T+1 / T+N，固定期限 |
+| **个人养老金账户** | 60 岁前锁定（特殊情形除外） |
+| **保险产品**（增额寿 / 年金） | 中长期锁定，提前退保有损失 |
+| **房产** | 极低流动性，交易周期 3-12 月 |
+| **黄金 / 外币 / 加密资产** | 看产品而定 |
 
-Compare current allocation to IPS targets:
+### Step 2：当前持仓估值
 
-| Asset Class | Target % | Current % | Drift | $ Over/Under |
-|------------|----------|-----------|-------|-------------|
-| US Large Cap Equity | | | | |
-| US Small/Mid Cap | | | | |
-| International Developed | | | | |
-| Emerging Markets | | | | |
-| Investment Grade Bonds | | | | |
-| High Yield / Credit | | | | |
-| TIPS / Inflation Protected | | | | |
-| Alternatives | | | | |
-| Cash | | | | |
+对每个账户：
+- 账户类型 + 锁定期标签
+- 各资产名称 + 当前市值
+- 持仓成本（如可获取）
+- 浮动盈亏（A 股个人卖出差价免税，但仍需关注组合表现）
+- 流动性评估（高 / 中 / 低）
 
-Flag positions exceeding the rebalancing band (typically ±3-5%).
+### Step 3：偏离分析（按 IPS 目标）
 
-### Step 3: Trade Recommendations
+对照投资策略说明书（IPS）的目标配置：
 
-Generate trades to bring allocation back to target:
+| 大类资产 | 目标 % | 当前 % | 偏离 | 金额差（元） |
+|---|---|---|---|---|
+| **A 股股票（含基金）** | | | | |
+| - 沪深 300 / 中证 500 / 创业板 / 科创板 | | | | |
+| **港股 + 港股通** | | | | |
+| **海外股票（QDII / 直投）** | | | | |
+| **国内债券（公募 / 信用）** | | | | |
+| **国内利率债（国债 / 政金债）** | | | | |
+| **银行理财 / 货币基金** | | | | |
+| **房地产（自住 + 投资）** | | | | |
+| **REITs（公募 + 海外）** | | | | |
+| **私募 / 信托 / 银行理财（非标）** | | | | |
+| **保险（增额寿 + 年金）** | | | | |
+| **黄金 + 大宗商品** | | | | |
+| **现金 + 应急储备** | | | | |
 
-**Tax-Aware Rebalancing Rules:**
-- Prefer rebalancing in tax-advantaged accounts (IRA, Roth) first — no tax consequences
-- In taxable accounts, avoid selling positions with large short-term gains
-- Harvest losses where possible while rebalancing
-- Watch for wash sale rules (30-day window) across all accounts
-- Consider directing new contributions to underweight asset classes instead of trading
+**典型再平衡阈值**：偏离超过 ±3% 或 ±5% 触发再平衡（按风险偏好调整）。
 
-**Trade List:**
+### Step 4：调仓建议
 
-| Account | Action | Security | Shares/$ | Reason | Tax Impact |
-|---------|--------|----------|----------|--------|-----------|
-| | Buy/Sell | | | Rebalance / TLH | ST gain / LT gain / Loss |
+**中国特色调仓原则：**
 
-### Step 4: Asset Location Review
+1. **优先用新增现金调仓**（如月度工资 / 年终奖），不动存量
+   - 把新资金投向偏低配的资产，减少卖出操作
+   - 资本利得免税不是"卖了不亏"的理由，交易摩擦（印花税 + 佣金）仍存在
 
-Optimize which assets are held in which account types:
-- **Tax-deferred (IRA/401k)**: Bonds, REITs, high-turnover funds (highest tax drag)
-- **Roth**: Highest expected growth assets (tax-free growth)
-- **Taxable**: Tax-efficient equity (index funds, ETFs, munis), tax-loss harvesting candidates
+2. **A 股交易成本**：
+   - 印花税：0.05%（卖出单边收，买入免）
+   - 佣金：0.025% 双边（散户）
+   - 过户费：0.001%
+   - 综合卖出成本约 0.075%，买入约 0.026%
 
-### Step 5: Implementation
+3. **公募基金成本**：
+   - 申购费 0.15%（C 类） / 1.5%（A 类）
+   - 赎回费 0-1.5%（持有 < 7 天的"惩罚性"赎回费 1.5%）
+   - 持有 ≥ 1 年的 A 类基金赎回费通常为 0
 
-- Total trades by account
-- Estimated transaction costs
-- Estimated tax impact (realized gains/losses)
-- Net effect on allocation drift
+4. **私募 / 信托锁定期**：调仓必须等开放日，且赎回有费率
 
-### Step 6: Output
+5. **房产**：除非配置严重失衡，否则不建议为再平衡卖房（交易税费 + 时间成本巨大）
 
-- Drift analysis table
-- Recommended trade list (Excel)
-- Tax impact summary
-- Before/after allocation comparison
+6. **个人养老金账户**：60 岁前不能调仓出账户，但可以在账户内部调整投资标的（理财 → 基金 → 储蓄）
 
-## Important Notes
+**调仓优先级：**
+- **第一档**：在公募基金账户内调仓（最灵活、成本中等）
+- **第二档**：用新增现金调仓（无任何卖出成本）
+- **第三档**：A 股股票账户调仓（印花税 + 佣金，但单笔成本低）
+- **第四档**：调整定投方向（不卖出，改变未来流入比例）
+- **慎用**：私募 / 信托 / 房产调仓（成本高 + 锁定期）
 
-- Don't rebalance for rebalancing's sake — small drift within bands is fine
-- Tax costs can outweigh rebalancing benefits in taxable accounts — calculate the breakeven
-- Consider pending cash flows (contributions, withdrawals, RMDs) before trading
-- Check for any client-specific restrictions (ESG, concentrated stock, lockups)
-- Document rationale for every trade for compliance records
-- Wash sale rules apply across accounts — coordinate trades across the household
+### Step 5：交易清单
+
+| 账户 | 操作 | 标的 | 金额（元） | 原因 | 成本估算 |
+|---|---|---|---|---|---|
+| | 买入 / 卖出 | | | 再平衡 / IPS 调整 | 印花税 + 佣金 |
+
+**交易摘要：**
+- 总卖出金额
+- 总买入金额
+- 估算交易成本
+- 调仓后预期组合配置 vs 目标
+
+### Step 6：资产摆放优化（中国语境）
+
+**最优资产摆放原则：**
+
+| 账户类型 | 最适合的资产 | 原因 |
+|---|---|---|
+| **A 股证券账户** | 高股息股票（持有 ≥ 1 年免税）| 长期持有最大化免税效应 |
+| **公募基金账户** | 主动管理基金 / 行业 ETF | 灵活调仓 + 分红免税 |
+| **个人养老金账户** | 长期增长资产（指数基金 / 股基） | 长期免税 + 60 岁后低税提取 |
+| **私募 / 信托** | 高净值客户的非标 / 量化策略 | 突破公募投资限制 |
+| **银行理财** | 短期资金 / 现金管理 | 流动性 + 稳定收益 |
+| **保险（增额寿）** | 长期固定收益替代 | IRR 锁定 + 资产隔离 |
+| **房产** | 自住 + 长期保值（一线城市核心地段）| 流动性低但抗通胀 |
+| **黄金** | 5-10% 配置（避险 + 通胀对冲） | 长期低相关性 |
+| **QDII** | 海外资产配置 | 分散单一国家风险 |
+
+### Step 7：执行清单
+
+- 各账户交易明细
+- 估算交易成本
+- 估算税务影响（A 股个人卖出差价免税，但要看其他税）
+- 对组合配置的净影响
+- 调仓后是否仍有偏离
+
+### Step 8：交付
+
+- 偏离分析表
+- 推荐交易清单（Excel）
+- 交易成本测算
+- 调仓前后配置对比图
+- 后续再平衡触发条件（绝对偏离 / 相对偏离）
+
+## 重要提示
+
+- **不要为再平衡而再平衡**：小幅偏离在阈值内是正常的
+- **优先用现金流**：新增工资 / 奖金 / 房租收入投向偏低配，比卖出存量便宜
+- **A 股个人卖出免税不等于零成本**：印花税 + 佣金 + 心理摩擦仍在
+- **现金流工具优先**：定投调整方向 / 红利再投资 / 月度工资定投
+- **长期持有的 A 股不要轻易卖**：满 1 年股息红利免税是真金白银
+- **私募 / 信托锁定期硬约束**：再平衡只能在开放日操作，提前规划
+- **个人养老金账户内调仓不算赎回**：在账户内换基金不影响锁定期
+- **房产调仓极其谨慎**：除非配置严重偏离（房产 > 70%），否则不建议为再平衡卖房
+
+## 数据源
+
+1. **AKShare MCP**：A 股 / 港股 / 公募基金行情数据
+2. **券商 / 银行 / 信托对账单**：各账户持仓
+3. **个税 APP**：税务影响测算
+4. **客户提供资料**：完整账户清单 + 当前 IPS

@@ -21,16 +21,17 @@ description: |
 
 # Comparable Company Analysis
 
-## ⚠️ CRITICAL: Data Source Priority (READ FIRST)
+## ⚠️ CRITICAL: 数据源优先级（先读这段）
 
-**ALWAYS follow this data source hierarchy:**
+**A 股数据源层级（必须按此顺序）：**
 
-1. **FIRST: Check for MCP data sources** - If S&P Kensho MCP, FactSet MCP, or Daloopa MCP are available, use them exclusively for financial and trading information
-2. **DO NOT use web search** if the above MCP data sources are available
-3. **ONLY if MCPs are unavailable:** Then use Bloomberg Terminal, SEC EDGAR filings, or other institutional sources
-4. **NEVER use web search as a primary data source** - it lacks the accuracy, audit trails, and reliability required for institutional-grade analysis
+1. **首选：AKShare MCP / Tushare MCP** — 行情、财报、北向资金、龙虎榜、申万行业、机构持仓
+2. **公告原文：巨潮资讯网（cninfo.com.cn）** — 上市公司年报/季报/重大事项公告，是法定披露源
+3. **市场情绪与大V观点：雪球（用户账号 cookie）** — 当雪球 MCP 部署后启用
+4. **机构付费数据（可选）：Wind / 同花顺 iFinD** — 团队/机构场景才考虑
+5. **不要用 Google/百度搜索做主数据源** — 财经媒体二手转述常有口径错误，必须回到原始公告
 
-**Why this matters:** MCP sources provide verified, institutional-grade data with proper citations. Web search results can be outdated, inaccurate, or unreliable for financial analysis.
+**Why this matters：** A 股财报和公告以 CAS 中国会计准则披露，自带 Wind/同花顺/AKShare 这些渠道做了清洗，比海外数据库（Daloopa/FactSet/S&P Capital IQ）覆盖更全。优先用 MCP 拿结构化数据，公告原文做交叉验证。
 
 ---
 
@@ -107,12 +108,20 @@ Start with headers that force strategic thinking about what matters, input clean
 
 ## Section 1: Document Structure & Setup
 
-### Header Block (Rows 1-3)
+### Header Block (Rows 1-3) — A 股版本
+
 ```
-Row 1: [ANALYSIS TITLE] - COMPARABLE COMPANY ANALYSIS
-Row 2: [List of Companies with Tickers] • [Company 1 (TICK1)] • [Company 2 (TICK2)] • [Company 3 (TICK3)]
-Row 3: As of [Period] | All figures in [USD Millions/Billions] except per-share amounts and ratios
+Row 1: [行业] - A 股可比公司分析
+Row 2: [公司列表带代码] • 公司一 (600519.SH) • 公司二 (000858.SZ) • 公司三 (000568.SZ)
+Row 3: 截至 [报告期] | 单位：人民币百万元（除每股数据和比率外）| 行业分类：申万一级/二级
 ```
+
+**A 股证券代码规则：**
+- 沪市主板：60xxxx.SH（如贵州茅台 600519.SH）
+- 沪市科创板：688xxx.SH
+- 深市主板：000xxx.SZ / 001xxx.SZ
+- 深市创业板：300xxx.SZ
+- 北交所：8xxxxx.BJ
 
 **Why this matters:** Establishes context immediately. Anyone opening this file knows what they're looking at, when it was created, and how to interpret the numbers.
 
@@ -312,27 +321,47 @@ Same structure as operating section: Max, 75th, Median, 25th, Min for every metr
 → Focus on: FCF, FCF Margin, FCF Conversion, CapEx intensity
 → Skip: EBITDA, P/E ratios
 
-### Industry-Specific Metric Selection
+### A 股行业指标选择（按申万一级分类）
 
-**Software/SaaS:**
-Must have: Revenue Growth, Gross Margin, Rule of 40
-Optional: ARR, Net Dollar Retention, CAC Payback
-Skip: Asset Turnover, Inventory metrics
+**白酒（食品饮料-白酒）：**
+必备：营收增速、销售毛利率（70%+ 是行业基线）、净利率、预收账款（合同负债）、ROE
+可选：吨价、产能利用率、经销商数量
+不要：CapEx 强度、研发费用率（占比极低）
 
-**Manufacturing/Industrials:**
-Must have: EBITDA Margin, Asset Turnover, CapEx/Revenue
-Optional: ROA, Inventory Turns, Backlog
-Skip: Rule of 40, SaaS metrics
+**新能源（电力设备-电池/光伏/风电）：**
+必备：营收增速、毛利率、海外营收占比、产能（GWh/GW）、研发费用率
+可选：单位投资强度、库存周转、现金循环天数
+不要：仅看 PE（周期股需结合景气位置看 PB+ROE）
 
-**Financial Services:**
-Must have: ROE, ROA, Efficiency Ratio, P/E
-Optional: Net Interest Margin, Loan Loss Reserves
-Skip: Gross Margin, EBITDA (not meaningful for banks)
+**银行（银行）：**
+必备：ROE、净息差（NIM）、不良率、拨备覆盖率、PB（A 股银行核心估值锚）
+可选：核心一级资本充足率、零售贷款占比、中收占比
+不要：毛利率、EBITDA（银行不适用）
 
-**Retail/E-commerce:**
-Must have: Revenue Growth, Gross Margin, Inventory Turnover
-Optional: Same-Store Sales, Customer Acquisition Cost
-Skip: Heavy R&D or CapEx metrics
+**券商（非银金融-证券）：**
+必备：ROE、PB、自营投资收益占比、经纪业务市占率、两融余额
+可选：投行储备项目、资管 AUM
+不要：毛利率（券商不披露此口径）
+
+**医药（医药生物）：**
+必备：营收增速、毛利率、研发费用率、销售费用率、PE（成长性强）
+可选：管线进度、获批品种数、集采影响
+注意：仿制药 vs 创新药估值逻辑完全不同
+
+**消费电子/半导体（电子）：**
+必备：营收增速、毛利率、研发费用率、客户集中度、ROE
+可选：晶圆产能、设备国产化率、产品代际
+不要：单看 PE（半导体周期波动大，参考 PB 和景气）
+
+**军工（国防军工）：**
+必备：营收增速、订单（中报/年报披露）、应收账款周转、毛利率
+可选：合同负债、关联交易占比（军工集团内部）
+注意：业绩季节性强，Q4 集中确认收入
+
+**地产（房地产）：**
+必备：销售额、毛利率、负债率、净负债率（"三道红线"指标）、PB
+可选：土储面积、存货周转、回款率
+不要：单看 PE（地产 PE 失真严重，PB-NAV 更合适）
 
 ### The "5-10 Rule"
 
@@ -375,12 +404,14 @@ If you have more than 15 metrics, you're probably including noise. Edit ruthless
 
 ### Sanity Checks
 - **Margin test**: Gross margin > EBITDA margin > Net margin (always true by definition)
-- **Multiple reasonableness**: 
-  - EV/Revenue: typically 0.5-20x (varies widely by industry)
-  - EV/EBITDA: typically 8-25x (fairly consistent across industries)
-  - P/E: typically 10-50x (depends on growth rate)
-- **Growth-multiple correlation**: Higher growth usually means higher multiples
-- **Size-efficiency trade-off**: Larger companies often have better margins (scale benefits)
+- **A 股估值合理范围（按申万行业经验）：**
+  - PE：白酒 25-40x、新能源 15-30x、银行 4-8x、券商 10-25x、医药创新 30-80x、传统制造 10-25x
+  - PB：银行 0.5-1.2x、券商 1-2x、白酒 8-15x、地产 0.5-1.5x、消费电子 2-5x
+  - PS：科创板/创业板成长股 5-20x，传统消费 1-5x
+  - PEG：< 1 偏低估、1-2 合理、> 2 偏高估（仅适用稳定增长公司）
+  - ROE：消费龙头 > 20% 是常态，工业 10-15%，银行 10-13%，公用 5-10%
+- **A 股估值经验法则：** 同行业内龙头给 1.2-1.5x 估值溢价，二线给 0.7-0.9x 折价
+- **成长 vs 估值匹配**：高增长（>30%）通常给高 PE，但要看是否有可持续性（白酒、消费电子常被周期错杀）
 
 ### Common Mistakes to Avoid
 ❌ Mixing market cap and enterprise value in formulas
@@ -492,21 +523,21 @@ This helps answer: "Is our target company trading rich or cheap vs. peers?"
 
 ## Section 8: Example Template Layout
 
-**Simple Version (Start here):**
+**Simple Version (从这里开始) — A 股白酒行业示例：**
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│ TECHNOLOGY - COMPARABLE COMPANY ANALYSIS                    │
-│ Microsoft • Alphabet • Amazon                               │
-│ As of Q4 2024 | All figures in USD Millions                │
+│ 白酒 - A 股可比公司分析（申万：食品饮料-白酒Ⅱ）              │
+│ 贵州茅台 (600519.SH) • 五粮液 (000858.SZ) • 泸州老窖 (000568.SZ) │
+│ 截至 2025Q4 | 单位：人民币亿元                                │
 ├─────────────────────────────────────────────────────────────┤
-│ OPERATING METRICS                                           │
-├──────────┬─────────┬─────────┬──────────┬──────────────────┤
-│ Company  │ Revenue │ Growth  │ Gross    │ EBITDA  │ EBITDA │
-│          │ (LTM)   │ (YoY)   │ Margin   │ (LTM)   │ Margin │
+│ 经营指标                                                      │
+├──────────┬─────────┬─────────┬──────────┬─────────┬────────┤
+│ 公司     │ 营收    │ 营收增速 │ 销售毛利 │ 归母净利│ 净利率  │
+│          │ (LTM)   │ (YoY)   │ 率       │ (LTM)   │        │
 ├──────────┼─────────┼─────────┼──────────┼─────────┼────────┤
-│ MSFT     │ 261,400 │ 12.3%   │ 68.7%    │ 205,100 │ 78.4%  │
-│ GOOGL    │ 349,800 │ 11.8%   │ 57.9%    │ 239,300 │ 68.4%  │
-│ AMZN     │ 638,100 │ 10.5%   │ 47.3%    │ 152,600 │ 23.9%  │
+│ 贵州茅台 │ 1,693   │ 15.7%   │ 91.9%    │ 826     │ 48.8%  │
+│ 五粮液   │   832   │  9.2%   │ 75.3%    │ 304     │ 36.5%  │
+│ 泸州老窖 │   311   │ 10.8%   │ 88.4%    │ 132     │ 42.5%  │
 │          │         │         │          │         │        │ [blank row]
 │ Median   │ =MEDIAN │ =MEDIAN │ =MEDIAN  │ =MEDIAN │=MEDIAN │
 │ 75th %   │ =QUART  │ =QUART  │ =QUART   │ =QUART  │=QUART  │
@@ -568,11 +599,22 @@ Add if relevant: Asset Turnover, Inventory Turns, Backlog
 🚩 Margins that don't make sense for the industry
 
 ### Comparability Issues
-🚩 Different fiscal year ends (causes timing problems)  
-🚩ixing pure-play and conglomerates  
-🚩 Materially different business models labeled as "comps"
+🚩 不同财年末（A 股统一 12 月 31 日，但港股/美股可能不同）
+🚩 把纯主业公司和多元集团混为一谈
+🚩 主营完全不同的公司被标为"可比"
 
-**When in doubt, exclude the company.** Better to have 3 perfect comps than 6 questionable ones.
+### A 股专属红旗（必查）
+🚩 **ST / *ST 股票** — 财务异常或退市风险，估值逻辑完全不同
+🚩 **商誉占净资产 > 30%** — 减值风险，每年报会爆雷
+🚩 **大股东质押比例 > 70%** — 平仓风险传导到股价
+🚩 **应收账款增速 > 营收增速 2 倍** — 收入质量存疑
+🚩 **关联交易占营收 > 30%** — 利润可能被关联方调节
+🚩 **限售股近期解禁占流通盘 > 10%** — 短期抛压
+🚩 **审计意见非"标准无保留"** — 保留意见/否定意见/无法表示意见都是危险信号
+🚩 **频繁更换审计机构** — 治理问题征兆
+🚩 **次新股（上市 < 1 年）** — 估值不稳定，业绩变脸高发期
+
+**有疑问就剔除。** 3 个干净的可比公司，好过 6 个有问题的。
 
 ---
 

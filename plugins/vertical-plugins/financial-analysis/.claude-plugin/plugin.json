@@ -1,8 +1,8 @@
 {
-  "name": "financial-analysis",
-  "version": "0.1.0",
-  "description": "Core financial modeling and analysis tools: DCF, comps, LBO, 3-statement models, competitive analysis, and deck QC",
+  "name": "financial-analysis-ashare",
+  "version": "0.2.0",
+  "description": "A 股财务建模与分析核心工具：DCF（中国 10Y 国债 + 中国 ERP）、申万行业可比公司分析、A 股估值惯例（PE/PB 优先）、三表建模、Excel 审核。MCP 接入 AKShare/Tushare。",
   "author": {
-    "name": "Anthropic FSI"
+    "name": "Zhao Yizhou (fork of Anthropic FSI)"
   }
 }

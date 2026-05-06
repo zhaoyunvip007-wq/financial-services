@@ -1,92 +1,134 @@
-# Model Update
+---
+name: model-update
+description: 用新数据更新 A 股财务模型——季报实际值、公司业绩展望、宏观假设变化。调整盈利预测、重算估值、标记重大变化。触发：财报发布后、业绩预告/快报披露、假设需要刷新时。关键词："更新模型""填入财报数据""刷新预测""更新预测""新业绩展望""调整估值"。
+---
 
-description: Update financial models with new data — quarterly earnings, management guidance, macro changes, or revised assumptions. Adjusts estimates, recalculates valuation, and flags material changes. Use after earnings, guidance updates, or when assumptions need refreshing. Triggers on "update model", "plug earnings", "refresh estimates", "update numbers for [company]", "new guidance", or "revise estimates".
+# A 股财务模型更新
 
-## Workflow
+## 工作流
 
-### Step 1: Identify What Changed
+### Step 1：识别变化触发点
 
-Determine the update trigger:
-- **Earnings release**: New quarterly actuals to plug in
-- **Guidance change**: Company updated forward outlook
-- **Estimate revision**: Analyst changing assumptions based on new data
-- **Macro update**: Interest rates, FX, commodity prices changed
-- **Event-driven**: M&A, restructuring, new product, management change
+确定更新触发：
+- **财报披露**：季报/半年报/年报实际值落地
+- **业绩预告/快报**：年报 1 月底前预告（强制）、季报快报
+- **管理层沟通**：业绩说明会、机构调研纪要、投资者日
+- **预测修订**：分析师基于新数据调整假设
+- **宏观更新**：LPR 调整、GDP 数据、行业政策（如新能源补贴退坡、医药集采）
+- **事件驱动**：重大资产重组、定增预案、回购、股权激励、关联交易
 
-### Step 2: Plug New Data
+### Step 2：填入新数据（CAS 中国会计准则口径）
 
-#### After Earnings
-Update the model with reported actuals:
+#### 财报披露后填数
 
-| Line Item | Prior Estimate | Actual | Delta | Notes |
-|-----------|---------------|--------|-------|-------|
-| Revenue | | | | |
-| Gross Margin | | | | |
-| Operating Expenses | | | | |
-| EBITDA | | | | |
-| EPS | | | | |
-| [Key metric 1] | | | | |
-| [Key metric 2] | | | | |
+| 报告期项目 | 上次预测 | 实际值 | 差异 % | 备注 |
+|---|---|---|---|---|
+| 营业总收入 | | | | |
+| 营业收入（主营） | | | | |
+| 营业成本 | | | | |
+| 销售毛利率 | | | | |
+| 销售费用 | | | | |
+| 管理费用 | | | | |
+| 研发费用 | | | | |
+| 财务费用 | | | | |
+| 投资收益 | | | | |
+| 公允价值变动损益 | | | | |
+| 营业利润 | | | | |
+| 利润总额 | | | | |
+| 所得税费用 | | | | |
+| 归母净利润 | | | | |
+| **扣非归母净利润** | | | | **核心** |
+| 经营活动现金流净额 | | | | |
+| EPS（基本/稀释） | | | | |
+| [核心业务指标 1] | | | | |
+| [核心业务指标 2] | | | | |
 
-**Segment Detail** (if applicable):
-- Update each segment's revenue and margin
-- Note any segment mix shifts
+**分部数据更新（如有披露）：**
+- 各业务板块 / 区域 / 产品线营收 + 毛利率
+- 关注业务结构变化（高毛利业务占比上升 = 利好）
 
-**Balance Sheet / Cash Flow Updates**:
-- Cash and debt balances
-- Share count (buybacks, dilution)
-- Capex actual vs. estimate
-- Working capital changes
+**资产负债表 / 现金流量表更新：**
+- 货币资金 + 交易性金融资产
+- 应收账款（增速对比营收增速）
+- 存货（增速对比营收增速）
+- 短期借款 + 长期借款（净负债）
+- 商誉（注意减值风险）
+- 合同负债 / 预收账款（消费品领先指标）
+- 股本变化（限售股解禁、定增、回购、股权激励）
+- 资本开支 vs 预测
+- 营运资本变化
 
-### Step 3: Revise Forward Estimates
+### Step 3：修订前瞻预测
 
-Based on the new data, adjust forward estimates:
+基于新数据调整未来预测：
 
-| | Old FY Est | New FY Est | Change | Old Next FY | New Next FY | Change |
-|---|-----------|-----------|--------|------------|------------|--------|
-| Revenue | | | | | | |
-| EBITDA | | | | | | |
+|  | 上次 25E | 新 25E | 变化 % | 上次 26E | 新 26E | 变化 % |
+|---|---|---|---|---|---|---|
+| 营业总收入 | | | | | | |
+| 销售毛利率 | | | | | | |
+| 营业利润 | | | | | | |
+| 归母净利润 | | | | | | |
+| 扣非归母净利润 | | | | | | |
 | EPS | | | | | | |
 
-**Key Assumption Changes:**
-- What assumptions are you changing and why?
-- Revenue growth rate: old → new (reason)
-- Margin assumption: old → new (reason)
-- Any new items (restructuring charges, one-time gains, etc.)
+**关键假设变化：**
+- 调整了哪些假设、为什么
+- 营收增速：旧值 → 新值（原因，如行业景气度变化、新产品周期、出海贡献）
+- 毛利率假设：旧值 → 新值（原因，如原材料价格、产品结构、规模效应）
+- 销售费用率：旧值 → 新值（如品牌投放节奏、渠道扩张）
+- 研发费用率：旧值 → 新值
+- 所得税率：注意高新技术企业 15%、地区性优惠
+- 新增 / 删除一次性项目（如政府补助、资产处置、公允价值变动、信用减值损失）
 
-### Step 4: Valuation Impact
+### Step 4：估值影响重算
 
-Recalculate valuation with updated estimates:
+更新估值并对比：
 
-| Valuation Method | Prior | Updated | Change |
-|-----------------|-------|---------|--------|
-| DCF fair value | | | |
-| P/E (NTM EPS × target multiple) | | | |
-| EV/EBITDA (NTM EBITDA × target multiple) | | | |
-| **Price Target** | | | |
+| 估值方法 | 旧值 | 新值 | 变化 |
+|---|---|---|---|
+| DCF 内在价值 | | | |
+| PE 估值（NTM EPS × 目标 PE 倍数）| | | |
+| PB 估值（适用银行/券商/地产）| | | |
+| EV/EBITDA（适用周期股）| | | |
+| **目标价** | | | |
+| 当前股价 | | | |
+| 上行空间 / 下行空间 | | | |
 
-### Step 5: Summary & Action
+**A 股估值惯例提示：**
+- 白酒、消费龙头：用 PE，参考历史 PE 区间和行业可比
+- 银行、券商：用 PB + ROE 双因子（戈登增长模型）
+- 地产、有色：PB 优先（PE 失真严重）
+- 创业板 / 科创板成长股：PE / PEG 结合
+- 周期股景气度顶部：用历史平均 PE，避免周期顶 PE 陷阱
+- 重资产新能源：PE / 单 GW 产能市值 双视角
 
-**Estimate Change Summary:**
-- One paragraph: what changed, why, and what it means for the stock
-- Is this a thesis-changing event or noise?
+### Step 5：总结与行动
 
-**Rating / Price Target:**
-- Maintain or change rating?
-- New price target (if changed) with methodology
-- Upside/downside to current price
+**预测变化摘要：**
+- 一段话：什么变了、为什么、对股价意味着什么
+- 这是逻辑变化的事件还是噪音？
+- 是否触发评级变化？
 
-### Step 6: Output
+**评级 / 目标价：**
+- 维持还是调整评级（A 股常用：买入 / 增持 / 中性 / 减持 / 卖出）
+- 新目标价（如调整）+ 推导方法
+- 相对当前股价的上行 / 下行空间
+- 隐含估值倍数（如 25 倍 PE）vs 行业中位数
 
-- Updated Excel model (if user provides the existing model)
-- Estimate change summary (markdown or Word)
-- Updated price target derivation
+### Step 6：输出
 
-## Important Notes
+- 更新后的 Excel 模型（如用户提供原模型）
+- 预测变化摘要（Markdown 或 Word）
+- 新目标价推导过程
+- 一致预期对照（与 Wind / Choice / 雪球 一致预期对比）
 
-- Always reconcile your estimates to the company's reported figures before projecting forward
-- Note any non-recurring items and whether your estimates are GAAP or adjusted
-- Track your estimate revision history — it shows your analytical progression
-- If the quarter was noisy, separate signal from noise in your estimate changes
-- Check consensus after updating — how do your revised estimates compare to the Street?
-- Share count matters — dilution from stock comp, converts, or buybacks can materially affect EPS
+## 重要提示
+
+- **始终先核对实际值**：先把财报对账对平，再做前瞻预测，避免误差累积
+- **区分经常性 vs 非经常性损益**：扣非归母净利润是核心。归母净利润如果含大量公允价值变动、资产处置收益，要剔除后再做预测
+- **跟踪预测修订史**：保留上次预测和本次预测的对照，体现分析逻辑演进
+- **季报噪音处理**：A 股 Q1 / Q3 季报披露较粗略，业绩波动大（春节、季节性、年终奖），不要被单季波动牵走全年预测
+- **对比一致预期**：更新后看与 Wind / Choice 一致预期的差异
+- **股本变动重要**：限售股解禁、定增、回购、股权激励都会影响 EPS。注意"摊薄 EPS"和"基本 EPS"的差异
+- **A 股财报口径锚点**：营收看"营业总收入"，盈利看"扣非归母净利润"，现金流看"经营活动现金流量净额"。不要混用美股口径
+- **季度披露时点**：Q1 报披露 4 月底前，半年报 8 月底前，Q3 报 10 月底前，年报次年 4 月底前。模型更新节奏对齐这些窗口

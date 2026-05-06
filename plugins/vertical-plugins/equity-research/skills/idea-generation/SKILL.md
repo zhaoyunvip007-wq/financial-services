@@ -1,111 +1,163 @@
-# Idea Generation
+---
+name: idea-generation
+description: A 股选股与投资标的发掘。结合定量筛选、主题研究、A 股特色信号（北向资金、龙虎榜、解禁压力、机构调研），系统化产出多空标的池。触发：用户提到"选股""筛股""找标的""有什么好票""跑个 screen""推荐几个""主题机会""逻辑挖掘""帮我看看哪些值得跟踪"。
+---
 
-description: Systematic stock screening and investment idea sourcing. Combines quantitative screens, thematic research, and pattern recognition to surface new long and short ideas. Use when looking for new ideas, running screens, or conducting thematic sweeps. Triggers on "idea generation", "stock screen", "find ideas", "what looks interesting", "screen for", "new ideas", or "pitch me something".
+# A 股选股与标的发掘
 
-## Workflow
+## 工作流
 
-### Step 1: Define Search Criteria
+### Step 1：定义筛选标准
 
-Ask the user for parameters:
-- **Direction**: Long ideas, short ideas, or both
-- **Market cap**: Large, mid, small, micro
-- **Sector**: Specific sector or cross-sector
-- **Style**: Value, growth, quality, special situation, event-driven
-- **Geography**: US, international, global
-- **Theme**: Any specific thematic angle (AI, reshoring, aging demographics, etc.)
+询问用户参数：
 
-### Step 2: Quantitative Screens
+- **方向**：长线持有、阶段性机会、对冲（中性策略）
+- **市值**：超大盘（>2000 亿）、大盘（500-2000 亿）、中盘（100-500 亿）、小盘（<100 亿）、微盘（<30 亿）
+- **板块**：申万一级行业（电子/电力设备/医药/食品饮料/银行/非银/汽车/机械/计算机等）或跨板块
+- **风格**：白马蓝筹 / 二线龙头 / 成长股 / 周期股 / 价值股 / 主题概念 / 困境反转
+- **A 股市场**：沪深主板 / 科创板 / 创业板 / 北交所
+- **主题**：是否针对特定主题（AI 算力、出海、消费降级、人形机器人、低空经济、新国九条受益、十四五规划）
 
-Run screens based on the style:
+### Step 2：定量筛选
 
-**Value Screen**
-- P/E below sector median
-- EV/EBITDA below historical average
-- Free cash flow yield >5%
-- Price/book below 1.5x
-- Insider buying in last 90 days
-- Dividend yield above market average
+按风格跑筛选：
 
-**Growth Screen**
-- Revenue growth >15% YoY
-- Earnings growth >20% YoY
-- Revenue acceleration (growth rate increasing)
-- Expanding margins
-- High return on invested capital (>15%)
-- Strong net retention (>110% for SaaS)
+**价值筛选（白马 + 高股息）**
+- PE（TTM）低于申万二级行业中位数
+- PB 低于历史 5 年中位数
+- 股息率 > 4%（注意非偶发性分红）
+- ROE（TTM）> 12%
+- 自由现金流 / 净利润 > 0.8（盈利质量）
+- 重要股东近 90 天净增持
 
-**Quality Screen**
-- Consistent revenue growth (5+ years)
-- Stable or expanding margins
-- ROE >15%
-- Low debt/equity
-- High free cash flow conversion
-- Insider ownership >5%
+**成长筛选**
+- 营收增速 > 25%（YoY，最近 4 个季度）
+- 扣非归母净利润增速 > 30%
+- 营收增速环比加速（Q3 增速 > Q2 增速 > Q1 增速）
+- 毛利率扩张
+- ROIC > 15%
+- 研发费用率上升（成长性投入信号）
+- 北向资金近 3 月持仓增加
 
-**Short Screen**
-- Declining revenue or decelerating growth
-- Margin compression
-- Rising receivables / inventory vs. sales
-- Insider selling
-- Valuation premium to peers without justification
-- High short interest with deteriorating fundamentals
-- Accounting red flags (auditor changes, restatements)
+**质量筛选**
+- 连续 5 年营收正增长
+- 毛利率稳定或扩张（5 年 σ < 5pp）
+- ROE > 15% 且连续 5 年 > 12%
+- 资产负债率 < 50%（金融、地产除外）
+- 大股东质押率 < 30%
+- 外资 / QFII 持股比例 > 1%
 
-**Special Situation Screen**
-- Recent IPOs / SPACs with lockup expirations
-- Spin-offs in last 12 months
-- Companies emerging from restructuring
-- Activist involvement
-- Management changes at underperforming companies
+**仓位调整筛选（A 股做空受限，多用于减持/换仓）**
+- 营收增速放缓或负增长
+- 毛利率持续压缩
+- 应收账款 / 存货 增速明显快于营收
+- 重要股东减持
+- 估值溢价但缺乏支撑（行业地位下降）
+- 商誉 / 净资产 > 30%（减值风险）
+- 审计意见非"标准无保留"
+- 频繁更换审计机构 / 高管
 
-### Step 3: Thematic Sweep
+**特殊事件筛选（A 股特色）**
+- 近 12 月 IPO 次新股（关注限售股解禁影响）
+- 重大资产重组、收购预案（需注意监管风险）
+- 实控人变更
+- 国企改革标的（混改、股权激励）
+- 大股东增持完成 / 回购方案落地
+- 业绩预告大幅超预期（年报 1 月、半年报 7 月）
+- 北向资金近期大幅净买入但股价未充分反应
 
-For thematic ideas, research the theme and identify beneficiaries:
+### Step 3：A 股专属信号扫描
 
-1. Define the thesis (e.g., "AI infrastructure spending accelerates through 2026")
-2. Map the value chain — who benefits directly vs. indirectly?
-3. Identify pure-play vs. diversified exposure
-4. Assess which names are already "priced in" vs. under-appreciated
-5. Look for second-order beneficiaries that the market hasn't connected to the theme
+**资金面信号：**
+- **北向资金**：连续 5 日净买入 + 持仓占流通股 > 5%
+- **龙虎榜**：机构席位（一二三四五号）净买入 + 知名游资追入
+- **大宗交易**：机构席位接盘 + 折价 < 5%（说明买方愿意付溢价）
+- **融资余额**：融资余额突破 + 融券余额下降
 
-### Step 4: Idea Presentation
+**机构动向：**
+- 公募基金调研频次（最近 30 天，AKShare 可查）
+- 险资 / 社保基金近期举牌或大幅增持
+- QFII 持股变动
+- 公司接待机构调研记录（巨潮披露）
 
-For each idea that passes the screen, present:
+**事件催化：**
+- 近 30 天有定增过会、可转债发行预案
+- 限售股解禁日期 < 60 天（压力测试用）
+- 重大合同公告 / 中标公告
+- 业绩预告披露日临近（Q1/Q3 经常错杀）
 
-**[Company Name] — [Long/Short] — [One-Line Thesis]**
+### Step 4：主题挖掘（A 股特色思路）
 
-| Metric | Value | vs. Peers |
-|--------|-------|-----------|
-| Market cap | | |
-| EV/EBITDA (NTM) | | |
-| P/E (NTM) | | |
-| Revenue growth | | |
-| EBITDA margin | | |
-| FCF yield | | |
+主题机会研究流程：
 
-**Thesis (3-5 bullets):**
-- Why this is mispriced
-- What the market is missing
-- Catalyst to realize value
+1. **定义主题**：例如"AI 算力 2026 资本开支再上台阶""人形机器人量产元年""碳化硅半导体国产替代"
+2. **拆解产业链**：上游 / 中游 / 下游各环节，谁直接受益谁间接受益
+3. **识别龙头 vs 二线**：龙头通常已被市场充分定价，二线弹性更大但风险高
+4. **市场预期对照**：当前一致预期是否过于乐观或悲观（用 Wind 一致预期数据）
+5. **二阶受益方**：寻找市场尚未充分关联到主题的标的
+6. **风险评估**：行业政策风险（A 股政策影响巨大）、估值消化能力
 
-**Key Risks:**
-- What would make this wrong
+### Step 5：标的呈现格式
 
-**Suggested Next Steps:**
-- Build full model? Deep-dive diligence? Expert call?
+每个通过筛选的标的呈现：
 
-### Step 5: Output
+**[公司名] (代码) — [推荐方向] — [一句话逻辑]**
 
-- Shortlist of 5-10 ideas with one-page summaries
-- Screening criteria and methodology documented
-- Comparison table across all ideas
-- Prioritized list: which ideas to research first
+| 指标 | 当前值 | 行业中位数 | 历史分位 |
+|---|---|---|---|
+| 总市值（亿元） | | | |
+| PE（TTM） | | | |
+| PB（MRQ） | | | |
+| ROE（TTM） | | | |
+| 营收增速（最新季度 YoY） | | | |
+| 扣非归母增速（最新季度 YoY） | | | |
+| 毛利率（TTM） | | | |
+| 自由现金流 / 营收 | | | |
+| 北向持仓占流通股比例 | | | |
+| 机构调研次数（近 30 天） | | | |
+| 大股东质押率 | | | |
+| 商誉 / 净资产 | | | |
 
-## Important Notes
+**核心逻辑（3-5 条）：**
+- 为什么市场低估 / 高估
+- 市场遗漏了什么（信息差 / 认知差）
+- 触发价值实现的催化剂（具体事件 + 时间窗口）
 
-- Screens surface candidates, not conclusions — every screen output needs fundamental work
-- The best ideas often come from intersections (e.g., quality company at value price due to temporary headwind)
-- Avoid crowded trades — check ownership data, short interest, and how many analysts cover the name
-- Contrarian ideas need a catalyst — being early without a catalyst is the same as being wrong
-- Track idea hit rates over time — which screens and approaches produce the best ideas?
-- Short ideas need higher conviction — timing is harder and risk is asymmetric
+**关键风险：**
+- 什么情况下逻辑不成立
+- 政策风险（A 股必看）
+- 业绩证伪窗口（下一次财报披露）
+
+**下一步建议：**
+- 建模 / 调研 / 跟踪事件 / 卖方研报对照
+
+### Step 6：输出
+
+- 5-10 个标的清单 + 每个一页摘要
+- 筛选标准和方法论文档化
+- 标的横向对比表
+- 优先级排序：哪些标的值得优先深度研究
+- 触发事件日历（财报披露日、解禁日、定增过会日）
+
+## 重要提示
+
+### A 股选股原则
+- 筛选只是产出候选池，每个候选标的都需要基本面深挖
+- A 股最好的机会通常出现在交叉点：好公司遇到阶段性逆风（带来低估值）
+- 避开拥挤交易：看公募持仓集中度、卖方研报覆盖度，过于一致的预期反而是反向信号
+- 逆向投资需要催化剂——没有催化剂的"早""左侧"等于错
+- 跟踪命中率：每个月复盘哪些筛选条件产出最优标的，迭代筛选规则
+- A 股政策市特征明显：重大政策出台前一周（如发改委文件、央行降准）适合主题筛选
+- **不要纯按 PE 选股**：A 股有大量伪低估值（地产、过剩产能、夕阳行业），低 PE 可能是价值陷阱
+
+### A 股做空 / 反向操作的限制
+- A 股缺乏卖空机制：融券标的少（仅 800 多只）、券源紧张、融券费率高（年化 8-10%）
+- 个股做空主要靠股指期货（IF/IH/IC/IM）做行业 / 风格对冲
+- "找看空标的"在 A 股语境下通常是"标记减持/规避标的"，不是真做空
+
+### 数据源优先级
+1. **AKShare MCP**：行情、财报、北向资金、龙虎榜、机构调研（首选，免费）
+2. **Tushare Pro MCP**：财务数据更全（需 200/年订阅）
+3. **巨潮资讯网**：公告原文（cninfo.com.cn）
+4. **东方财富 Choice**：一致预期、研报库（需订阅）
+5. **Wind / 同花顺 iFinD**：机构级数据（昂贵，团队场景）

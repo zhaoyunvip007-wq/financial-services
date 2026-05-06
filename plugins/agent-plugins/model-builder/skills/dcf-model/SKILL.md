@@ -97,7 +97,9 @@ Fetch data from MCP servers, user provided data, and the web.
 **Data Sources Priority:**
 1. **MCP Servers** (if configured) - Structured financial data from providers like Daloopa
 2. **User-Provided Data** - Historical financials from their research
-3. **Web Search/Fetch** - Current prices, beta, debt and cash when needed
+3. **AKShare MCP / Tushare MCP** - A 股行情、财报、Beta、债务、现金（首选）
+4. **巨潮资讯网公告** - 年报/季报原文交叉验证
+5. **Web Search 仅作兜底** - 当 MCP 拿不到数据时使用，且必须标注"待人工核实"
 
 **Validation Checklist:**
 - Verify net debt vs net cash (critical for valuation)
@@ -199,26 +201,37 @@ EBIT
 
 ### Step 6: Cost of Capital (WACC) Research
 
-**CAPM Methodology for Cost of Equity:**
+**CAPM 计算股权成本（A 股版本）：**
 
 ```
-Cost of Equity = Risk-Free Rate + Beta × Equity Risk Premium
+股权成本 = 无风险利率 + Beta × 市场风险溢价
 
-Where:
-- Risk-Free Rate = Current 10-Year Treasury Yield
-- Beta = 5-year monthly stock beta vs market index
-- Equity Risk Premium = 5.0-6.0% (market standard)
+A 股参数取值：
+- 无风险利率 = 当前 10 年期国债收益率（约 2.0-2.5%，2026 年低利率环境）
+  数据源：AKShare bond_zh_us_rate() 或中国债券信息网
+- Beta = 5 年月度股价 vs 沪深 300（大盘股）或申万一级行业指数（行业股）
+  数据源：AKShare stock_a_indicator_lg()
+- 市场风险溢价（ERP）= 5.5-7.0%（中国市场普遍取值）
+  Damodaran 对中国市场 ERP 测算约 6%；学术研究区间 5-8%
 ```
 
-**Cost of Debt Calculation:**
+**A 股 vs 美股关键差异：**
+- 中国 10Y 国债远低于美国 10Y（2.5% vs 4.5%），导致 A 股 WACC 数字看起来低
+- 但 ERP 略高（中国 6% vs 美国 5%），部分对冲
+- 综合下来 A 股优质公司 WACC 通常落在 8-11%，比美股略低
+
+**债务成本计算（A 股）：**
 
 ```
-After-Tax Cost of Debt = Pre-Tax Cost of Debt × (1 - Tax Rate)
+税后债务成本 = 税前债务成本 × (1 - 税率)
 
-Determine Pre-Tax Cost of Debt from:
-- Credit rating (if available)
-- Current yield on company bonds
-- Interest expense / Total Debt from financials
+A 股税率默认 = 25%（高新技术企业 15%，部分行业有税收优惠）
+查询：年报"所得税费用 / 利润总额"反推有效税率
+
+税前债务成本来源：
+- 公司债 / 中票 / 短融发行利率（Wind/巨潮可查）
+- 利润表"财务费用-利息支出" / 资产负债表"短期借款+长期借款" 计算综合融资成本
+- AAA 级 1Y 中票收益率约 2.2%，AA+ 约 2.5%（2026 年环境）
 ```
 
 **Capital Structure Weights:**
@@ -240,10 +253,12 @@ WACC = (Cost of Equity × Equity Weight) + (After-Tax Cost of Debt × Debt Weigh
   - WACC calculation adjusts accordingly
 - **No Debt**: WACC = Cost of Equity
 
-**Typical WACC Ranges:**
-- Large Cap, Stable: 7-9%
-- Growth Companies: 9-12%
-- High Growth/Risk: 12-15%
+**A 股典型 WACC 区间（2026 年低利率环境）：**
+- 大盘蓝筹（白酒/银行/公用）：7-9%
+- 成熟成长（家电/消费电子）：8-10%
+- 成长性公司（创业板/医药）：9-12%
+- 高风险/科创板早期：12-15%
+- 银行股：用 ROE-PB 模型替代 DCF（DCF 不适用）
 
 ### Step 7: Discount Rate Application (5-10 Year Forecast)
 
@@ -281,7 +296,20 @@ Terminal Value = Terminal FCF / (WACC - Terminal Growth Rate)
 Critical Constraint: Terminal Growth < WACC (otherwise infinite value)
 ```
 
-**Terminal Growth Rate Selection:**
+**永续增长率选取（A 股）：**
+
+A 股永续增长率参考：
+- 长期 GDP 名义增速：3.5-4.5%（2025-2030 年中国预期）
+- 长期 CPI：2-3%
+- **行业差异化**：
+  - 消费龙头（白酒、调味品）：3.0-4.0%
+  - 医药、新能源：3.5-4.5%（高于 GDP，反映长期渗透率提升）
+  - 周期/制造业：2.5-3.5%
+  - 银行/地产：1.5-2.5%（成熟行业，受人口和金融周期约束）
+  - 公用事业：1.5-2.5%
+
+**关键约束：永续增长率 < WACC，否则得到无穷大估值**
+**铁律：永续增长率永远 ≤ 长期 GDP 名义增速**
 - Conservative: 2.0-2.5% (GDP growth rate)
 - Moderate: 2.5-3.5%
 - Aggressive: 3.5-5.0% (only for market leaders)

@@ -1,11 +1,20 @@
 ---
 name: earnings-analysis
-description: Create professional equity research earnings update reports (8-12 pages, 3,000-5,000 words) analyzing quarterly results for companies already under coverage. Fast-turnaround format focusing on beat/miss analysis, key metrics, updated estimates, and revised thesis. Includes 1-3 summary tables and 8-12 charts. Use when user requests "earnings update", "quarterly update", "earnings analysis", "Q1/Q2/Q3/Q4 results", or post-earnings report.
+description: 撰写 A 股财报点评报告（8-12 页、3000-5000 字），针对已覆盖公司的季报/半年报/年报。快速周转格式，聚焦超预期/低于预期分析、核心指标、盈利预测调整、投资逻辑变化。包含 1-3 张汇总表 + 8-12 张图。触发：用户请求"财报点评""季报点评""年报点评""半年报""Q1/Q2/Q3 业绩点评""业绩快报点评"。
 ---
 
-# Equity Research Earnings Update
+# A 股财报点评报告
 
-Create professional **EARNINGS UPDATE REPORTS** analyzing quarterly results for companies already under coverage, following institutional standards (JPMorgan, Goldman Sachs, Morgan Stanley format).
+撰写专业的 **A 股财报点评报告**，分析已覆盖公司的季报/半年报/年报，对标卖方研究所（中信、中金、招商、海通）的研报格式。
+
+## A 股披露窗口（重要）
+
+- **年报**：次年 4 月 30 日前披露完毕（多数公司 3-4 月集中披露）
+- **半年报**：当年 8 月 31 日前披露完毕（多数公司 7-8 月披露）
+- **一季报**：当年 4 月 30 日前披露
+- **三季报**：当年 10 月 31 日前披露
+- **业绩预告**：年报需在 1 月 31 日前披露（亏损/扭亏/大增/大减必须预告）
+- **业绩快报**：可选披露，比正式财报早 1-2 月（提供未经审计的核心数据）
 
 **Key Characteristics:**
 - **Length**: 8-12 pages
@@ -47,16 +56,45 @@ Use when the user requests:
 - No full P&L/Cash Flow/Balance Sheet (just key metrics)
 - Assume reader has seen initiation report
 
-### 4. Citations & Source Attribution ⭐⭐⭐ MANDATORY
+### 4. A 股核心财务科目（CAS 中国会计准则）
+
+**关键科目对照（不要用美股 GAAP 术语）：**
+
+| A 股科目（CAS） | 美股近似科目（GAAP） | 备注 |
+|---|---|---|
+| 营业总收入 | Total Revenue | 包含主营 + 其他业务 |
+| 营业收入 | Revenue / Net Sales | 主营业务收入 |
+| 营业成本 | Cost of Revenue | A 股直接列示 |
+| 销售费用 | Selling Expenses | 含市场推广、销售人员薪酬 |
+| 管理费用 | G&A Expenses | 含办公、董秘费 |
+| 研发费用 | R&D Expenses | 2018 年起独立列示 |
+| 财务费用 | Net Interest Expense | 利息支出-利息收入 |
+| 投资收益 | Investment Income | 含联营企业 + 处置收益 |
+| 公允价值变动损益 | Fair Value Change | 金融资产持有期变动 |
+| 营业利润 | Operating Income | A 股口径含投资收益（与美股不同） |
+| 利润总额 | Pre-tax Income | 营业利润+营业外收支 |
+| 归母净利润 | Net Income to Parent | 扣除少数股东损益 |
+| **扣非归母净利润** | Adjusted Net Income | **核心业绩指标**，剔除非经常性损益 |
+| 经营活动现金流净额 | Operating Cash Flow | 现金流量表第一项 |
+| 自由现金流 | Free Cash Flow | A 股不直接披露，需自算（OCF-CapEx）|
+
+**A 股关注的"业绩质量"指标：**
+- **扣非归母净利润 vs 归母净利润差额**：差距大说明利润含较多非经常性损益（如政府补贴、资产处置、公允价值变动）
+- **经营活动现金流 / 净利润 比率**：> 1 是健康，< 0.5 警惕利润质量
+- **应收账款增速 vs 营收增速**：应收增速明显快于营收 = 收入确认激进
+- **存货增速 vs 营收增速**：存货大增可能预示需求疲软
+- **预收账款（合同负债）变化**：白酒、消费品行业的领先指标
+
+### 5. Citations & Source Attribution ⭐⭐⭐ MANDATORY
 
 **CRITICAL**: Properly cite all data with SPECIFIC sources and CLICKABLE HYPERLINKS.
 
-**Include specific citations WITH CLICKABLE LINKS in every figure and table:**
+**每张图表必须有 A 股标准引用源（带可点击链接）：**
 
 ```
-Source: Q3 2024 10-Q filed November 8, 2024; Company earnings release
-        [Hyperlink "10-Q" to: https://www.sec.gov/cgi-bin/viewer?accession=...]
-        [Hyperlink "earnings release" to: https://investor.company.com/news/q3-2024]
+资料来源：[公司名]2025 年三季度报告（披露日期 2025-10-30），公司投资者关系活动记录表
+         [超链接"三季度报告"到：http://www.cninfo.com.cn/new/disclosure/detail?...]
+         [超链接"投关活动记录"到：http://www.cninfo.com.cn/new/disclosure/detail?...]
 ```
 
 **HOW HYPERLINKS SHOULD APPEAR IN WORD:**
@@ -64,35 +102,36 @@ Source: Q3 2024 10-Q filed November 8, 2024; Company earnings release
 - Reader can Ctrl+Click to open source directly
 - Not plain text URLs - formatted hyperlinks with display text
 
-**REQUIRED SOURCES LIST:**
+**必备引用源（A 股版本）：**
 
-Cite in every earnings update:
-- ✅ Earnings release (with date and URL)
-- ✅ 10-Q filing (with filing date and EDGAR link)
-- ✅ Earnings call transcript (with date)
-- ✅ Investor presentation/supplemental materials (if available)
-- ✅ Consensus estimates source (Bloomberg/FactSet/etc. with date)
-- ✅ Prior guidance (from previous quarter's materials)
+每篇财报点评必须引用：
+- ✅ 季报/半年报/年报全文（巨潮资讯 cninfo.com.cn 官方披露链接）
+- ✅ 业绩预告/业绩快报（如已披露）
+- ✅ 业绩说明会会议纪要 / 投资者关系活动记录表（巨潮披露）
+- ✅ 公司公告（重大合同、定增、回购、关联交易等同期公告）
+- ✅ 一致预期来源（Wind / 同花顺 iFinD / 雪球 / 东方财富 Choice，注明日期）
+- ✅ 上期公告的业绩展望（如有）
+- ✅ 行业数据：申万行业指数 / 国家统计局月度数据（如汽车销量、PMI、CPI）
 
 **REFERENCE SECTION WITH CLICKABLE HYPERLINKS:**
 
 Include "Sources" section at end of report:
 
 ```
-SOURCES & REFERENCES
+资料来源与参考文献
 
-Earnings Materials (Q3 2024):
-• Earnings Release (November 7, 2024)
-  [Hyperlink entire line to: https://investor.company.com/news/q3-2024-earnings]
+财报材料（2025 年三季报）：
+• 2025 年第三季度报告（披露日期 2025-10-30）
+  [超链接：http://www.cninfo.com.cn/new/disclosure/detail?stockCode=600519&...]
 
-• Form 10-Q (Filed November 8, 2024)
-  [Hyperlink to: https://www.sec.gov/cgi-bin/viewer?accession=...]
+• 投资者关系活动记录表（2025-10-31）
+  [超链接：http://www.cninfo.com.cn/new/disclosure/detail?...]
 
-• Earnings Call Transcript (November 7, 2024)
-  [Hyperlink to: https://seekingalpha.com/article/...]
+• 业绩说明会通稿（如适用，公司官网或上证 e 互动）
+  [超链接：上证 e 互动或公司投资者关系页面]
 
-• Investor Presentation (November 7, 2024)
-  [Hyperlink to: https://investor.company.com/presentations/q3-2024.pdf]
+• 同期重大公告（如关联交易、回购、限制性股票激励等）
+  [超链接：巨潮资讯网公告页面]
 ```
 
 **VERIFICATION CHECKLIST:**
@@ -177,8 +216,8 @@ Verify content, formatting, accuracy, and timeliness before delivery.
 ## Output Specification
 
 **Primary Deliverable**: DOCX report (8-12 pages)
-**File Name**: `[Company]_Q[Quarter]_[Year]_Earnings_Update.docx`
-**Example**: `Nike_Q2_FY24_Earnings_Update.docx`
+**文件命名**：`[公司名]_[年份]Q[季度]_财报点评.docx`
+**示例**：`贵州茅台_2025Q3_财报点评.docx`、`宁德时代_2025年报_点评.docx`
 
 **Contents:**
 - Page 1: Summary with rating, price target, key takeaways

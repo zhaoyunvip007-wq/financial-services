@@ -1,8 +1,8 @@
 {
-  "name": "equity-research",
-  "version": "0.1.0",
-  "description": "Equity research tools: earnings analysis, initiating coverage reports, and research workflows",
+  "name": "equity-research-ashare",
+  "version": "0.2.0",
+  "description": "A 股股票研究工具：财报点评、首次覆盖报告、龙虎榜分析、北向资金跟踪、申万行业对比、限售解禁、大宗交易、宏观数据。基于申万行业分类、CAS 中国会计准则、AKShare/Tushare 数据源。",
   "author": {
-    "name": "Anthropic FSI"
+    "name": "Zhao Yizhou (fork of Anthropic FSI)"
   }
 }
